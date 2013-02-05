@@ -8,8 +8,11 @@ The Leap detects and tracks hands, fingers and finger-like tools. The device ope
 
 The Leap software analyzes the objects observed in the device field of view. It recognizes hands, fingers, and tools, reporting both discrete positions and motion. The Leap field of view is an inverted pyramid centered on the device. The effective range of the Leap extends from approximately 25 to 600 millimeters above the device (1 inch to 2 feet).
 
-[https://developer.leapmotion.com/](https://developer.leapmotion.com/)
-[https://developer.leapmotion.com/documentation/guide/Leap_Overview](https://developer.leapmotion.com/documentation/guide/Leap_Overview)
+Useful links for developers:
+
+* [Getting started](https://developer.leapmotion.com/documentation)
+* [Documentation](https://developer.leapmotion.com/documentation/guide/Leap_Overview)
+* [Knowledge Base](https://developer.leapmotion.com/articles)
 
 ## Download
 
@@ -36,9 +39,7 @@ Processing Version:
 
 ## Examples
 
-![Snapshot](https://raw.github.com/voidplus/leap-motion-processing/master/reference/snapshot.png)
-
-* [Basic](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e1_basic/e1_basic.pde)
+* [Basic](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e1_basic/e1_basic.pde) - [Snapshot](https://raw.github.com/voidplus/leap-motion-processing/master/reference/snapshot.png)
 
 
 ## License

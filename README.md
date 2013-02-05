@@ -1,4 +1,4 @@
-# LeapMotion Processing
+# Leap Motion Processing
 
 Simple wrapper to use the [Leap Motion](https://leapmotion.com/) [API](https://developer.leapmotion.com/documentation/api/annotated) in [Processing](http://processing.org/).
 

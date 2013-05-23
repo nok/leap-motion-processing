@@ -24,7 +24,7 @@ Unzip and put the extracted *LeapMotion* folder into the libraries folder of you
 
 ### Basic Data-Access
 
-```
+```java
 import de.voidplus.leapmotion.*;
 
 LeapMotion leap;
@@ -96,7 +96,9 @@ void leapOnExit(){
 
 ### Gesture-Recognition
 
-```
+![Snapshot](https://raw.github.com/voidplus/leap-motion-processing/master/reference/leap_gestures.jpg)
+
+```java
 import de.voidplus.leapmotion.*;
 
 LeapMotion leap;

@@ -10,7 +10,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-* [LeapMotion Processing Library v1.0.0](https://raw.github.com/voidplus/leap-motion-processing/master/download/LeapMotion.zip)
+* [LeapMotion-Processing v1.0.0](https://raw.github.com/voidplus/leap-motion-processing/master/download/LeapMotion-Processing.zip)
 
 ## Installation
 

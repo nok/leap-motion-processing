@@ -10,11 +10,11 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-* [LeapMotion-Processing v1.0.0](https://raw.github.com/voidplus/leap-motion-processing/master/download/LeapMotion-Processing.zip)
+* [LeapMotion-Processing v1.0.0](https://raw.github.com/voidplus/leap-motion-processing/master/download/Leap-Motion-Library.zip)
 
 ## Installation
 
-Unzip and put the extracted *LeapMotion* folder into the libraries folder of your Processing sketches. Reference and examples are included in the *LeapMotion* folder.
+Unzip and put the extracted *Leap Motion Library* folder into the libraries folder of your Processing sketches. Reference and examples are included in the *Leap Motion Library* folder.
 
 ## Dependencies
 

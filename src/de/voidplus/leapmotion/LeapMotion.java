@@ -47,7 +47,7 @@ public class LeapMotion {
 	public LeapMotion(PApplet parent, boolean verbose){
 		this.parent = parent;
 		
-		System.out.println("# LeapMotion-Processing v"+this.getVersion()+" - LeapMotion-SDK v"+this.getVersionSDK()+" - https://github.com/voidplus/leap-motion-processing");
+		System.out.println("# LeapMotion-Library v"+this.getVersion()+" - LeapMotion-SDK v"+this.getVersionSDK()+" - https://github.com/voidplus/leap-motion-processing");
 		
 		this.setWorld(200, 500, 200);
 		this.setVerbose(verbose);

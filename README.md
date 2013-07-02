@@ -1,4 +1,4 @@
-# Leap Motion Processing
+# Leap Motion for Processing
 
 Simple library to use the complete [Leap Motion](https://leapmotion.com/) [API](https://developer.leapmotion.com/documentation/api/annotated) in [Processing](http://processing.org/).
 
@@ -10,11 +10,11 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-* [LeapMotion-Processing v1.0.0](https://raw.github.com/voidplus/leap-motion-processing/master/download/Leap-Motion-Library.zip)
+* [Leap Motion for Processing v1.0.0](https://raw.github.com/voidplus/leap-motion-processing/master/download/Leap-Motion-for-Processing.zip)
 
 ## Installation
 
-Unzip and put the extracted *Leap Motion Library* folder into the libraries folder of your Processing sketches. Reference and examples are included in the *Leap Motion Library* folder.
+Unzip and put the extracted *Leap Motion for Processing* folder into the libraries folder of your Processing sketches. Reference and examples are included in the *Leap Motion for Processing* folder.
 
 ## Dependencies
 

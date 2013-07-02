@@ -2,7 +2,7 @@
 # UTF-8 supported.
 
 # The name of your library as you want it formatted.
-name = Leap Motion Library
+name = Leap Motion for Processing
 
 # List of authors. Links can be provided using the syntax [author name](url).
 authorList = [Darius Morawiec](http://voidplus.de)

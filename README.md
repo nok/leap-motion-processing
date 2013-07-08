@@ -14,11 +14,11 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Installation
 
-Unzip and put the extracted *Leap Motion for Processing* folder into the libraries folder of your Processing sketches. Reference and examples are included in the *Leap Motion for Processing* folder.
+Unzip and put the extracted *leap-motion-processing* folder into the libraries folder of your Processing sketches. Reference and examples are included in the *leap-motion-processing* folder.
 
 ## Dependencies
 
-* [LeapMotion SDK v0.7.9](https://developer.leapmotion.com/downloads/leap-motion/sdk)
+* [Leap Motion SDK v0.7.9](https://developer.leapmotion.com/downloads/leap-motion/sdk)
 
 ## Usage
 

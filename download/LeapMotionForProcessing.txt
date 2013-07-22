@@ -18,7 +18,7 @@ url = https://github.com/voidplus/leap-motion-processing
 # 
 # If a value other than those listed is used, your library will listed as 
 # "Other".
-category = Video & Vision
+category = Hardware
 
 # A short sentence (or fragment) to summarize the library's function. This will 
 # be shown from inside the PDE when the library is being installed. Avoid 
@@ -42,8 +42,8 @@ paragraph =
 # compare different versions of the same library, and check if an update is 
 # available. You should think of it as a counter, counting the total number of 
 # releases you've had.
-version = 1  # This must be parsable as an int
+version = 2  # This must be parsable as an int
 
 # The version as the user will see it. If blank, the version attribute will be 
 # used here.
-prettyVersion = 1.0.0  # This is treated as a String
+prettyVersion = 1.1.0  # This is treated as a String

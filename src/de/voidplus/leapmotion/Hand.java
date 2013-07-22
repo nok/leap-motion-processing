@@ -57,12 +57,36 @@ public class Hand implements PConstants {
 	}
 	
 	/**
+	 * The stabilized center position of the palm in millimeters.
+	 * @return
+	 */
+	public PVector getStabilizedPosition(){
+		return this.leap.map( this.hand.stabilizedPalmPosition() );
+	}
+	
+	/**
+	 * The stabilized center position of the palm in millimeters.
+	 * @return
+	 */
+	public PVector getStabilizedPalmPosition(){
+		return this.getStabilizedPosition();
+	}
+	
+	/**
 	 * The direction from the palm position toward the fingers.
 	 * @return
 	 */
 	public PVector getDirection(){
 		return this.leap.map(this.hand.direction());
-	}	
+	}
+	
+	/**
+	 * The duration of time this Hand has been visible to the Leap Motion Controller.
+	 * @return
+	 */
+	public float getTimeVisible(){
+		return this.hand.timeVisible();
+	}
 	
 	/**
 	 * Draw the hand with all details.

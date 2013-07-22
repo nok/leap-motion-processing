@@ -21,8 +21,8 @@ import processing.core.PVector;
  */
 public class LeapMotion {
 	
-	public static final String VERSION = "1.0.0"; 
-	public static final String SDK_VERSION = "0.7.9";
+	public static final String VERSION = "1.1.0"; 
+	public static final String SDK_VERSION = "0.8.1.6221";
 	
 	private final PApplet parent;
 	
@@ -34,6 +34,7 @@ public class LeapMotion {
 	private Frame frame;
 	private ArrayList<Hand> hands;
 	private ArrayList<Finger> fingers;
+	private ArrayList<Device> devices;
 	
 	private final Controller controller;
 	private final Listener listener;
@@ -55,6 +56,7 @@ public class LeapMotion {
 		
 		this.hands = new ArrayList<Hand>();
 		this.fingers = new ArrayList<Finger>();
+		this.devices = new ArrayList<Device>();
 		
 		this.controller = new Controller();
 		this.listener = new Listener(){
@@ -87,6 +89,16 @@ public class LeapMotion {
 		this(parent, false);
 	}
 	
+	/**
+	 * The instantaneous framerate.
+	 * @return
+	 */
+	public int getFrameRate(){
+		if(this.isConnected()){
+			return (int) this.frame.currentFramesPerSecond();
+		}
+		return 0;
+	}
 	
 	/* ------------------------------------------------------------------------ */
 	/* World */
@@ -126,6 +138,17 @@ public class LeapMotion {
 	}
 	public Controller getController() {
 		return this.controller;
+	}
+	public ArrayList<Device> getDevices() {
+		devices.clear();
+		if(this.isConnected()){
+			if(!this.getController().devices().isEmpty()){
+				for(com.leapmotion.leap.Device device : this.getController().devices()){
+					devices.add(new Device(this.parent, this, device));
+			    }
+			}
+		}
+		return this.devices;
 	}
 	
 	
@@ -555,6 +578,14 @@ public class LeapMotion {
 	 * @return
 	 */
 	public PVector map(Vector position){
+		
+//		InteractionBox box = this.frame.interactionBox();
+//		Vector normalized = box.normalizePoint(position);
+//		PVector response = new PVector(
+//			(normalized.getX()*this.parent.width),
+//			(this.parent.height-normalized.getY()*this.parent.height)
+//		);
+		
 		PVector response = new PVector();
 		
 		// WIDTH

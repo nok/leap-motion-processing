@@ -2,25 +2,31 @@
 
 Simple library to use the complete [Leap Motion](https://leapmotion.com/) [API](https://developer.leapmotion.com/documentation/api/annotated) in [Processing](http://processing.org/).
 
+
 ## About
 
 The Leap detects and tracks hands, fingers and finger-like tools. The device operates in an intimate proximity with high precision and tracking frame rate.
 
 The Leap software analyzes the objects observed in the device field of view. It recognizes hands, fingers, and tools, reporting both discrete positions and motion. The Leap field of view is an inverted pyramid centered on the device. The effective range of the Leap extends from approximately 25 to 600 millimeters above the device (1 inch to 2 feet).
 
+
 ## Download
 
-* [Leap Motion for Processing v1.0.0](https://raw.github.com/voidplus/leap-motion-processing/master/download/LeapMotionForProcessing.zip)
+* [Leap Motion for Processing v.1.1.0](https://raw.github.com/voidplus/leap-motion-processing/master/download/LeapMotionForProcessing.zip) (SDK v.0.8.1.6221)
+
 
 ## Installation
 
 Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries folder of your Processing sketches. Reference and examples are included in the *LeapMotionForProcessing* folder.
 
+
 ## Dependencies
 
-* [Leap Motion SDK v0.7.9](https://developer.leapmotion.com/downloads/leap-motion/sdk)
+* [Leap Motion Software](http://www.leapmotion.com/setup)
+
 
 ## Usage
+
 
 ### Basic Data-Access
 
@@ -41,6 +47,7 @@ void setup(){
 void draw(){
     background(255);
     // ...
+	int fps = leap.getFrameRate();
 
 	// HANDS
 	for(Hand hand : leap.getHands()){
@@ -48,6 +55,7 @@ void draw(){
 		hand.draw();
 		int     hand_id          = hand.getId();
 		PVector hand_position    = hand.getPosition();
+		PVector hand_stabilized  = hand.getStabilizedPosition();
 		PVector hand_direction   = hand.getDirection();
 		PVector hand_dynamics    = hand.getDynamics();
 		float   hand_roll        = hand.getRoll();
@@ -58,22 +66,65 @@ void draw(){
 		
 		// FINGERS
 		for(Finger finger : hand.getFingers()){
+		
+			// Basics
 			finger.draw();
 			int     finger_id         = finger.getId();
 			PVector finger_position   = finger.getPosition();
+			PVector finger_stabilized = finger.getStabilizedPosition();
 			PVector finger_velocity   = finger.getVelocity();
 			PVector finger_direction  = finger.getDirection();
+			
+			// Touch Emulation
+			int     touch_zone        = finger.getTouchZone();
+			float   touch_distance    = finger.getTouchDistance();
+
+			switch(touch_zone){
+				case -1: // None
+				break;
+				case 0: // Hovering
+					// println("Hovering (#"+finger_id+"): "+touch_distance);
+				break;
+				case 1: // Touching
+					// println("Touching (#"+finger_id+")");
+				break;
+			}
 		}
 		
 		// TOOLS
 		for(Tool tool : hand.getTools()){
+		
+			// Basics
 			tool.draw();
 			int     tool_id           = tool.getId();
 			PVector tool_position     = tool.getPosition();
+			PVector tool_stabilized   = tool.getStabilizedPosition();
 			PVector tool_velocity     = tool.getVelocity();
 			PVector tool_direction    = tool.getDirection();
+
+			// Touch Emulation
+			int     touch_zone        = tool.getTouchZone();
+			float   touch_distance    = tool.getTouchDistance();
+
+			switch(touch_zone){
+				case -1: // None
+				break;
+				case 0: // Hovering
+					// println("Hovering (#"+tool_id+"): "+touch_distance);
+				break;
+				case 1: // Touching
+					// println("Touching (#"+tool_id+")");
+				break;
+			}
 		}
 		
+	}
+	
+	// DEVICES
+	for(Device device : leap.getDevices()){
+		float device_horizontal_view_angle = device.getHorizontalViewAngle();
+		float device_verical_view_angle = device.getVerticalViewAngle();
+		float device_range = device.getRange();
 	}
 }
 
@@ -93,6 +144,7 @@ void leapOnExit(){
 	// println("Leap Motion Exit");
 }
 ```
+
 
 ### Gesture-Recognition
 
@@ -186,17 +238,15 @@ void leapOnKeyTapGesture(KeyTapGesture g){
 }
 ```
 
+
 ## Examples
 
-* [Basic](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e1_basic/e1_basic.pde)
-* [Gestures](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e2_gestures/e2_gestures.pde)
-* …
+* [Basic Data](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e1_basic/e1_basic.pde)
+* [Gesture Recognition](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e2_gestures/e2_gestures.pde)
+* [Touch Emulation](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e1_basic/e1_basic.pde)
 
-<!--
-With other libraries/dependencies:
+Note: Or try the [OneDollarUnistrokeRecognizer](https://github.com/voidplus/onedollar-unistroke-recognizer) library, a two-dimensional template based gesture recognizer.
 
-* Gestures-Recognition with the [OneDollarUnistrokeRecognizer Processing Library](https://github.com/voidplus/onedollar-unistroke-recognizer).
--->
 
 ## Tested
 
@@ -207,20 +257,46 @@ System:
 
 Processing Version:
 
-* 2.0b7
-* 2.0b8
+* 2.0.1
 * 2.0b9
+* 2.0b8
+* 2.0b7
+
+Leap Motion Software Version:
+
+* 1.0.2+7287
+
+
+## Tasks
+
+* Converting from Leap Motion Coordinates to Application Coordinates ~ InteractionBox Tests
+
+
+## Changelog
+
+### v.1.1.0
+
+* Added Support for [SDK v.0.8.1](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#version-0-8-1)
+
+* * Added the Hand.timeVisible and Pointable.timeVisible attributes, which report how long the associated hand, finger, or tool has been visible.
+* * Added the Frame.currentFrameRate attribute, that reports the current rate at which the Leap Motion software is generating frames of data.
+
+Added Support for [SDK v.0.8.0](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#version-0-8-0)
+
 
 ## Links
+
 Useful links for developers:
 
-* [Getting started](https://developer.leapmotion.com/documentation)
-* [Documentation](https://developer.leapmotion.com/documentation/guide/Leap_Overview)
+* [Documentation](https://developer.leapmotion.com/documentation)
+* [SDK Release Notes](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes.html)
 * [Knowledge Base](https://developer.leapmotion.com/articles)
+
 
 ## Questions?
 
 Don't be shy and feel free to contact me via [Twitter](http://twitter.voidplus.de).
+
 
 ## License
 

@@ -243,7 +243,6 @@ void leapOnKeyTapGesture(KeyTapGesture g){
 
 * [Basic Data](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e1_basic/e1_basic.pde)
 * [Gesture Recognition](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e2_gestures/e2_gestures.pde)
-* [Touch Emulation](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e1_basic/e1_basic.pde)
 
 Note: Or try the [OneDollarUnistrokeRecognizer](https://github.com/voidplus/onedollar-unistroke-recognizer) library, a two-dimensional template based gesture recognizer.
 
@@ -277,11 +276,7 @@ Leap Motion Software Version:
 ### v.1.1.0
 
 * Added Support for [SDK v.0.8.1](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#version-0-8-1)
-
-* * Added the Hand.timeVisible and Pointable.timeVisible attributes, which report how long the associated hand, finger, or tool has been visible.
-* * Added the Frame.currentFrameRate attribute, that reports the current rate at which the Leap Motion software is generating frames of data.
-
-Added Support for [SDK v.0.8.0](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#version-0-8-0)
+* Added Support for [SDK v.0.8.0](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#version-0-8-0)
 
 
 ## Links

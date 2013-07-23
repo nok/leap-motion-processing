@@ -50,6 +50,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 ---
 
 
+Leap Developer SDK.
+Copyright (C) 2012-2013 Leap Motion, Inc. All rights reserved.
+
+NOTICE: This developer release of Leap Motion, Inc. software is confidential
+and intended for very limited distribution. Parties using this software must
+accept the SDK Agreement prior to obtaining this software and related tools.
+This software is subject to copyright.
+
+
+---
+
+
 The 3-clause BSD license applies to OpenSSL 1.0.0j, protobuf 2.5.0,
 websocketpp 1.0, and libuvc used in the Leap Motion platform.
 

@@ -295,4 +295,4 @@ Don't be shy and feel free to contact me via [Twitter](http://twitter.voidplus.d
 
 ## License
 
-The library is Open Source Software released under the [MIT License](https://raw.github.com/voidplus/leap-motion-processing/master/LICENSE.txt). It's developed by [Darius Morawiec](http://voidplus.de).
+The library is Open Source Software released under the [License](https://raw.github.com/voidplus/leap-motion-processing/master/LICENSE.txt). It's developed by [Darius Morawiec](http://voidplus.de).

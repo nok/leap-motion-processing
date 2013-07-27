@@ -26,11 +26,27 @@ public class KeyTapGesture extends Gesture {
 	}
 	
 	/**
+	 * Raw data of the position where the key tap is registered.
+	 * @return
+	 */
+	public PVector getRawPosition() {
+		return this.leap.convert(this.keyTap.position());
+	}
+	
+	/**
 	 * The direction of finger tip motion.
 	 * @return
 	 */
 	public PVector getDirection() {
 		return this.leap.map(this.keyTap.direction());
+	}
+
+	/**
+	 * Raw data of the position where the key tap is registered.
+	 * @return
+	 */
+	public PVector getRawDirection() {
+		return this.leap.convert(this.keyTap.direction());
 	}
 	
 	/**

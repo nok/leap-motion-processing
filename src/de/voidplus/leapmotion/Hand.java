@@ -45,7 +45,15 @@ public class Hand implements PConstants {
 	 * @return
 	 */
 	public PVector getPosition(){
-		return this.leap.map( this.hand.palmPosition() );
+		return this.leap.map(this.hand.palmPosition());
+	}
+	
+	/**
+	 * Raw data of the center position.
+	 * @return
+	 */
+	public PVector getRawPosition(){
+		return this.leap.convert(this.hand.palmPosition());
 	}
 	
 	/**
@@ -61,7 +69,7 @@ public class Hand implements PConstants {
 	 * @return
 	 */
 	public PVector getStabilizedPosition(){
-		return this.leap.map( this.hand.stabilizedPalmPosition() );
+		return this.leap.map(this.hand.stabilizedPalmPosition());
 	}
 	
 	/**
@@ -73,6 +81,22 @@ public class Hand implements PConstants {
 	}
 	
 	/**
+	 * Raw data of the stabilized center position.
+	 * @return
+	 */
+	public PVector getRawStabilizedPosition(){
+		return this.leap.convert(this.hand.stabilizedPalmPosition());
+	}
+	
+	/**
+	 * Raw data of the stabilized center position.
+	 * @return
+	 */
+	public PVector getRawStabilizedParlmPosition(){
+		return this.getRawStabilizedPosition();
+	}
+	
+	/**
 	 * The direction from the palm position toward the fingers.
 	 * @return
 	 */
@@ -81,11 +105,67 @@ public class Hand implements PConstants {
 	}
 	
 	/**
+	 * Raw data of the direction from the palm position toward the fingers.
+	 * @return
+	 */
+	public PVector getRawDirection(){
+		return this.leap.convert(this.hand.direction());
+	}	
+	
+	/**
 	 * The duration of time this Hand has been visible to the Leap Motion Controller.
 	 * @return
 	 */
 	public float getTimeVisible(){
 		return this.hand.timeVisible();
+	}
+	
+	/**
+	 * The member of the list that is farthest to the front within the standard Leap Motion frame of reference (i.e has the smallest Z coordinate). 
+	 * @return
+	 */
+	public Finger getFrontFinger(){		
+		return new Finger(this.parent, this.leap, this.hand.fingers().frontmost());
+	}
+	
+	/**
+	 * The member of the list that is farthest to the left within the standard Leap Motion frame of reference (i.e has the smallest X coordinate). 
+	 * @return
+	 */
+	public Finger getLeftFinger(){		
+		return new Finger(this.parent, this.leap, this.hand.fingers().leftmost());
+	}
+	
+	/**
+	 * The member of the list that is farthest to the right within the standard Leap Motion frame of reference (i.e has the largest X coordinate). 
+	 * @return
+	 */
+	public Finger getRightFinger(){		
+		return new Finger(this.parent, this.leap, this.hand.fingers().rightmost());
+	}
+	
+	/**
+	 * The member of the list that is farthest to the front within the standard Leap Motion frame of reference (i.e has the smallest Z coordinate). 
+	 * @return
+	 */
+	public Tool getFrontTool(){		
+		return new Tool(this.parent, this.leap, this.hand.tools().frontmost());
+	}
+	
+	/**
+	 * The member of the list that is farthest to the left within the standard Leap Motion frame of reference (i.e has the smallest X coordinate). 
+	 * @return
+	 */
+	public Tool getLeftTool(){		
+		return new Tool(this.parent, this.leap, this.hand.tools().leftmost());
+	}
+	
+	/**
+	 * The member of the list that is farthest to the right within the standard Leap Motion frame of reference (i.e has the largest X coordinate). 
+	 * @return
+	 */
+	public Tool getRightTool(){		
+		return new Tool(this.parent, this.leap, this.hand.tools().rightmost());
 	}
 	
 	/**
@@ -154,7 +234,15 @@ public class Hand implements PConstants {
 	 * @return
 	 */
 	public PVector getSpherePosition(){
-		return this.leap.map( this.hand.sphereCenter() );
+		return this.leap.map(this.hand.sphereCenter());
+	}
+
+	/**
+	 * Raw data of the center of a sphere fit to the curvature of this hand. 
+	 * @return
+	 */
+	public PVector getRawSpherePosition(){
+		return this.leap.convert(this.hand.sphereCenter());
 	}
 	
 	/**

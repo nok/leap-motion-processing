@@ -37,11 +37,27 @@ public class Pointable {
 	}
 	
 	/**
+	 * Raw data of the tip position.
+	 * @return
+	 */
+	public PVector getRawPosition(){
+		return this.leap.convert(this.pointable.tipPosition());
+	}
+	
+	/**
 	 * The stabilized tip position in millimeters.
 	 * @return
 	 */
 	public PVector getStabilizedPosition(){
 		return this.leap.map(this.pointable.stabilizedTipPosition());
+	}
+	
+	/**
+	 * Raw data of the stabilized tip position.
+	 * @return
+	 */
+	public PVector getRawStabilizedPosition(){
+		return this.leap.convert(this.pointable.tipPosition());
 	}
 	
 	/**
@@ -52,6 +68,14 @@ public class Pointable {
 		return this.leap.map(this.pointable.tipVelocity());
 	}
 
+	/**
+	 * Raw data of the rate of change of the tip position.
+	 * @return
+	 */
+	public PVector getRawVelocity(){
+		return this.leap.convert(this.pointable.tipVelocity());
+	}
+	
 	/**
 	 * The direction in which this finger is pointing.
 	 * @return

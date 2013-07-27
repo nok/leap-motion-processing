@@ -17,11 +17,11 @@ import processing.core.PVector;
 /**
  * Leap Motion Processing Library
  * @author Darius Morawiec
- * @version 1.0.0
+ * @version 1.1.2
  */
 public class LeapMotion {
 	
-	public static final String VERSION = "1.1.0"; 
+	public static final String VERSION = "1.1.2"; 
 	public static final String SDK_VERSION = "0.8.1.6221";
 	
 	private final PApplet parent;
@@ -34,6 +34,7 @@ public class LeapMotion {
 	private Frame frame;
 	private ArrayList<Hand> hands;
 	private ArrayList<Finger> fingers;
+	private ArrayList<Tool> tools;
 	private ArrayList<Device> devices;
 	
 	private final Controller controller;
@@ -56,6 +57,7 @@ public class LeapMotion {
 		
 		this.hands = new ArrayList<Hand>();
 		this.fingers = new ArrayList<Finger>();
+		this.tools = new ArrayList<Tool>();
 		this.devices = new ArrayList<Device>();
 		
 		this.controller = new Controller();
@@ -200,6 +202,30 @@ public class LeapMotion {
 		return 0;
 	}
 
+	/**
+	 * The member of the list that is farthest to the front within the standard Leap Motion frame of reference (i.e has the smallest Z coordinate). 
+	 * @return
+	 */
+	public Hand getFrontHand(){		
+		return new Hand(this.parent, this, this.frame.hands().frontmost());
+	}
+	
+	/**
+	 * The member of the list that is farthest to the left within the standard Leap Motion frame of reference (i.e has the smallest X coordinate). 
+	 * @return
+	 */
+	public Hand getLeftHand(){		
+		return new Hand(this.parent, this, this.frame.hands().leftmost());
+	}
+	
+	/**
+	 * The member of the list that is farthest to the right within the standard Leap Motion frame of reference (i.e has the largest X coordinate). 
+	 * @return
+	 */
+	public Hand getRightHand(){		
+		return new Hand(this.parent, this, this.frame.hands().rightmost());
+	}
+	
 
 	/* ------------------------------------------------------------------------ */
 	/* Fingers */
@@ -249,6 +275,103 @@ public class LeapMotion {
 		return 0;
 	}
 
+	/**
+	 * The member of the list that is farthest to the front within the standard Leap Motion frame of reference (i.e has the smallest Z coordinate). 
+	 * @return
+	 */
+	public Finger getFrontFinger(){
+		return new Finger(this.parent, this, this.frame.fingers().frontmost());
+	}
+	
+	/**
+	 * The member of the list that is farthest to the left within the standard Leap Motion frame of reference (i.e has the smallest X coordinate). 
+	 * @return
+	 */
+	public Finger getLeftFinger(){		
+		return new Finger(this.parent, this, this.frame.fingers().leftmost());
+	}
+	
+	/**
+	 * The member of the list that is farthest to the right within the standard Leap Motion frame of reference (i.e has the largest X coordinate). 
+	 * @return
+	 */
+	public Finger getRightFinger(){		
+		return new Finger(this.parent, this, this.frame.fingers().rightmost());
+	}
+	
+
+	/* ------------------------------------------------------------------------ */
+	/* Tools */
+	
+	/**
+	 * Check if there is any tool.
+	 * @return
+	 */
+	public boolean hasTools(){
+		if(this.isConnected()){
+			return !this.frame.tools().empty();
+		}
+		return false;
+	}
+
+	/**
+	 * Get a specific tool.
+	 * @param id
+	 * @return
+	 */
+	public Tool getTool(Integer id){
+		return new Tool(this.parent, this, this.frame.tool(id));
+	}
+	
+	/**
+	 * Get all detected tools.
+	 * @return
+	 */
+	public ArrayList<Tool> getTools(){
+		this.tools.clear();
+		if(this.hasTools()){
+			for(com.leapmotion.leap.Tool tool : this.frame.tools()){
+				tools.add(new Tool(this.parent, this, tool));
+		    }
+		}
+		return this.tools;
+	}
+
+	/**
+	 * Get the number of detected tools.
+	 * @return
+	 */
+	public int countTools(){
+		if(this.isConnected()){
+			return this.frame.tools().count();
+		}
+		return 0;
+	}
+
+	/**
+	 * The member of the list that is farthest to the front within the standard Leap Motion frame of reference (i.e has the smallest Z coordinate). 
+	 * @return
+	 */
+	public Tool getFrontTool(){
+		return new Tool(this.parent, this, this.frame.tools().frontmost());
+	}
+	
+	/**
+	 * The member of the list that is farthest to the left within the standard Leap Motion frame of reference (i.e has the smallest X coordinate). 
+	 * @return
+	 */
+	public Tool getLeftTool(){		
+		return new Tool(this.parent, this, this.frame.tools().leftmost());
+	}
+	
+	/**
+	 * The member of the list that is farthest to the right within the standard Leap Motion frame of reference (i.e has the largest X coordinate). 
+	 * @return
+	 */
+	public Tool getRightTool(){		
+		return new Tool(this.parent, this, this.frame.tools().rightmost());
+	}
+	
 	
 	/* ------------------------------------------------------------------------ */
 	/* Gesture-Recognition */	
@@ -620,6 +743,18 @@ public class LeapMotion {
 		return response;
 	}
 	
+	/**
+	 * Convert Vector to PVector without modifications
+	 * @param position
+	 * @return
+	 */
+	public PVector convert(Vector position) {
+		return new PVector(
+			position.getX(),
+			position.getY(),
+			position.getZ()
+		);
+	}
 
 	/* ------------------------------------------------------------------------ */
 	/* Library */

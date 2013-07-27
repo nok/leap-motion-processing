@@ -12,7 +12,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-* [Leap Motion for Processing v.1.1.0](https://raw.github.com/voidplus/leap-motion-processing/master/download/LeapMotionForProcessing.zip) (SDK v.0.8.1.6221)
+* [Leap Motion for Processing v.1.1.2](https://raw.github.com/voidplus/leap-motion-processing/master/download/LeapMotionForProcessing.zip) (SDK v.0.8.1.6221)
 
 
 ## Installation
@@ -263,6 +263,7 @@ Processing Version:
 
 Leap Motion Software Version:
 
+* 1.0.4+7346
 * 1.0.2+7287
 
 
@@ -272,6 +273,12 @@ Leap Motion Software Version:
 
 
 ## Changelog
+
+### v.1.1.2
+
+* Added methods to get raw data (without mapping) from the Leap Motion SDK: ```getPosition()``` → ```getRawPosition()```
+* Added ```hasTools()```, ```getTool(id)```, ```getTools()```, ```countTools()```, ```getFrontHand()```, ```getLeftHand()```, ```getRightHand()```, ```getFrontFinger()```, ```getLeftFinger()```, ```getRightFinger()```, ```getFrontTool()```, ```getLeftTool()``` and ```getRightTool()``` to ```LeapMotion```
+* Added ```getFrontFinger()```, ```getLeftFinger()```, ```getRightFinger()```, ```getFrontTool()```, ```getLeftTool()```and ```getRightTool()``` to ```Hand```
 
 ### v.1.1.0
 

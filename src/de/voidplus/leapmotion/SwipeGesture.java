@@ -26,6 +26,14 @@ public class SwipeGesture extends Gesture {
 	}
 
 	/**
+	 * Raw data of the current position of the swipe.
+	 * @return
+	 */
+	public PVector getRawPosition() {
+		return this.leap.convert(this.swipe.position());
+	}
+	
+	/**
 	 * The position where the swipe began. 
 	 * @return
 	 */
@@ -34,11 +42,27 @@ public class SwipeGesture extends Gesture {
 	}
 	
 	/**
+	 * Raw data of the position where the swipe began.
+	 * @return
+	 */
+	public PVector getRawStartPosition() {
+		return this.leap.convert(this.swipe.startPosition());
+	}
+	
+	/**
 	 * The unit direction vector parallel to the swipe motion. 
 	 * @return
 	 */
 	public PVector getDirection() {
 		return this.leap.map(this.swipe.direction());
+	}
+	
+	/**
+	 * Raw data of the unit direction vector parallel to the swipe motion.
+	 * @return
+	 */
+	public PVector getRawDirection() {
+		return this.leap.convert(this.swipe.direction());
 	}
 	
 	/**

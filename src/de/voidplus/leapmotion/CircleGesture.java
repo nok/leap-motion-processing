@@ -26,11 +26,27 @@ public class CircleGesture extends Gesture {
 	}
 	
 	/**
+	 * Raw data of the center point of the circle within the Leap frame of reference. 
+	 * @return
+	 */
+	public PVector getRawCenter() {
+		return this.leap.convert(this.circle.center());
+	}
+	
+	/**
 	 * Returns the normal vector for the circle being traced.
 	 * @return
 	 */
 	public PVector getNormal() {
 		return this.leap.map(this.circle.normal());
+	}
+	
+	/**
+	 * Raw data the normal vector for the circle being traced.
+	 * @return
+	 */
+	public PVector getRawNormal() {
+		return this.leap.convert(this.circle.normal());
 	}
 	
 	/**

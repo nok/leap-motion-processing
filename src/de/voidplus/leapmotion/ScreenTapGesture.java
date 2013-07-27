@@ -24,6 +24,14 @@ public class ScreenTapGesture extends Gesture {
 	public PVector getPosition() {
 		return this.leap.map(this.screenTap.position());
 	}
+
+	/**
+	 * Raw data of the position where the screen tap is registered.
+	 * @return
+	 */
+	public PVector getRawPosition() {
+		return this.leap.convert(this.screenTap.position());
+	}
 	
 	/**
 	 * The direction of finger tip motion.
@@ -31,6 +39,14 @@ public class ScreenTapGesture extends Gesture {
 	 */
 	public PVector getDirection() {
 		return this.leap.map(this.screenTap.direction());
+	}
+	
+	/**
+	 * Raw data of the direction of finger tip motion.
+	 * @return
+	 */
+	public PVector getRawDirection() {
+		return this.leap.convert(this.screenTap.direction());
 	}
 	
 	/**

@@ -294,6 +294,9 @@ Useful links for developers:
 * [SDK Release Notes](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes.html)
 * [Knowledge Base](https://developer.leapmotion.com/articles)
 
+## Projects
+
+* [Leap Motion Ball Maze](http://www.youtube.com/watch?v=I_-UpOYULxw) by David Thomasson
 
 ## Questions?
 

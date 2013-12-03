@@ -12,7 +12,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-* [Leap Motion for Processing v.1.1.2](https://raw.github.com/voidplus/leap-motion-processing/master/download/LeapMotionForProcessing.zip) (SDK v.0.8.1.6221)
+* [Leap Motion for Processing v.1.1.3](https://raw.github.com/voidplus/leap-motion-processing/master/download/LeapMotionForProcessing.zip)
 
 
 ## Installation
@@ -256,6 +256,7 @@ System:
 
 Processing Version:
 
+* 2.1.0
 * 2.0.1
 * 2.0b9
 * 2.0b8
@@ -263,16 +264,16 @@ Processing Version:
 
 Leap Motion Software Version:
 
+* 1.1.0+9145
 * 1.0.4+7346
 * 1.0.2+7287
 
 
-## Tasks
-
-* Converting from Leap Motion Coordinates to Application Coordinates ~ InteractionBox Tests
-
-
 ## Changelog
+
+### v.1.1.3
+
+* Added Support for [SDK v.1.0.9](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#version-1-0-9)
 
 ### v.1.1.2
 

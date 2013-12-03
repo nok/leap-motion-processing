@@ -57,7 +57,7 @@ public abstract class Gesture {
 	 * @return
 	 */
 	public boolean hasHands(){
-		return !this.gesture.hands().empty();
+		return !this.gesture.hands().isEmpty();
 	}
 	
 	/**

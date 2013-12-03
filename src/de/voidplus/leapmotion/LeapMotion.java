@@ -17,12 +17,12 @@ import processing.core.PVector;
 /**
  * Leap Motion Processing Library
  * @author Darius Morawiec
- * @version 1.1.2
+ * @version 1.1.3
  */
 public class LeapMotion {
 	
-	public static final String VERSION = "1.1.2"; 
-	public static final String SDK_VERSION = "0.8.1.6221";
+	public static final String VERSION = "1.1.3"; 
+	public static final String SDK_VERSION = "1.0.9";
 	
 	private final PApplet parent;
 	
@@ -163,7 +163,7 @@ public class LeapMotion {
 	 */
 	public boolean hasHands(){
 		if(this.isConnected()){
-			return !this.frame.hands().empty();
+			return !this.frame.hands().isEmpty();
 		}
 		return false;
 	}
@@ -236,7 +236,7 @@ public class LeapMotion {
 	 */
 	public boolean hasFingers(){
 		if(this.isConnected()){
-			return !this.frame.fingers().empty();
+			return !this.frame.fingers().isEmpty();
 		}
 		return false;
 	}
@@ -309,7 +309,7 @@ public class LeapMotion {
 	 */
 	public boolean hasTools(){
 		if(this.isConnected()){
-			return !this.frame.tools().empty();
+			return !this.frame.tools().isEmpty();
 		}
 		return false;
 	}

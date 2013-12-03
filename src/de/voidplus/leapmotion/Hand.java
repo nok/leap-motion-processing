@@ -277,7 +277,7 @@ public class Hand implements PConstants {
 	 */
 	public boolean hasFingers(){
 		if(this.leap.isConnected()){
-			return !this.hand.fingers().empty();
+			return !this.hand.fingers().isEmpty();
 		}
 		return false;
 	}
@@ -317,7 +317,7 @@ public class Hand implements PConstants {
 	 */
 	public boolean hasTools(){
 		if(this.leap.isConnected()){
-			return !this.hand.tools().empty();
+			return !this.hand.tools().isEmpty();
 		}
 		return false;
 	}

@@ -12,7 +12,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-* [Leap Motion for Processing v.1.1.3](https://raw.github.com/voidplus/leap-motion-processing/master/download/LeapMotionForProcessing.zip)
+* [Leap Motion for Processing v.1.1.3.1](https://raw.github.com/voidplus/leap-motion-processing/master/download/LeapMotionForProcessing.zip)
 
 
 ## Installation
@@ -256,6 +256,7 @@ System:
 
 Processing Version:
 
+* 2.1.1
 * 2.1.0
 * 2.0.1
 * 2.0b9
@@ -270,6 +271,11 @@ Leap Motion Software Version:
 
 
 ## Changelog
+
+### v.1.1.3.1
+
+* Added ```runInBackground()```
+
 
 ### v.1.1.3
 

@@ -21,7 +21,7 @@ import processing.core.PVector;
  */
 public class LeapMotion {
 	
-	public static final String VERSION = "1.1.3"; 
+	public static final String VERSION = "1.1.3.1"; 
 	public static final String SDK_VERSION = "1.0.9";
 	
 	private final PApplet parent;
@@ -80,6 +80,7 @@ public class LeapMotion {
 			}
 		};
 		this.controller.addListener(this.listener);
+		this.runInBackground(true);
 		this.parent.registerDispose(this);
 	}
 	
@@ -89,6 +90,20 @@ public class LeapMotion {
 	 */
 	public LeapMotion(PApplet parent){
 		this(parent, false);
+	}
+	
+	/**
+	 * Run the tracking in background, too.
+	 * @param silent
+	 * @return
+	 */
+	public LeapMotion runInBackground(boolean active){
+		if(active){
+			this.controller.setPolicyFlags(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
+		} else {
+			this.controller.setPolicyFlags(Controller.PolicyFlag.POLICY_DEFAULT);
+		}
+		return this;
 	}
 	
 	/**

@@ -265,6 +265,7 @@ Processing Version:
 
 Leap Motion Software Version:
 
+* 1.1.3+9188
 * 1.1.0+9145
 * 1.0.4+7346
 * 1.0.2+7287
@@ -304,6 +305,7 @@ Useful links for developers:
 ## Projects
 
 * [Leap Motion Ball Maze](http://www.youtube.com/watch?v=I_-UpOYULxw) by David Thomasson
+* [Leap Motion / Projected Interface: Tagging and capturing physical objects](https://vimeo.com/85337378) by Anouk Hoffmeister and Tom Brewe
 
 ## Questions?
 

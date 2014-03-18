@@ -304,8 +304,8 @@ Useful links for developers:
 
 ## Projects
 
-* [Leap Motion Ball Maze](http://www.youtube.com/watch?v=I_-UpOYULxw) by David Thomasson
-* [Leap Motion / Projected Interface: Tagging and capturing physical objects](https://vimeo.com/85337378) by Anouk Hoffmeister and Tom Brewe
+* [Leap Motion: Ball Maze](http://www.youtube.com/watch?v=I_-UpOYULxw) by David Thomasson
+* [Leap Motion: Tagging and capturing physical objects](https://vimeo.com/85337378) by Anouk Hoffmeister and Tom Brewe
 
 ## Questions?
 

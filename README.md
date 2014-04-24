@@ -251,11 +251,13 @@ Note: Or try the [OneDollarUnistrokeRecognizer](https://github.com/voidplus/oned
 
 System:
 
-* OSX
-* Windows (*not tested yet, but x86 and x64 should work*)
+* OSX (*Mac OS 10.7 and higher*)
+* Linux (*not tested yet, but it should work*) (*Ubuntu Linux 12.04 LTS and Ubuntu 13.04 Raring Ringtail*)
+* Windows (*not tested yet, but x86 and x64 should work*) (*Windows 7 and 8*)
 
 Processing Version:
 
+* 2.1.2
 * 2.1.1
 * 2.1.0
 * 2.0.1
@@ -265,6 +267,7 @@ Processing Version:
 
 Leap Motion Software Version:
 
+* 1.2.0+10933
 * 1.1.3+9188
 * 1.1.0+9145
 * 1.0.4+7346
@@ -273,25 +276,33 @@ Leap Motion Software Version:
 
 ## Changelog
 
+### ~~v.1.2.0~~
+
+> So far Leap Motion didn't release the developer libraries for SDK v1.2.0 to support the Leap Motion Software v1.2.0+10933.
+
+* ~~Added support for [SDK v.1.2.0](https://developer.leapmotion.com/documentation/Leap_SDK_Release_Notes.html#version-1-2-0)~~
+
+
 ### v.1.1.3.1
 
-* Added ```runInBackground()```
-
+* Added methods:
+* * ```runInBackground()``` to ```LeapMotion```
 
 ### v.1.1.3
 
-* Added Support for [SDK v.1.0.9](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#version-1-0-9)
+* Added support for [SDK v.1.0.9](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#version-1-0-9)
 
 ### v.1.1.2
 
-* Added methods to get raw data (without mapping) from the Leap Motion SDK: ```getPosition()``` → ```getRawPosition()```
-* Added ```hasTools()```, ```getTool(id)```, ```getTools()```, ```countTools()```, ```getFrontHand()```, ```getLeftHand()```, ```getRightHand()```, ```getFrontFinger()```, ```getLeftFinger()```, ```getRightFinger()```, ```getFrontTool()```, ```getLeftTool()``` and ```getRightTool()``` to ```LeapMotion```
-* Added ```getFrontFinger()```, ```getLeftFinger()```, ```getRightFinger()```, ```getFrontTool()```, ```getLeftTool()```and ```getRightTool()``` to ```Hand```
+* Added methods:
+* *  ```getPosition()``` → ```getRawPosition()``` (to get raw data without mapping)
+* * ```hasTools()```, ```getTool(id)```, ```getTools()```, ```countTools()```, ```getFrontHand()```, ```getLeftHand()```, ```getRightHand()```, ```getFrontFinger()```, ```getLeftFinger()```, ```getRightFinger()```, ```getFrontTool()```, ```getLeftTool()``` and ```getRightTool()``` to ```LeapMotion``` 
+* * ```getFrontFinger()```, ```getLeftFinger()```, ```getRightFinger()```, ```getFrontTool()```, ```getLeftTool()```and ```getRightTool()``` to ```Hand```
 
 ### v.1.1.0
 
-* Added Support for [SDK v.0.8.1](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#version-0-8-1)
-* Added Support for [SDK v.0.8.0](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#version-0-8-0)
+* Added support for [SDK v.0.8.1](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#versnoS-0-8-1)
+* Added support for [SDK v.0.8.0](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#version-0-8-0)
 
 
 ## Links

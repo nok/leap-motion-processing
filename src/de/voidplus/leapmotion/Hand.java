@@ -110,6 +110,46 @@ public class Hand implements PConstants {
 	 */
 	public PVector getRawDirection(){
 		return this.leap.convert(this.hand.direction());
+	}
+	
+	/**
+	 * How confident we are with a given hand pose. The confidence level ranges between 0.0 and 1.0 inclusive.
+	 * @return 
+	 */
+	public float getConfidence(){
+		return this.hand.confidence();
+	}
+	
+	/**
+	 * Identifies whether this Hand is a left hand.
+	 * @return True if the hand is identified as a left hand.
+	 */
+	public boolean isLeft(){
+		return this.hand.isLeft();
+	}
+
+	/**
+	 * Identifies whether this Hand is a right hand.
+	 * @return True if the hand is identified as a right hand.
+	 */
+	public boolean isRight(){
+		return this.hand.isRight();
+	}
+	
+	/**
+	 * The strength of a grab hand pose. The strength is zero for an open hand, and blends to 1.0 when a grabbing hand pose is recognized.
+	 * @return A float value in the [0..1] range representing the holding strength of the pose.
+	 */
+	public float getGrabStrength(){
+		return this.hand.grabStrength();
+	}
+	
+	/**
+	 * The holding strength of a pinch hand pose. The strength is zero for an open hand, and blends to 1.0 when a pinching hand pose is recognized. Pinching can be done between the thumb and any other finger of the same hand.
+	 * @return A float value in the [0..1] range representing the holding strength of the pinch pose.
+	 */
+	public float getPinchStrength(){
+		return this.hand.pinchStrength();
 	}	
 	
 	/**
@@ -168,27 +208,6 @@ public class Hand implements PConstants {
 		return new Tool(this.parent, this.leap, this.hand.tools().rightmost());
 	}
 	
-	/**
-	 * Draw the hand with all details.
-	 * @param radius	The radius of the ellipse (2D) or sphere (3D).
-	 */
-	public void draw(float radius){
-		PVector position = this.getPosition();
-		if(this.parent.g.is2D()){
-			this.parent.ellipseMode(PConstants.CENTER);
-			this.parent.ellipse(position.x, position.y, radius, radius);
-		} else {
-			this.parent.pushMatrix();
-				this.parent.translate(position.x, position.y, position.z);
-				this.parent.sphereDetail(20);
-				this.parent.sphere(5);
-			this.parent.popMatrix();
-		}
-	}
-	public void draw(){
-		this.draw(5);
-	}
-
 	
 	/* ------------------------------------------------------------------------ */
 	/* FLIGHT-DYNAMICS */
@@ -292,6 +311,81 @@ public class Hand implements PConstants {
 		}
 		return 0;
 	}
+	
+	/**
+	 * Get a specific finger by id.
+	 * @param type	0:TYPE_THUMB, 1:TYPE_INDEX, 2:TYPE_MIDDLE, 3:TYPE_RING, 4:TYPE_PINKY
+	 * @return
+	 */
+	public Finger getFinger(int type){
+		for(Finger finger : this.getFingers()){
+			if(finger.getType()==type){
+				return finger;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Get a specific finger by name.
+	 * @param type	"thumb", "index", "middle", "ring", "pinky"
+	 * @return
+	 */
+	public Finger getFinger(String name){
+		name = name.toLowerCase();
+		if(name.equals("thumb")){
+			return this.getFinger(0);
+		} else if(name.equals("index")){
+			return this.getFinger(1);
+		} else if(name.equals("middle")){
+			return this.getFinger(2);
+		} else if(name.equals("ring")){
+			return this.getFinger(3);
+		} else if (name.equals("pinky")){
+			return this.getFinger(4);
+		}
+		return null;
+	}
+	
+	/**
+	 * Get the thumb finger.
+	 * @return
+	 */
+	public Finger getThumb(){
+		return this.getFinger(0);
+	}
+
+	/**
+	 * Get the index finger.
+	 * @return
+	 */
+	public Finger getIndexFinger(){
+		return this.getFinger(1);
+	}
+	
+	/**
+	 * Get the middle finger.
+	 * @return
+	 */
+	public Finger getMiddleFinger(){
+		return this.getFinger(2);
+	}
+	
+	/**
+	 * Get the ring finger.
+	 * @return
+	 */
+	public Finger getRingFinger(){
+		return this.getFinger(3);
+	}
+	
+	/**
+	 * Get the pinky/little finger.
+	 * @return
+	 */
+	public Finger getPinkyFinger(){
+		return this.getFinger(4);
+	}
 
 	
 	/* ------------------------------------------------------------------------ */
@@ -331,6 +425,97 @@ public class Hand implements PConstants {
 			return this.hand.tools().count();
 		}
 		return 0;
+	}
+	
+	
+	/* ------------------------------------------------------------------------ */
+	/* DRAWING */
+	
+	/**
+	 * Draw the hand with all details.
+	 * @param radius	The radius of the ellipse (2D) or sphere (3D).
+	 */
+	public void draw(float radius){
+		this.parent.noStroke();
+		this.parent.fill(0);
+		
+		PVector position = this.getPosition();
+		if(this.parent.g.is2D()){
+			this.parent.ellipseMode(PConstants.CENTER);
+			this.parent.ellipse(position.x, position.y, radius, radius);
+		} else {
+			
+			// position
+			this.parent.pushMatrix();
+				this.parent.translate(position.x, position.y, position.z);
+				this.parent.sphereDetail(20);
+				this.parent.sphere(radius);
+			this.parent.popMatrix();
+			
+			// sphere
+//			this.parent.stroke(0, 30);
+//			
+//			this.parent.noFill();
+//			this.parent.pushMatrix();
+//				this.parent.translate(position.x, position.y, position.z);
+//				
+//				float pitch = this.hand.direction().pitch();
+//				PVector rotation = this.leap.map(new com.leapmotion.leap.Vector(pitch, 0, 0));
+//				this.parent.rotateX(rotation.x);
+//				this.parent.ellipse(0, 0, 100, 100);
+//			this.parent.popMatrix();
+			
+		}
+		// fingers
+		if(this.hasFingers()){
+			this.parent.noStroke();
+			this.parent.fill(0);
+			
+			for(Finger finger : this.fingers){
+				finger.draw();
+			}
+		}
+	}
+	public void draw(){
+		this.draw(5);
+	}
+
+	/**
+	 * Draw all fingers of the hand.
+	 * @param radius	The radius of the ellipse (2D) or sphere (3D).
+	 */
+	public void drawFingers(int radius){
+		if(this.hasFingers()){
+			for(Finger finger : this.fingers){
+				finger.draw(radius);
+			}
+		}
+	}
+	public void drawFingers(){
+		this.drawFingers(3);
+	}
+	
+	/**
+	 * Draw the sphere of the hand.
+	 * @param radius	The radius of the ellipse (2D) or sphere (3D).
+	 */
+	public void drawSphere(){
+		this.parent.stroke(0, 10);
+		this.parent.noFill();
+		
+		PVector position = this.getSpherePosition();
+		float radius = this.getSphereRadius();
+		
+		if(this.parent.g.is2D()){
+			this.parent.ellipseMode(PConstants.CENTER);
+			this.parent.ellipse(position.x, position.y, radius, radius);
+		} else {
+			this.parent.pushMatrix();
+				this.parent.translate(position.x, position.y, position.z);
+				this.parent.sphereDetail(12);
+				this.parent.sphere(radius);
+			this.parent.popMatrix();
+		}
 	}
 	
 }

@@ -152,26 +152,12 @@ public class Pointable {
 		return this.pointable.isValid();
 	}
 	
-	/**
-	 * Draw the finger with all details.
-	 * @param radius	The radius of the ellipse (2D) or sphere (3D).
-	 */
-	public void draw(float radius){
-		PVector position = this.getPosition();
-		
-		if(this.parent.g.is2D()){
-			this.parent.ellipseMode(PConstants.CENTER);
-			this.parent.ellipse(position.x, position.y, radius, radius);
-		} else {
-			this.parent.pushMatrix();
-			this.parent.translate(position.x, position.y, position.z);
-			this.parent.sphereDetail(20);
-			this.parent.sphere(5);
-			this.parent.popMatrix();
-		}
+	protected boolean isFinger(){
+		return this.pointable.isFinger();
 	}
-	public void draw(){
-		this.draw(5);
-	}	
+	
+	protected boolean isTool(){
+		return this.pointable.isTool();
+	}
 	
 }

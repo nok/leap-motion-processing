@@ -5,7 +5,6 @@ LeapMotion leap;
 void setup(){
   size(800, 500, P3D);
   background(255);
-  noStroke(); fill(50);
   // ...
     
   leap = new LeapMotion(this);
@@ -16,10 +15,10 @@ void draw(){
   // ...
   int fps = leap.getFrameRate();
   
-  // HANDS
+  // === HANDS
   for(Hand hand : leap.getHands()){
 
-    hand.draw();
+    // --- Basics
     int     hand_id          = hand.getId();
     PVector hand_position    = hand.getPosition();
     PVector hand_stabilized  = hand.getStabilizedPosition();
@@ -28,15 +27,43 @@ void draw(){
     float   hand_roll        = hand.getRoll();
     float   hand_pitch       = hand.getPitch();
     float   hand_yaw         = hand.getYaw();
+    boolean hand_is_left     = hand.isLeft();
+    boolean hand_is_right    = hand.isRight();
+    float   hand_grab        = hand.getGrabStrength();
+    float   hand_pinch       = hand.getPinchStrength();
     float   hand_time        = hand.getTimeVisible();
     PVector sphere_position  = hand.getSpherePosition();
     float   sphere_radius    = hand.getSphereRadius();
     
-    // FINGERS
+    // --- Specific fingers
+    Finger  finger_thumb     = hand.getThumb();
+    // or                      hand.getFinger("thumb");
+    // or                      hand.getFinger(0);
+
+    Finger  finger_index     = hand.getIndexFinger();
+    // or                      hand.getFinger("index");
+    // or                      hand.getFinger(1);
+
+    Finger  finger_middle    = hand.getMiddleFinger();
+    // or                      hand.getFinger("middle");
+    // or                      hand.getFinger(2);
+
+    Finger  finger_ring      = hand.getRingFinger();
+    // or                      hand.getFinger("ring");
+    // or                      hand.getFinger(3);
+
+    Finger  finger_pink      = hand.getPinkyFinger();
+    // or                      hand.getFinger("pinky");
+    // or                      hand.getFinger(4);
+    
+    // --- Drawing
+    // hand.drawSphere();
+    hand.draw();
+    
+    // === FINGERS (all)
     for(Finger finger : hand.getFingers()){
       
-      // Basics
-      finger.draw();
+      // --- Basics
       int     finger_id         = finger.getId();
       PVector finger_position   = finger.getPosition();
       PVector finger_stabilized = finger.getStabilizedPosition();
@@ -44,7 +71,31 @@ void draw(){
       PVector finger_direction  = finger.getDirection();
       float   finger_time       = finger.getTimeVisible();
       
-      // Touch Emulation
+      // --- Find specific finger
+      switch(finger.getType()){
+        case 0:
+          // System.out.println("thumb");
+          break;
+        case 1:
+          // System.out.println("index");
+          break;
+        case 2:
+          // System.out.println("middle");
+          break;
+        case 3:
+          // System.out.println("ring");
+          break;
+        case 4:
+          // System.out.println("pinky");
+          break;
+      }
+      
+      // --- Drawing
+      // finger.draw(); // = drawLines()+drawJoints()
+      // finger.drawLines();
+      // finger.drawJoints();
+      
+      // --- Touch emulation
       int     touch_zone        = finger.getTouchZone();
       float   touch_distance    = finger.getTouchDistance();
       
@@ -60,11 +111,10 @@ void draw(){
       }
     }
     
-    // TOOLS
+    // === TOOLS
     for(Tool tool : hand.getTools()){
       
-      // Basics
-      tool.draw();
+      // --- Basics
       int     tool_id           = tool.getId();
       PVector tool_position     = tool.getPosition();
       PVector tool_stabilized   = tool.getStabilizedPosition();
@@ -72,7 +122,10 @@ void draw(){
       PVector tool_direction    = tool.getDirection();
       float   tool_time         = tool.getTimeVisible();
       
-      // Touch Emulation
+      // --- Drawing
+      // tool.draw();
+      
+      // --- Touch emulation
       int     touch_zone        = tool.getTouchZone();
       float   touch_distance    = tool.getTouchDistance();
       
@@ -90,7 +143,7 @@ void draw(){
     
   }
   
-  // DEVICES
+  // === DEVICES
   // for(Device device : leap.getDevices()){
   //   float device_horizontal_view_angle = device.getHorizontalViewAngle();
   //   float device_verical_view_angle = device.getVerticalViewAngle();

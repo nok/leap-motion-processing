@@ -17,12 +17,12 @@ import processing.core.PVector;
 /**
  * Leap Motion Processing Library
  * @author Darius Morawiec
- * @version 1.1.3
+ * @version 2.0.0 BETA
  */
 public class LeapMotion {
 	
-	public static final String VERSION = "1.1.3.1"; 
-	public static final String SDK_VERSION = "1.0.9";
+	public static final String VERSION = "2.0.0 BETA"; 
+	public static final String SDK_VERSION = "2.0.0 BETA";
 	
 	private final PApplet parent;
 	
@@ -122,9 +122,9 @@ public class LeapMotion {
 	
 	/**
 	 * Set the world coordinates.
-	 * @param width 	World width dimension in millimeters.
-	 * @param height 	World height dimension in millimeters.
-	 * @param depth 	World depth dimension in millimeters.
+	 * @param width 	World width dimension in millimeters (default: 200).
+	 * @param height 	World height dimension in millimeters (default: 500).
+	 * @param depth 	World depth dimension in millimeters (default: 200).
 	 * @return
 	 */
 	public LeapMotion setWorld(int width, int height, int depth){

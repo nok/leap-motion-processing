@@ -32,7 +32,7 @@ Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries 
 
 ![Snapshot](https://raw.github.com/voidplus/leap-motion-processing/beta/reference/hand.jpg)
 
-```
+```java
 import de.voidplus.leapmotion.*;
 
 LeapMotion leap;

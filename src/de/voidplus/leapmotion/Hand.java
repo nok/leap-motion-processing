@@ -435,9 +435,11 @@ public class Hand implements PConstants {
 	 * Draw the hand with all details.
 	 * @param radius	The radius of the ellipse (2D) or sphere (3D).
 	 */
-	public void draw(float radius){
-		this.parent.noStroke();
-		this.parent.fill(0);
+	public void draw(float radius, boolean pre){
+		if(pre){
+			this.parent.noStroke();
+			this.parent.fill(0);	
+		}
 		
 		PVector position = this.getPosition();
 		if(this.parent.g.is2D()){
@@ -468,40 +470,51 @@ public class Hand implements PConstants {
 		}
 		// fingers
 		if(this.hasFingers()){
-			this.parent.noStroke();
-			this.parent.fill(0);
-			
 			for(Finger finger : this.fingers){
-				finger.draw();
+				finger.draw(pre);
 			}
 		}
 	}
+	public void draw(int radius){
+		this.draw(radius, true);
+	}
+	public void draw(boolean pre){
+		this.draw(5, pre);
+	}
 	public void draw(){
-		this.draw(5);
+		this.draw(5, true);
 	}
 
 	/**
 	 * Draw all fingers of the hand.
 	 * @param radius	The radius of the ellipse (2D) or sphere (3D).
 	 */
-	public void drawFingers(int radius){
+	public void drawFingers(int radius, boolean pre){
 		if(this.hasFingers()){
 			for(Finger finger : this.fingers){
-				finger.draw(radius);
+				finger.draw(radius, pre);
 			}
 		}
 	}
+	public void drawFingers(int radius){
+		this.drawFingers(radius, true);
+	}
+	public void drawFingers(boolean pre){
+		this.drawFingers(3, pre);
+	}
 	public void drawFingers(){
-		this.drawFingers(3);
+		this.drawFingers(3, true);
 	}
 	
 	/**
 	 * Draw the sphere of the hand.
 	 * @param radius	The radius of the ellipse (2D) or sphere (3D).
 	 */
-	public void drawSphere(){
-		this.parent.stroke(0, 10);
-		this.parent.noFill();
+	public void drawSphere(boolean pre){
+		if(pre){
+			this.parent.stroke(0, 10);
+			this.parent.noFill();
+		}
 		
 		PVector position = this.getSpherePosition();
 		float radius = this.getSphereRadius();
@@ -516,6 +529,9 @@ public class Hand implements PConstants {
 				this.parent.sphere(radius);
 			this.parent.popMatrix();
 		}
+	}
+	public void drawSphere(){
+		this.drawSphere(true);
 	}
 	
 }

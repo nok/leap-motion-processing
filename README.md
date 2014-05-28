@@ -12,7 +12,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v.2.0.0 BETA](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
+- [Leap Motion for Processing v2.0.1 BETA](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
 
 
 ## Installation
@@ -22,7 +22,7 @@ Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries 
 
 ## Dependencies
 
-- [Leap Motion Software](http://www.leapmotion.com/setup) **2.0.0+13819 BETA**
+- [Leap Motion Software](https://developer.leapmotion.com/) **2.0.1+15831 BETA**
 
 
 ## Usage
@@ -316,7 +316,8 @@ System:
 
 Processing Version:
 
-- **2.1.2**
+- **2.2.1**
+- 2.1.2
 - 2.1.1
 - 2.1.0
 - 2.0.1
@@ -326,55 +327,131 @@ Processing Version:
 
 Leap Motion Software Version:
 
-* **2.0.0+13819 BETA**
-* 1.2.0+10933
-* 1.1.3+9188
-* 1.1.0+9145
-* 1.0.4+7346
-* 1.0.2+7287
+* **2.0.1+15831 BETA**
+* 2.0.0+13819 BETA
+* ...
 
 
 ## Changelog
 
-### v.2.0.0 BETA
+### v2.0.1 BETA
 
-- Added support for SDK v.2.0.0 BETA
+- Added support for SDK v2.0.1+15831 BETA (Bone API)
+- Added new class:
+	- Class ```Bone```
 - Added public methods:
-	- ```Finger getFinger(int id)``` (0-4, 0=thumb, 1=index, 2=middle, 3=ring, 4=pinky), ```Finger getFinger(String type)``` ("thumb", "index", "middle", "ring", "pinky"), ```Finger getThumb()```, ```Finger getIndexFinger()```, ```Finger getMiddleFinger()```, ```Finger getRingFinger()```, ```Finger getPinkyFinger()```, ```float getConfidence()```, ```boolean isLeft()```, ```boolean isRight()```, ```float getGrabStrength()``` ([0..1]), ```float getPinchStrength()``` ([0..1]), ```void drawSphere()```, ```void drawFingers()``` to class ```Hand```
-	- ```PVector getPositionOfJointTip()```, ```PVector getPositionOfJointMcp()```, ```PVector getPositionOfJointPip()```, ```PVector getPositionOfJointDip()```, ```PVector getRawPositionOfJointTip()```, ```PVector getRawPositionOfJointMcp()```, ```PVector getRawPositionOfJointPip()```, ```PVector getRawPositionOfJointDip()```, ```void drawLines()```, ```void drawJoints()``` to class ```Finger```
-	- ```PVector getTipPosition()```, ```PVector getRawTipPosition()```, ```void draw()``` to class ```Tool```
+	- Class ```Bone```
+		- ```float getLength()```
+		- ```float getWidth()```
+		- ```PVector getNextJoint()``` and ```PVector getRawNextJoint()```
+		- ```PVector getPrevJoint()``` and ```PVector getRawPrevJoint()```
+		- ```PVector getNextJoint()``` and ```PVector getRawNextJoint()```
+		- ```int getType()``` (0-3, 0=distal, 1=intermediate, 2=proximal, 3=metacarpal)
+		- ```PVector getDirection()``` and ```PVector getRawDirection()```
+		- ```void draw()``` and ```void draw(boolean pre)```
+	- Class ```Hand```
+		- ```float getWidth()```
+	- Class ```Finger```
+		- ```Bone getBone(int index)``` (0-3, 0=distal, 1=intermediate, 2=proximal, 3=metacarpal)
+		- ```Bone getBone(int name)``` ("distal", "intermediate", "proximal", "metacarpal")
+		- ```Bone getDistalBone()```
+		- ```Bone getIntermediateBone()```
+		- ```Bone getMetacarpalBone()```
+		- ```Bone getProximalBone()```
+		- ```void drawBones()``` and ```void drawBones(boolean pre)```
+	- Class ```LeapMotion```
+		- ```long getId()```
+		- ```long getTimestamp()```
 - Changed public methods:
-	- ```void draw()``` of class ```Hand```
-	- ```void draw()``` of class ```Finger```
-	- ```void draw()``` of class ```Tool```
+	- Class ```Finger```
+		- ```void draw()```
+		- ```void draw(int radius)```
+		- ```void draw(boolean pre)```
+		- ```void draw(int radius, boolean pre)```
+		- ```void drawJoints()```
+		- ```void drawJoints(boolean pre)```
+		- ```void drawLines()```
+		- ```void drawLines(int radius)```
+		- ```void drawLines(boolean pre)```
+		- ```void drawLines(int radius, boolean pre)```
+	- Class ```Hand```
+		- ```void draw()```
+		- ```void draw(int radius)```
+		- ```void draw(boolean pre)```
+		- ```void draw(int radius, boolean pre)```
+		- ```void drawSphere()```
+		- ```void drawSphere(boolean pre)```
+		- ```void drawFingers()```
+		- ```void drawFingers(int radius)```
+		- ```void drawFingers(boolean pre)```
+		- ```void drawFingers(int radius, boolean pre)```
+- Fixed [Gestures in Processing](https://community.leapmotion.com/t/gestures-in-processing/873/11)
+			
+### v2.0.0 BETA
+
+- Added support for SDK v2.0.0+13819 BETA
+- Added public methods:
+	- Class ```Hand```
+		- ```Finger getFinger(int index)``` (0-4, 0=thumb, 1=index, 2=middle, 3=ring, 4=pinky)
+		- ```Finger getFinger(String name)``` ("thumb", "index", "middle", "ring", "pinky")
+		- ```Finger getThumb()```
+		- ```Finger getIndexFinger()```
+		- ```Finger getMiddleFinger()```
+		- ```Finger getRingFinger()```
+		- ```Finger getPinkyFinger()```
+		- ```float getConfidence()```
+		- ```boolean isLeft()```
+		- ```boolean isRight()```
+		- ```float getGrabStrength()``` ([0..1])
+		- ```float getPinchStrength()``` ([0..1])
+		- ```void drawSphere()```
+		- ```void drawFingers()```
+	- Class ```Finger```
+		- ```PVector getPositionOfJointTip()``` and ```PVector getRawPositionOfJointTip()```
+		- ```PVector getPositionOfJointMcp()``` and ```PVector getRawPositionOfJointMcp()```
+		- ```PVector getPositionOfJointPip()``` and ```PVector getRawPositionOfJointPip()```
+		- ```PVector getPositionOfJointDip()``` and ```PVector getRawPositionOfJointDip()```
+		- ```void getType()``` (0-4, 0=thumb, 1=index, 2=middle, 3=ring, 4=pinky)
+		- ```void drawLines()```
+		- ```void drawJoints()```
+	- Class ```Tool```
+		- ```PVector getTipPosition()```
+		- ```void draw()```
+- Changed public methods:
+	- Class ```Hand```
+		- ```void draw()```
+	- Class ```Finger```
+		- ```void draw()```
+	- Class ```Tool```
+		- ```void draw()```
 - Removed public methods:
-	- ```void drawDirection()``` from class ```Finger```
+	- Class ```Finger```
+		- ```void drawDirection()```
 
-
-### ~~v.1.2.0~~
+### ~~v1.2.0~~
 
 > So far Leap Motion didn't release the developer libraries for SDK v.1.2.0 to support the Leap Motion Software v.1.2.0+10933.
 
 - ~~Added support for [SDK v.1.2.0](https://developer.leapmotion.com/documentation/Leap_SDK_Release_Notes.html#version-1-2-0)~~
 
 
-### v.1.1.3.1
+### v1.1.3.1
 
 - Added public method:
 	- ```LeapMotion runInBackground(boolean active)``` to class ```LeapMotion```
 
-### v.1.1.3
+### v1.1.3
 
 - Added support for [SDK v.1.0.9](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#version-1-0-9)
 
-### v.1.1.2
+### v1.1.2
 
 - Added public methods:
 	-  ```PVector getPosition()``` → ```PVector getRawPosition()``` (to get raw data without mapping)
 	- ```boolean hasTools()```, ```Tool getTool(id)```, ```ArrayList<Tool> getTools()```, ```int countTools()```, ```Hand getFrontHand()```, ```Hand getLeftHand()```, ```Hand getRightHand()```, ```Finger getFrontFinger()```, ```Finger getLeftFinger()```, ```Finger getRightFinger()```, ```Tool getFrontTool()```, ```Tool getLeftTool()``` and ```Tool getRightTool()``` to class ```LeapMotion``` 
 	- ```Finger getFrontFinger()```, ```Finger getLeftFinger()```, ```Finger getRightFinger()```, ```Tool getFrontTool()```, ```Tool getLeftTool()```and ```Tool getRightTool()``` to class ```Hand```
 
-### v.1.1.0
+### v1.1.0
 
 - Added support for [SDK v.0.8.1](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#versnoS-0-8-1)
 - Added support for [SDK v.0.8.0](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#version-0-8-0)

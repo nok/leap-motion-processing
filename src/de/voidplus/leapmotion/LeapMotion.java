@@ -17,12 +17,12 @@ import processing.core.PVector;
 /**
  * Leap Motion Processing Library
  * @author Darius Morawiec
- * @version 2.0.0 BETA
+ * @version 2.0.1 BETA
  */
 public class LeapMotion {
 	
-	public static final String VERSION = "2.0.0 BETA"; 
-	public static final String SDK_VERSION = "2.0.0 BETA";
+	public static final String VERSION = "2.0.1 BETA"; 
+	public static final String SDK_VERSION = "2.0.1+15831 BETA";
 	
 	private final PApplet parent;
 	
@@ -32,6 +32,7 @@ public class LeapMotion {
 	private boolean recognition;
 	
 	private Frame frame;
+	private Frame lastFrame;
 	private ArrayList<Hand> hands;
 	private ArrayList<Finger> fingers;
 	private ArrayList<Tool> tools;
@@ -55,6 +56,8 @@ public class LeapMotion {
 		this.setVerbose(verbose);
 		this.recognition = false; 
 		
+		this.frame = Frame.invalid();
+		this.lastFrame = Frame.invalid();
 		this.hands = new ArrayList<Hand>();
 		this.fingers = new ArrayList<Finger>();
 		this.tools = new ArrayList<Tool>();
@@ -113,6 +116,28 @@ public class LeapMotion {
 	public int getFrameRate(){
 		if(this.isConnected()){
 			return (int) this.frame.currentFramesPerSecond();
+		}
+		return 0;
+	}
+	
+	/**
+	 * Get the current timestamp.
+	 * @return
+	 */
+	public long getTimestamp(){
+		if(this.isConnected()){
+			return this.frame.timestamp();
+		}
+		return 0;
+	}
+	
+	/**
+	 * Get the current ID.
+	 * @return
+	 */
+	public long getId(){
+		if(this.isConnected()){
+			return this.frame.id();
 		}
 		return 0;
 	}
@@ -454,7 +479,7 @@ public class LeapMotion {
 	 */	
 	private void check() {
 		if (this.isConnected() && this.recognition) {
-			for (com.leapmotion.leap.Gesture g : this.frame.gestures()) {
+			for (com.leapmotion.leap.Gesture g : this.frame.gestures(this.lastFrame)) {
 				int state = 2;
 				switch (g.type()) {
 					case TYPE_CIRCLE:
@@ -547,6 +572,8 @@ public class LeapMotion {
 				}
 				
 			}
+			
+			this.lastFrame = this.frame;
 		}
 	}
 	

@@ -108,17 +108,89 @@ public class Finger extends Pointable {
 		return -1;
 	}
 	
+	/**
+	 * Get a specific bone by name.
+	 * @param name	"distal", "intermediate", "proximal", "metacarpal"
+	 * @return
+	 */
+	public Bone getBone(String name){
+		name = name.toLowerCase();
+		if(name.equals("distal")){
+			return new Bone(parent, leap, this.finger.bone(com.leapmotion.leap.Bone.Type.TYPE_DISTAL));
+		} else if(name.equals("intermediate")){
+			return new Bone(parent, leap, this.finger.bone(com.leapmotion.leap.Bone.Type.TYPE_INTERMEDIATE));
+		} else if(name.equals("proximal")){
+			return new Bone(parent, leap, this.finger.bone(com.leapmotion.leap.Bone.Type.TYPE_PROXIMAL));
+		} else if(name.equals("metacarpal")){
+			return new Bone(parent, leap, this.finger.bone(com.leapmotion.leap.Bone.Type.TYPE_METACARPAL));
+		}
+		return null;
+	}
+	
+	/**
+	 * Get a specific bone by numeric index.
+	 * @param type	(0-3, 0=distal, 1=intermediate, 2=proximal, 3=metacarpal).
+	 * @return
+	 */
+	public Bone getBone(int type){
+		switch(type){
+		case 0:
+			return new Bone(parent, leap, this.finger.bone(com.leapmotion.leap.Bone.Type.TYPE_DISTAL));
+		case 1:
+			return new Bone(parent, leap, this.finger.bone(com.leapmotion.leap.Bone.Type.TYPE_INTERMEDIATE));
+		case 2:
+			return new Bone(parent, leap, this.finger.bone(com.leapmotion.leap.Bone.Type.TYPE_PROXIMAL));
+		case 3:
+			return new Bone(parent, leap, this.finger.bone(com.leapmotion.leap.Bone.Type.TYPE_METACARPAL));
+		}
+		return null;
+	}
+	
+	/**
+	 * Get the distal bone of the finger.
+	 * @return
+	 */
+	public Bone getDistalBone(){
+		return new Bone(parent, leap, this.finger.bone(com.leapmotion.leap.Bone.Type.TYPE_DISTAL));
+	}
+	
+	/**
+	 * Get the intermediate bone of the finger.
+	 * @return
+	 */
+	public Bone getIntermediateBone(){
+		return new Bone(parent, leap, this.finger.bone(com.leapmotion.leap.Bone.Type.TYPE_INTERMEDIATE));
+	}
+	
+	/**
+	 * Get the metacarpal bone of the finger.
+	 * @return
+	 */
+	public Bone getMetacarpalBone(){
+		return new Bone(parent, leap, this.finger.bone(com.leapmotion.leap.Bone.Type.TYPE_METACARPAL));
+	}
+	
+	/**
+	 * Get the proximal bone of the finger.
+	 * @return
+	 */
+	public Bone getProximalBone(){
+		return new Bone(parent, leap, this.finger.bone(com.leapmotion.leap.Bone.Type.TYPE_PROXIMAL));
+	}
 	
 	/* ------------------------------------------------------------------------ */
 	/* DRAWING */
 	
 	/**
 	 * Draw the lines between the joints.  
+	 * @param pre 
 	 * @return
 	 */
-	public void drawLines(){
-		this.parent.stroke(0);
-		this.parent.noFill();
+	public void drawLines(boolean pre){
+		if(pre){
+			this.parent.stroke(0);
+			this.parent.noFill();
+		}
 		
 		PVector tip = this.getPositionOfJointTip();
 		PVector mcp = this.getPositionOfJointMcp();
@@ -139,14 +211,35 @@ public class Finger extends Pointable {
 		}
 		this.parent.endShape(this.parent.OPEN);
 	}
+	public void drawLines(){
+		this.drawLines(true);
+	}
 
 	/**
-	 * Draw the joints of the finger.  
+	 * Draw all bones of finger.
+	 * @param pre
+	 */
+	public void drawBones(boolean pre){
+		this.getBone(0).draw(pre);
+		this.getBone(1).draw(pre);
+		this.getBone(2).draw(pre);
+		if(this.getType()!=0){ // thumb
+			this.getBone(3).draw(pre);
+		}
+	}
+	public void drawBones(){
+		this.drawBones(true);
+	}
+	
+	/**
+	 * Draw all joints of finger.  
 	 * @return
 	 */
-	public void drawJoints(float radius){
-		this.parent.noStroke();
-		this.parent.fill(0);
+	public void drawJoints(float radius, boolean pre){
+		if(pre){
+			this.parent.noStroke();
+			this.parent.fill(0);
+		}
 		
 		PVector tip = this.getPositionOfJointTip();
 		PVector mcp = this.getPositionOfJointMcp();
@@ -180,20 +273,33 @@ public class Finger extends Pointable {
 			this.parent.popMatrix();
 		}
 	}
+	public void drawJoints(int radius){
+		this.drawJoints(radius, true);
+	}
+	public void drawJoints(boolean pre){
+		this.drawJoints(3, pre);
+	}
 	public void drawJoints(){
-		this.drawJoints(3);
+		this.drawJoints(3, true);
 	}
 	
 	/**
-	 * Draw the joints and the lines of the finger.  
+	 * Draw the joints and bones of the finger.  
 	 * @return
 	 */
-	public void draw(float radius){
-		this.drawLines();
-		this.drawJoints(radius);
+	public void draw(float radius, boolean pre){
+		this.drawBones(pre);
+		// this.drawLines(pre);
+		this.drawJoints(radius, pre);
+	}
+	public void draw(int radius){
+		this.draw(radius, true);
+	}
+	public void draw(boolean pre){
+		this.draw(3, pre);
 	}
 	public void draw(){
-		this.draw(3);
-	}	
+		this.draw(3, true);
+	}
 	
 }

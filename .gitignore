@@ -11,3 +11,4 @@ src/development/
 bin/
 /bin
 tmp/
+/bin

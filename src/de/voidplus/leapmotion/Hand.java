@@ -470,7 +470,7 @@ public class Hand implements PConstants {
 		}
 		// fingers
 		if(this.hasFingers()){
-			for(Finger finger : this.fingers){
+			for(Finger finger : this.getFingers()){
 				finger.draw(pre);
 			}
 		}

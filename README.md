@@ -345,7 +345,6 @@ Leap Motion Software Version:
 		- ```float getWidth()```
 		- ```PVector getNextJoint()``` and ```PVector getRawNextJoint()```
 		- ```PVector getPrevJoint()``` and ```PVector getRawPrevJoint()```
-		- ```PVector getNextJoint()``` and ```PVector getRawNextJoint()```
 		- ```int getType()``` (0-3, 0=distal, 1=intermediate, 2=proximal, 3=metacarpal)
 		- ```PVector getDirection()``` and ```PVector getRawDirection()```
 		- ```void draw()``` and ```void draw(boolean pre)```

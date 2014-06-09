@@ -17,12 +17,12 @@ import processing.core.PVector;
 /**
  * Leap Motion Processing Library
  * @author Darius Morawiec
- * @version 2.0.1 BETA
+ * @version 2.0.2 BETA
  */
 public class LeapMotion {
 	
-	public static final String VERSION = "2.0.1 BETA"; 
-	public static final String SDK_VERSION = "2.0.1+15831 BETA";
+	public static final String VERSION = "2.0.2 BETA"; 
+	public static final String SDK_VERSION = "2.0.2+16391 BETA";
 	
 	private final PApplet parent;
 	

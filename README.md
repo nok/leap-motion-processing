@@ -12,7 +12,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.0.1 BETA](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
+- [Leap Motion for Processing v2.0.2 BETA](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
 
 
 ## Installation
@@ -22,7 +22,7 @@ Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries 
 
 ## Dependencies
 
-- [Leap Motion Software](https://developer.leapmotion.com/) **2.0.1+15831 BETA**
+- [Leap Motion Software](https://developer.leapmotion.com/) **2.0.2+16391 BETA**
 
 
 ## Usage
@@ -327,16 +327,24 @@ Processing Version:
 
 Leap Motion Software Version:
 
-* **2.0.1+15831 BETA**
+* **2.0.2+16391 BETA**
+* 2.0.1+15831 BETA
 * 2.0.0+13819 BETA
 * ...
 
 
 ## Changelog
 
+### v2.0.2 BETA
+
+- Added support for SDK 2.0.2+16391 BETA
+	- Updated libraries
+
 ### v2.0.1 BETA
 
-- Added support for SDK v2.0.1+15831 BETA (Bone API)
+- Added support for SDK v2.0.1+15831 BETA
+	- Updated libraries
+	- Added new Bone API
 - Added new class:
 	- Class ```Bone```
 - Added public methods:

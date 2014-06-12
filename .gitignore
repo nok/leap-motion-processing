@@ -10,3 +10,14 @@ web/
 src/development/
 bin/
 /bin
+LeapForProcessingFork.iml
+.idea/.name
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/libraries/LeapMotionForProcessing.xml
+.idea/libraries/library.xml
+.idea/scopes/scope_settings.xml

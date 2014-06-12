@@ -39,7 +39,13 @@ public class Hand implements PConstants {
 	public int getId(){
 		return this.hand.id();
 	}
-	
+
+    /**
+     * Reports whether this is a valid Hand object.
+     * @return True, if this Hand object contains valid tracking data.
+     */
+    public boolean isValid() { return this.hand.isValid(); }
+
 	/**
 	 * The center position of the palm in millimeters.
 	 * @return

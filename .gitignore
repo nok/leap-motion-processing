@@ -10,3 +10,5 @@ web/
 src/development/
 bin/
 /bin
+LeapForProcessingFork.iml
+.idea/*

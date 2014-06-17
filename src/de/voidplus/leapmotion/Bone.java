@@ -18,6 +18,17 @@ public class Bone {
 	}
 	
 	/**
+	 * Reports whether this is a valid Bone object. 
+	 * @return
+	 */
+	public boolean isValid(){
+		return this.bone.isValid();
+	}
+	protected static boolean isValid(com.leapmotion.leap.Bone bone){
+		return bone.isValid();
+	}
+	
+	/**
 	 * Get the index of bone (0-3, 0=distal, 1=intermediate, 2=proximal, 3=metacarpal).  
 	 * @return
 	 */

@@ -19,6 +19,16 @@ public abstract class Gesture {
 		this.gesture = gesture;
 	}
 
+	/**
+	 * Reports whether this is a valid Gesture object. 
+	 * @return
+	 */
+	public boolean isValid(){
+		return this.gesture.isValid();
+	}
+	public static boolean isValid(com.leapmotion.leap.Gesture gesture){
+		return gesture.isValid();
+	}
 	
 	/**
 	 * Get the unique ID.

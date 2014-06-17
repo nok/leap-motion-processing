@@ -28,6 +28,16 @@ public class Hand implements PConstants {
 		this.tools = new ArrayList<Tool>();
 	}
 
+	/**
+	 * Reports whether this is a valid Hand object. 
+	 * @return
+	 */
+	public boolean isValid(){
+		return this.hand.isValid();
+	}
+	protected static boolean isValid(com.leapmotion.leap.Hand hand){
+		return hand.isValid();
+	}
 	
 	/* ------------------------------------------------------------------------ */
 	/* HAND */
@@ -164,7 +174,7 @@ public class Hand implements PConstants {
 	 * The member of the list that is farthest to the front within the standard Leap Motion frame of reference (i.e has the smallest Z coordinate). 
 	 * @return
 	 */
-	public Finger getFrontFinger(){		
+	public Finger getFrontFinger(){
 		return new Finger(this.parent, this.leap, this.hand.fingers().frontmost());
 	}
 	

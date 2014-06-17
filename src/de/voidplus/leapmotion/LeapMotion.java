@@ -17,11 +17,11 @@ import processing.core.PVector;
 /**
  * Leap Motion Processing Library
  * @author Darius Morawiec
- * @version 2.0.2 BETA
+ * @version 2.0.2.2 BETA
  */
 public class LeapMotion {
 	
-	public static final String VERSION = "2.0.2 BETA"; 
+	public static final String VERSION = "2.0.2.2 BETA"; 
 	public static final String SDK_VERSION = "2.0.2+16391 BETA";
 	
 	private final PApplet parent;
@@ -214,7 +214,11 @@ public class LeapMotion {
 	 * @return
 	 */
 	public Hand getHand(Integer id){
-		return new Hand(this.parent, this, this.frame.hand(id));
+		com.leapmotion.leap.Hand hand = this.frame.hand(id);
+		if(!LeapMotion.isNull(hand) && Hand.isValid(hand)){
+			return new Hand(this.parent, this, hand);
+		}
+		return null;
 	}
 	
 	/**
@@ -225,7 +229,9 @@ public class LeapMotion {
 		this.hands.clear();
 		if(this.hasHands()){
 			for(com.leapmotion.leap.Hand hand : this.frame.hands()){
-				hands.add(new Hand(this.parent, this, hand));
+				if(Hand.isValid(hand)){
+					hands.add(new Hand(this.parent, this, hand));
+				}
 		    }
 		}
 		return this.hands;
@@ -246,16 +252,28 @@ public class LeapMotion {
 	 * The member of the list that is farthest to the front within the standard Leap Motion frame of reference (i.e has the smallest Z coordinate). 
 	 * @return
 	 */
-	public Hand getFrontHand(){		
-		return new Hand(this.parent, this, this.frame.hands().frontmost());
+	public Hand getFrontHand(){
+		if (!this.frame.hands().isEmpty()) {
+			com.leapmotion.leap.Hand hand = this.frame.hands().frontmost();
+			if (!LeapMotion.isNull(hand) && Hand.isValid(hand)) {
+				return new Hand(this.parent, this, hand);
+			}
+		}
+		return null;
 	}
 	
 	/**
 	 * The member of the list that is farthest to the left within the standard Leap Motion frame of reference (i.e has the smallest X coordinate). 
 	 * @return
 	 */
-	public Hand getLeftHand(){		
-		return new Hand(this.parent, this, this.frame.hands().leftmost());
+	public Hand getLeftHand(){
+		if (!this.frame.hands().isEmpty()) {
+			com.leapmotion.leap.Hand hand = this.frame.hands().leftmost();
+			if (!LeapMotion.isNull(hand) && Hand.isValid(hand)) {
+				return new Hand(this.parent, this, hand);
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -263,7 +281,13 @@ public class LeapMotion {
 	 * @return
 	 */
 	public Hand getRightHand(){		
-		return new Hand(this.parent, this, this.frame.hands().rightmost());
+		if (!this.frame.hands().isEmpty()) {
+			com.leapmotion.leap.Hand hand = this.frame.hands().rightmost();
+			if (!LeapMotion.isNull(hand) && Hand.isValid(hand)) {
+				return new Hand(this.parent, this, hand);
+			}
+		}
+		return null;
 	}
 	
 
@@ -287,7 +311,11 @@ public class LeapMotion {
 	 * @return
 	 */
 	public Finger getFinger(Integer id){
-		return new Finger(this.parent, this, this.frame.finger(id));
+		com.leapmotion.leap.Finger finger = this.frame.finger(id);
+		if(!LeapMotion.isNull(finger) && Finger.isValid(finger)){
+			return new Finger(this.parent, this, finger);
+		}
+		return null;
 	}
 	
 	/**
@@ -298,7 +326,9 @@ public class LeapMotion {
 		this.fingers.clear();
 		if(this.hasFingers()){
 			for(com.leapmotion.leap.Finger finger : this.frame.fingers()){
-				fingers.add(new Finger(this.parent, this, finger));
+				if(Finger.isValid(finger)){
+					fingers.add(new Finger(this.parent, this, finger));
+				}
 		    }
 		}
 		return this.fingers;
@@ -360,7 +390,11 @@ public class LeapMotion {
 	 * @return
 	 */
 	public Tool getTool(Integer id){
-		return new Tool(this.parent, this, this.frame.tool(id));
+		com.leapmotion.leap.Tool tool = this.frame.tool(id);
+		if(!LeapMotion.isNull(tool) && Tool.isValid(tool)){
+			return new Tool(this.parent, this, tool);
+		}
+		return null;
 	}
 	
 	/**
@@ -371,7 +405,9 @@ public class LeapMotion {
 		this.tools.clear();
 		if(this.hasTools()){
 			for(com.leapmotion.leap.Tool tool : this.frame.tools()){
-				tools.add(new Tool(this.parent, this, tool));
+				if(Tool.isValid(tool)){
+					tools.add(new Tool(this.parent, this, tool));
+				}
 		    }
 		}
 		return this.tools;
@@ -798,6 +834,15 @@ public class LeapMotion {
 		);
 	}
 
+	
+	/* ------------------------------------------------------------------------ */
+	/* Helpers */
+	
+	private static boolean isNull(Object object){
+		return object==null;
+	}
+	
+	
 	/* ------------------------------------------------------------------------ */
 	/* Library */
 	

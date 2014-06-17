@@ -12,7 +12,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.0.2 BETA](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
+- [Leap Motion for Processing v2.0.2.2 BETA](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
 
 
 ## Installation
@@ -334,6 +334,29 @@ Leap Motion Software Version:
 
 
 ## Changelog
+
+### v2.0.2.2 BETA
+
+- Added public methods:
+	- Class ```Hand```
+		- ```boolean isValid()```
+	- Class ```Bone```
+		- ```boolean isValid()```
+	- Class ```Finger```
+		- ```boolean isValid()```
+	- Class ```Tool```
+		- ```boolean isValid()```
+- Changed public methods:
+	- Class ```LeapMotion```
+		- ```Hand getHand(Integer id)```
+		- ```ArrayList<Hand> getHands()```	
+		- ```Hand getFrontHand()```
+		- ```Hand getLeftHand()```
+		- ```Hand getRightHand()```
+		- ```Finger getFinger(Integer id)```
+		- ```ArrayList<Finger> getFingers()```	
+		- ```Tool getTool(Integer id)```
+		- ```ArrayList<Tool> getTools()```
 
 ### v2.0.2 BETA
 

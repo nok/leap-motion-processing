@@ -19,6 +19,17 @@ public class Tool extends Pointable {
 	}
 
 	/**
+	 * Reports whether this is a valid Tool object. 
+	 * @return
+	 */
+	public boolean isValid(){
+		return this.tool.isValid();
+	}
+	protected static boolean isValid(com.leapmotion.leap.Tool tool){
+		return tool.isValid();
+	}
+	
+	/**
 	 * Get the position of tip.
 	 * @return
 	 */

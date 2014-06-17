@@ -22,6 +22,16 @@ public class Finger extends Pointable {
 		super(parent, leap, pointable);
 	}
 	
+	/**
+	 * Reports whether this is a valid Finger object. 
+	 * @return
+	 */
+	public boolean isValid(){
+		return this.finger.isValid();
+	}
+	protected static boolean isValid(com.leapmotion.leap.Finger finger){
+		return finger.isValid();
+	}
 
 	/**
 	 * The finger tip position in millimeters. 

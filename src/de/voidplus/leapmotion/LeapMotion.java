@@ -17,16 +17,17 @@ import processing.core.PVector;
 /**
  * Leap Motion Processing Library
  * @author Darius Morawiec
- * @version 2.0.2.2 BETA
+ * @version 2.0.3 BETA
  */
 public class LeapMotion {
 	
-	public static final String VERSION = "2.0.2.2 BETA"; 
-	public static final String SDK_VERSION = "2.0.2+16391 BETA";
+	public static final String VERSION = "2.0.3 BETA"; 
+	public static final String SDK_VERSION = "2.0.3+17004 BETA";
 	
 	private final PApplet parent;
 	
 	private PVector world;
+	private PVector origin;
 	private boolean verbose;
 	
 	private boolean recognition;
@@ -139,7 +140,7 @@ public class LeapMotion {
 		if(this.isConnected()){
 			return this.frame.id();
 		}
-		return 0;
+		return Frame.invalid().id();
 	}
 	
 	/* ------------------------------------------------------------------------ */
@@ -153,8 +154,7 @@ public class LeapMotion {
 	 * @return
 	 */
 	public LeapMotion setWorld(int width, int height, int depth){
-		this.world = new PVector(width, height, depth);
-		return this;
+		return this.setWorld(new PVector(width, height, depth));
 	}
 	
 	/**
@@ -167,7 +167,27 @@ public class LeapMotion {
 		return this;
 	}
 	
-
+	/**
+	 * Move the world origin.
+	 * @param width
+	 * @param height
+	 * @param depth
+	 * @return
+	 */
+	public LeapMotion moveWorld(int x, int y, int z){
+		return this.moveWorld(new PVector(x, y, z));
+	}
+	
+	/**
+	 * Move the world origin.
+	 * @param origin
+	 * @return
+	 */
+	public LeapMotion moveWorld(PVector origin){
+		this.origin = origin;
+		return this;
+	}
+	
 	/* ------------------------------------------------------------------------ */
 	/* Device */
 	
@@ -778,7 +798,7 @@ public class LeapMotion {
 	 * @param 	position
 	 * @return
 	 */
-	public PVector map(Vector position){
+	protected PVector map(Vector position){
 		
 //		InteractionBox box = this.frame.interactionBox();
 //		Vector normalized = box.normalizePoint(position);
@@ -818,7 +838,7 @@ public class LeapMotion {
 			(position.getZ() / world.z)
 		);
 		
-		return response;
+		return this.move(response);
 	}
 	
 	/**
@@ -826,14 +846,28 @@ public class LeapMotion {
 	 * @param position
 	 * @return
 	 */
-	public PVector convert(Vector position) {
-		return new PVector(
+	protected PVector convert(Vector position) {
+		return this.move(new PVector(
 			position.getX(),
 			position.getY(),
 			position.getZ()
-		);
+		));
 	}
 
+	/**
+	 * Replace all elements.
+	 * @param position
+	 * @return
+	 */
+	private PVector move(PVector position){
+		if(this.origin!=null){
+			position.x += origin.x;
+			position.y += origin.y;
+			position.z += origin.z;	
+		}
+		return position;
+	}
+	
 	
 	/* ------------------------------------------------------------------------ */
 	/* Helpers */

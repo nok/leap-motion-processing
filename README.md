@@ -12,7 +12,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.0.2.2 BETA](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
+- [Leap Motion for Processing v2.0.3 BETA](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
 
 
 ## Installation
@@ -22,7 +22,7 @@ Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries 
 
 ## Dependencies
 
-- [Leap Motion Software](https://developer.leapmotion.com/) **2.0.2+16391 BETA**
+- [Leap Motion Software](https://developer.leapmotion.com/) **2.0.3+17004 BETA**
 
 
 ## Usage
@@ -32,7 +32,7 @@ Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries 
 
 ![Snapshot](https://raw.github.com/voidplus/leap-motion-processing/beta/reference/hand.jpg)
 
-```java
+```
 import de.voidplus.leapmotion.*;
 
 LeapMotion leap;
@@ -94,6 +94,14 @@ void draw(){
         // --- Drawing
         // hand.drawSphere();
         hand.draw();
+
+        // === ARM
+        if(hand.hasArm()){
+            Arm     arm               = hand.getArm();
+            float   arm_width         = arm.getWidth();
+            PVector arm_wrist_pos     = arm.getWristPosition();
+            PVector arm_elbow_pos     = arm.getElbowPosition();
+        }
 
         // === FINGERS (all)
         for(Finger finger : hand.getFingers()){
@@ -327,13 +335,35 @@ Processing Version:
 
 Leap Motion Software Version:
 
-* **2.0.2+16391 BETA**
+* **2.0.3+17004 BETA**
+* 2.0.2+16391 BETA
 * 2.0.1+15831 BETA
 * 2.0.0+13819 BETA
 * ...
 
 
 ## Changelog
+
+### v2.0.3 BETA
+
+- Added support for SDK 2.0.3+17004 BETA
+	- Updated libraries
+- Added new class:
+	- Class ```Arm```
+- Added public methods:
+	- Class ```Arm```
+		- ```boolean isValid()```
+		- ```PVector getWristPosition()```
+		- ```PVector getWristRawPosition()```
+		- ```PVector getElbowPosition()```
+		- ```PVector getElbowRawPosition()```
+		- ```float getWidth()```
+	- Class ```Hand```
+		- ```Arm getArm()```
+		- ```boolean hasArm()```
+	- Class ```LeapMotion```
+		- ```LeapMotion moveWorld(Integer x, Integer y, Integer z)```
+		- ```LeapMotion moveWorld(PVector origin)```
 
 ### v2.0.2.2 BETA
 

@@ -3,7 +3,7 @@ import de.voidplus.leapmotion.*;
 LeapMotion leap;
 
 void setup(){
-  size(800, 500, P3D);
+  size(800, 500, OPENGL);
   background(255);
   noStroke(); fill(50);
   // ...
@@ -31,6 +31,14 @@ void draw(){
     float   hand_time        = hand.getTimeVisible();
     PVector sphere_position  = hand.getSpherePosition();
     float   sphere_radius    = hand.getSphereRadius();
+    
+    // ARM
+    if(hand.hasArm()){
+      Arm     arm              = hand.getArm();
+      float   arm_width        = arm.getWidth();
+      PVector arm_wrist_pos    = arm.getWristPosition();
+      PVector arm_elbow_pos    = arm.getElbowPosition(); 
+    }
     
     // FINGERS
     for(Finger finger : hand.getFingers()){

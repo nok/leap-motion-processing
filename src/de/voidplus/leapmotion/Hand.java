@@ -19,7 +19,6 @@ public class Hand implements PConstants {
 	private ArrayList<Finger> fingers;
 	private ArrayList<Tool> tools;
 	
-	
 	public Hand(PApplet parent, LeapMotion leap, com.leapmotion.leap.Hand hand){
 		this.parent = parent;
 		this.leap = leap;
@@ -435,6 +434,26 @@ public class Hand implements PConstants {
 			return this.hand.tools().count();
 		}
 		return 0;
+	}
+	
+	
+	/* ------------------------------------------------------------------------ */
+	/* ARM */
+	
+	/**
+	 * Get arm of the hand.
+	 * @return
+	 */
+	public Arm getArm(){
+		return new Arm(this.parent, this.leap, this.hand.arm());
+	}
+	
+	/**
+	 * Check if hand has valid arm.
+	 * @return
+	 */
+	public boolean hasArm(){
+		return this.hand.arm().isValid();
 	}
 	
 	

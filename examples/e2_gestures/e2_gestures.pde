@@ -3,7 +3,7 @@ import de.voidplus.leapmotion.*;
 LeapMotion leap;
 
 void setup(){
-  size(800, 500, P3D);
+  size(800, 500, OPENGL);
   background(255);
   // ...
     

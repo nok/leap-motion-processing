@@ -38,6 +38,27 @@ public abstract class Gesture {
 		return this.gesture.id();
 	}
 
+	/**
+	 * Get the type index of a gesture.
+	 * @return 
+	 */
+	public int getType(){
+		if(this.isValid()){
+			switch (this.gesture.type()) {
+			case TYPE_CIRCLE:
+				return 0;
+			case TYPE_KEY_TAP:
+				return 1;
+			case TYPE_SCREEN_TAP:
+				return 2;
+			case TYPE_SWIPE:
+				return 3;
+			default:
+				return -1;
+			}
+		}
+		return -1;
+	}
 	
 	/* ------------------------------------------------------------------------ */
 	/* DURATION */

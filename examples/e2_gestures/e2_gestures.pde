@@ -48,6 +48,7 @@ void leapOnCircleGesture(CircleGesture g, int state){
   float     progress         = g.getProgress();
   long      duration         = g.getDuration();
   float     duration_seconds = g.getDurationInSeconds();
+  int       direction        = g.getDirection();
 
   switch(state){
     case 1: // Start
@@ -58,6 +59,14 @@ void leapOnCircleGesture(CircleGesture g, int state){
       println("CircleGesture: "+id);
       break;
   }
+  
+  switch(direction){
+    case 0: // Anticlockwise/Left gesture
+      break;
+    case 1: // Clockwise/Right gesture
+      break;
+  }
+  
 }
 
 // SCREEN TAP GESTURE

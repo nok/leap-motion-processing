@@ -12,7 +12,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.0.3 BETA](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
+- [Leap Motion for Processing v2.0.3.1 BETA](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
 
 
 ## Installation
@@ -247,6 +247,7 @@ void leapOnSwipeGesture(SwipeGesture g, int state){
 	float 	speed 				= g.getSpeed();
 	long 	duration 			= g.getDuration();
 	float 	duration_seconds 	= g.getDurationInSeconds();
+	int     direction          = g.getDirection();
 
 	switch(state){
 		case 1:	// Start
@@ -257,6 +258,13 @@ void leapOnSwipeGesture(SwipeGesture g, int state){
 			println("SwipeGesture: "+id);
 			break;
 	}
+
+    switch(direction){
+        case 0: // Anticlockwise/Left gesture
+            break;
+        case 1: // Clockwise/Right gesture
+            break;
+    }
 }
 
 // CIRCLE GESTURE
@@ -343,6 +351,14 @@ Leap Motion Software Version:
 
 
 ## Changelog
+
+### v2.0.3.1 BETA
+
+- Added public methods:
+	- Class ```Gesture```
+		- ```int getType()``` (-1=NO_GESTURE, 0=TYPE_CIRCLE, 1=TYPE_KEY_TAP, 2=TYPE_SCREEN_TAP, 3=TYPE_SWIPE)
+	- Class ```CircleGesture```
+		- ```int getDirection()``` (0=anticlockwise/left, 1=clockwise/right)
 
 ### v2.0.3 BETA
 

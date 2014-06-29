@@ -15,7 +15,7 @@ public class CircleGesture extends Gesture {
 		super(parent, leap, gesture);
 		this.circle = new com.leapmotion.leap.CircleGesture(gesture);
 	}
-
+	
 	
 	/**
 	 * The center point of the circle within the Leap frame of reference. 
@@ -71,6 +71,21 @@ public class CircleGesture extends Gesture {
 	 */
 	public Finger getFinger() {
 		return new Finger(this.parent, this.leap, this.circle.pointable());
+	}
+	
+	/**
+	 * Get the direction of the circle gestures.
+	 * @return 0 = anticlockwise/left, 1 = clockwise/right
+	 */
+	public int getDirection(){
+		if(this.isValid()){
+			if (this.circle.pointable().direction().angleTo(this.circle.normal()) <= Math.PI / 2) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
+		return -1;
 	}
 	
 }

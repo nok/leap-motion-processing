@@ -17,11 +17,11 @@ import processing.core.PVector;
 /**
  * Leap Motion Processing Library
  * @author Darius Morawiec
- * @version 2.0.3 BETA
+ * @version 2.0.3.1 BETA
  */
 public class LeapMotion {
 	
-	public static final String VERSION = "2.0.3 BETA"; 
+	public static final String VERSION = "2.0.3.1 BETA"; 
 	public static final String SDK_VERSION = "2.0.3+17004 BETA";
 	
 	private final PApplet parent;
@@ -483,22 +483,22 @@ public class LeapMotion {
 		this.recognition = false;
 		for(String gesture : gestures){
 			gesture = "TYPE_"+gesture;
+			this.recognition = true;
 			switch(com.leapmotion.leap.Gesture.Type.valueOf(gesture)){
 				case TYPE_SWIPE:
 					controller.enableGesture(Gesture.Type.TYPE_SWIPE);
-					this.recognition = true;
 					break;
 				case TYPE_CIRCLE:
 					controller.enableGesture(Gesture.Type.TYPE_CIRCLE);
-					this.recognition = true;
 					break;
 				case TYPE_SCREEN_TAP:
 					controller.enableGesture(Gesture.Type.TYPE_SCREEN_TAP);
-					this.recognition = true;
 					break;
 				case TYPE_KEY_TAP:
 					controller.enableGesture(Gesture.Type.TYPE_KEY_TAP);
-					this.recognition = true;
+					break;
+				default:
+					this.recognition = false;
 					break;
 			}
 		}
@@ -536,99 +536,97 @@ public class LeapMotion {
 	private void check() {
 		if (this.isConnected() && this.recognition) {
 			for (com.leapmotion.leap.Gesture g : this.frame.gestures(this.lastFrame)) {
-				int state = 2;
-				switch (g.type()) {
-					case TYPE_CIRCLE:
-						state = 2;
-						if(g.state()==com.leapmotion.leap.Gesture.State.STATE_START){
-							state = 1;
-						} else if(g.state()==com.leapmotion.leap.Gesture.State.STATE_STOP){
-							state = 3;
-						}
-						try {
-							this.parent.getClass().getMethod(
-								"leapOnCircleGesture",
-								de.voidplus.leapmotion.CircleGesture.class,
-								int.class
-							).invoke(
-								this.parent,
-								new de.voidplus.leapmotion.CircleGesture(
-									this.parent,
-									this, g
-								),
-								state
-							);
-						} catch (Exception e) {
-							// e.printStackTrace();
-						}
-						break;
-					case TYPE_SWIPE:
-						state = 2;
-						if(g.state()==com.leapmotion.leap.Gesture.State.STATE_START){
-							state = 1;
-						} else if(g.state()==com.leapmotion.leap.Gesture.State.STATE_STOP){
-							state = 3;
-						}
-						try {
-							this.parent.getClass().getMethod(
-								"leapOnSwipeGesture",
-								de.voidplus.leapmotion.SwipeGesture.class,
-								int.class
-							).invoke(
-								this.parent,
-								new de.voidplus.leapmotion.SwipeGesture(
-									this.parent,
-									this, g
-								),
-								state
-							);
-						} catch (Exception e) {
-							// e.printStackTrace();
-						}
-						break;
-					case TYPE_SCREEN_TAP:
-						if(g.state()==com.leapmotion.leap.Gesture.State.STATE_STOP){
+				if (g.isValid()) {
+					int state = 2;
+					switch (g.type()) {
+						case TYPE_CIRCLE:
+							if(g.state()==com.leapmotion.leap.Gesture.State.STATE_START){
+								state = 1;
+							} else if(g.state()==com.leapmotion.leap.Gesture.State.STATE_STOP){
+								state = 3;
+							}
 							try {
 								this.parent.getClass().getMethod(
-									"leapOnScreenTapGesture",
-									de.voidplus.leapmotion.ScreenTapGesture.class
+									"leapOnCircleGesture",
+									de.voidplus.leapmotion.CircleGesture.class,
+									int.class
 								).invoke(
 									this.parent,
-									new de.voidplus.leapmotion.ScreenTapGesture(
+									new de.voidplus.leapmotion.CircleGesture(
 										this.parent,
 										this, g
-									)
+									),
+									state
 								);
 							} catch (Exception e) {
 								// e.printStackTrace();
 							}
-						}
-						break;
-					case TYPE_KEY_TAP:
-						if(g.state()==com.leapmotion.leap.Gesture.State.STATE_STOP){
+							break;
+						case TYPE_SWIPE:
+							if(g.state()==com.leapmotion.leap.Gesture.State.STATE_START){
+								state = 1;
+							} else if(g.state()==com.leapmotion.leap.Gesture.State.STATE_STOP){
+								state = 3;
+							}
 							try {
 								this.parent.getClass().getMethod(
-									"leapOnKeyTapGesture",
-									de.voidplus.leapmotion.KeyTapGesture.class
+									"leapOnSwipeGesture",
+									de.voidplus.leapmotion.SwipeGesture.class,
+									int.class
 								).invoke(
 									this.parent,
-									new de.voidplus.leapmotion.KeyTapGesture(
+									new de.voidplus.leapmotion.SwipeGesture(
 										this.parent,
 										this, g
-									)
+									),
+									state
 								);
 							} catch (Exception e) {
 								// e.printStackTrace();
 							}
-						}
-						break;
-					default:
-			            System.out.println("Unknown gesture type.");
-			            break;
+							break;
+						case TYPE_SCREEN_TAP:
+							if(g.state()==com.leapmotion.leap.Gesture.State.STATE_STOP){
+								try {
+									this.parent.getClass().getMethod(
+										"leapOnScreenTapGesture",
+										de.voidplus.leapmotion.ScreenTapGesture.class
+									).invoke(
+										this.parent,
+										new de.voidplus.leapmotion.ScreenTapGesture(
+											this.parent,
+											this, g
+										)
+									);
+								} catch (Exception e) {
+									// e.printStackTrace();
+								}
+							}
+							break;
+						case TYPE_KEY_TAP:
+							if(g.state()==com.leapmotion.leap.Gesture.State.STATE_STOP){
+								try {
+									this.parent.getClass().getMethod(
+										"leapOnKeyTapGesture",
+										de.voidplus.leapmotion.KeyTapGesture.class
+									).invoke(
+										this.parent,
+										new de.voidplus.leapmotion.KeyTapGesture(
+											this.parent,
+											this, g
+										)
+									);
+								} catch (Exception e) {
+									// e.printStackTrace();
+								}
+							}
+							break;
+						default:
+				            System.out.println("Unknown gesture type.");
+				            break;
+					}
 				}
-				
 			}
-			
 			this.lastFrame = this.frame;
 		}
 	}

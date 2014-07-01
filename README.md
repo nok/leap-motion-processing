@@ -5,7 +5,7 @@ Simple library to use the complete [Leap Motion](https://leapmotion.com/) [API](
 
 ## BETA
 
-If you are interested in the **Leap Motion 2.0.2 BETA** implementation, so have a look at the [BETA branch](https://github.com/voidplus/leap-motion-processing/tree/beta).
+IF YOU ARE INTERESTED IN THE NEWEST **LEAP MOTION BETA** IMPLEMENTATION, SO HAVE A LOOK AT THE [BETA BRANCH](https://github.com/voidplus/leap-motion-processing/tree/beta).
 
 
 ## About

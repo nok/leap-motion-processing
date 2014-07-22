@@ -12,7 +12,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.0.3.1 BETA](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
+- [Leap Motion for Processing v2.0.4 BETA](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
 
 
 ## Installation
@@ -22,7 +22,7 @@ Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries 
 
 ## Dependencies
 
-- [Leap Motion Software](https://developer.leapmotion.com/) **2.0.3+17004 BETA**
+- [Leap Motion Software](https://developer.leapmotion.com/) **2.0.4+17546 BETA**
 
 
 ## Usage
@@ -30,7 +30,15 @@ Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries 
 
 ### Basic Data-Access
 
-![Snapshot](https://raw.github.com/voidplus/leap-motion-processing/beta/reference/hand.jpg)
+#### Schemas
+
+![leap Motion Joints](https://raw.github.com/voidplus/leap-motion-processing/beta/reference/leap_hand.jpg)
+
+![Leap Motion Bones](https://raw.github.com/voidplus/leap-motion-processing/beta/reference/leap_bones.jpg)
+
+> Source: [Leap Motion](https://developer.leapmotion.com/documentation/skeletal/java/devguide/Leap_Overview.html)
+
+#### Code
 
 ```java
 import de.voidplus.leapmotion.*;
@@ -50,10 +58,14 @@ void draw(){
     // ...
     int fps = leap.getFrameRate();
 
-    // === HANDS
+
+    // ========= HANDS =========
+    
     for(Hand hand : leap.getHands()){
 
-        // --- Basics
+
+        // ----- BASICS -----
+        
         int     hand_id          = hand.getId();
         PVector hand_position    = hand.getPosition();
         PVector hand_stabilized  = hand.getStabilizedPosition();
@@ -70,7 +82,9 @@ void draw(){
         PVector sphere_position  = hand.getSpherePosition();
         float   sphere_radius    = hand.getSphereRadius();
 
-        // --- Specific fingers
+
+        // ----- SPECIFIC FINGER -----
+        
         Finger  finger_thumb     = hand.getThumb();
         // or                      hand.getFinger("thumb");
         // or                      hand.getFinger(0);
@@ -89,13 +103,17 @@ void draw(){
 
         Finger  finger_pink      = hand.getPinkyFinger();
         // or                      hand.getFinger("pinky");
-        // or                      hand.getFinger(4);
+        // or                      hand.getFinger(4);        
 
-        // --- Drawing
-        // hand.drawSphere();
+
+        // ----- DRAWING -----
+        
         hand.draw();
+        // hand.drawSphere();
 
-        // === ARM
+
+        // ========= ARM =========
+        
         if(hand.hasArm()){
             Arm     arm               = hand.getArm();
             float   arm_width         = arm.getWidth();
@@ -103,10 +121,14 @@ void draw(){
             PVector arm_elbow_pos     = arm.getElbowPosition();
         }
 
-        // === FINGERS (all)
+
+        // ========= FINGERS =========
+        
         for(Finger finger : hand.getFingers()){
       
-            // --- Basics
+      
+            // ----- BASICS -----
+            
             int     finger_id         = finger.getId();
             PVector finger_position   = finger.getPosition();
             PVector finger_stabilized = finger.getStabilizedPosition();
@@ -114,7 +136,9 @@ void draw(){
             PVector finger_direction  = finger.getDirection();
             float   finger_time       = finger.getTimeVisible();
 
-            // --- Find specific finger
+
+            // ----- SPECIFIC FINGER -----
+            
             switch(finger.getType()){
                 case 0:
                     // System.out.println("thumb");
@@ -132,13 +156,36 @@ void draw(){
                     // System.out.println("pinky");
                     break;
             }
-      
-            // --- Drawing
+
+
+            // ----- SPECIFIC BONE -----
+            
+            Bone    bone_distal       = finger.getDistalBone();
+            // or                       finger.get("distal");
+            // or                       finger.getBone(0);
+            
+            Bone    bone_intermediate = finger.getIntermediateBone();
+            // or                       finger.get("intermediate");
+            // or                       finger.getBone(1);
+            
+            Bone    bone_proximal     = finger.getProximalBone();
+            // or                       finger.get("proximal");
+            // or                       finger.getBone(2);
+
+            Bone    bone_metacarpal   = finger.getMetacarpalBone();
+            // or                       finger.get("metacarpal");
+            // or                       finger.getBone(3);
+            
+            
+            // ----- DRAWING -----
+            
             // finger.draw(); // = drawLines()+drawJoints()
             // finger.drawLines();
             // finger.drawJoints();
 
-            // --- Touch emulation
+
+            // ----- TOUCH EMULATION -----
+            
             int     touch_zone        = finger.getTouchZone();
             float   touch_distance    = finger.getTouchDistance();
       
@@ -154,10 +201,14 @@ void draw(){
             }
         }
     
-        // === TOOLS
+    
+        // ========= TOOLS =========
+        
         for(Tool tool : hand.getTools()){
       
-            // --- Basics
+      
+            // ----- BASICS -----
+            
             int     tool_id           = tool.getId();
             PVector tool_position     = tool.getPosition();
             PVector tool_stabilized   = tool.getStabilizedPosition();
@@ -165,10 +216,14 @@ void draw(){
             PVector tool_direction    = tool.getDirection();
             float   tool_time         = tool.getTimeVisible();
       
-            // --- Drawing
+      
+            // ----- DRAWING -----
+            
             // tool.draw();
       
-            // --- Touch emulation
+      
+            // ----- TOUCH EMULATION -----
+            
             int     touch_zone        = tool.getTouchZone();
             float   touch_distance    = tool.getTouchDistance();
       
@@ -183,10 +238,11 @@ void draw(){
                 break;
             }
         }
-    
     }
   
-    // === DEVICES
+  
+    // ========= DEVICES =========
+    
     for(Device device : leap.getDevices()){
         float device_horizontal_view_angle = device.getHorizontalViewAngle();
         float device_verical_view_angle = device.getVerticalViewAngle();
@@ -194,6 +250,8 @@ void draw(){
     }
     
 }
+
+// ========= CALLBACKS =========
 
 void leapOnInit(){
     // println("Leap Motion Init");
@@ -215,7 +273,13 @@ void leapOnExit(){
 
 ### Gesture-Recognition
 
+#### Schemas
+
 ![Snapshot](https://raw.github.com/voidplus/leap-motion-processing/master/reference/leap_gestures.jpg)
+
+> Source: [Leap Motion](https://developer.leapmotion.com/documentation/skeletal/java/devguide/Leap_Overview.html#gestures)
+
+#### Code
 
 ```java
 import de.voidplus.leapmotion.*;
@@ -237,7 +301,9 @@ void draw(){
     // ...
 }
 
-// SWIPE GESTURE
+
+// ----- SWIPE GESTURE -----
+
 void leapOnSwipeGesture(SwipeGesture g, int state){
 	int 	id 					= g.getId();
 	Finger	finger 				= g.getFinger();
@@ -246,8 +312,7 @@ void leapOnSwipeGesture(SwipeGesture g, int state){
 	PVector direction 			= g.getDirection();
 	float 	speed 				= g.getSpeed();
 	long 	duration 			= g.getDuration();
-	float 	duration_seconds 	= g.getDurationInSeconds();
-	int     direction          = g.getDirection();
+    float   duration_seconds 	= g.getDurationInSeconds();
 
 	switch(state){
 		case 1:	// Start
@@ -258,16 +323,11 @@ void leapOnSwipeGesture(SwipeGesture g, int state){
 			println("SwipeGesture: "+id);
 			break;
 	}
-
-    switch(direction){
-        case 0: // Anticlockwise/Left gesture
-            break;
-        case 1: // Clockwise/Right gesture
-            break;
-    }
 }
 
-// CIRCLE GESTURE
+
+// ----- CIRCLE GESTURE -----
+
 void leapOnCircleGesture(CircleGesture g, int state){
 	int 	id 					= g.getId();
 	Finger	finger 				= g.getFinger();
@@ -276,6 +336,7 @@ void leapOnCircleGesture(CircleGesture g, int state){
 	float 	progress 			= g.getProgress();
 	long 	duration 			= g.getDuration();
 	float 	duration_seconds 	= g.getDurationInSeconds();
+    int     direction          = g.getDirection();
 
 	switch(state){
 		case 1:	// Start
@@ -286,9 +347,18 @@ void leapOnCircleGesture(CircleGesture g, int state){
 			println("CircleGesture: "+id);
 			break;
 	}
+	
+    switch(direction){
+        case 0: // Anticlockwise/Left gesture
+            break;
+        case 1: // Clockwise/Right gesture
+            break;
+    }
 }
 
-// SCREEN TAP GESTURE
+
+// ----- SCREEN TAP GESTURE -----
+
 void leapOnScreenTapGesture(ScreenTapGesture g){
 	int 	id 					= g.getId();
 	Finger	finger 				= g.getFinger();
@@ -300,7 +370,9 @@ void leapOnScreenTapGesture(ScreenTapGesture g){
 	println("ScreenTapGesture: "+id);
 }
 
-// KEY TAP GESTURE
+
+// ----- KEY TAP GESTURE -----
+
 void leapOnKeyTapGesture(KeyTapGesture g){
 	int 	id 					= g.getId();
 	Finger	finger 				= g.getFinger();
@@ -330,7 +402,7 @@ System:
 - **Linux** (*not tested yet, but it should work*) (*Ubuntu Linux 12.04 LTS and Ubuntu 13.04 Raring Ringtail*)
 - **Windows** (*not tested yet, but x86 and x64 should work*) (*Windows 7 and 8*)
 
-Processing Version:
+Processing version:
 
 - **2.2.1**
 - 2.1.2
@@ -341,9 +413,10 @@ Processing Version:
 - 2.0b8
 - 2.0b7
 
-Leap Motion Software Version:
+Leap Motion Software version:
 
-* **2.0.3+17004 BETA**
+* **2.0.4+17546 BETA**
+* 2.0.3+17004 BETA
 * 2.0.2+16391 BETA
 * 2.0.1+15831 BETA
 * 2.0.0+13819 BETA
@@ -351,6 +424,11 @@ Leap Motion Software Version:
 
 
 ## Changelog
+
+### v2.0.4 BETA
+
+- Added support for SDK 2.0.4+17546 BETA
+	- Updated libraries
 
 ### v2.0.3.1 BETA
 
@@ -487,7 +565,7 @@ Leap Motion Software Version:
 		- ```PVector getPositionOfJointMcp()``` and ```PVector getRawPositionOfJointMcp()```
 		- ```PVector getPositionOfJointPip()``` and ```PVector getRawPositionOfJointPip()```
 		- ```PVector getPositionOfJointDip()``` and ```PVector getRawPositionOfJointDip()```
-		- ```void getType()``` (0-4, 0=thumb, 1=index, 2=middle, 3=ring, 4=pinky)
+		- ```int getType()``` (0-4, 0=thumb, 1=index, 2=middle, 3=ring, 4=pinky)
 		- ```void drawLines()```
 		- ```void drawJoints()```
 	- Class ```Tool```
@@ -504,42 +582,13 @@ Leap Motion Software Version:
 	- Class ```Finger```
 		- ```void drawDirection()```
 
-### ~~v1.2.0~~
-
-> So far Leap Motion didn't release the developer libraries for SDK v.1.2.0 to support the Leap Motion Software v.1.2.0+10933.
-
-- ~~Added support for [SDK v.1.2.0](https://developer.leapmotion.com/documentation/Leap_SDK_Release_Notes.html#version-1-2-0)~~
-
-
-### v1.1.3.1
-
-- Added public method:
-	- ```LeapMotion runInBackground(boolean active)``` to class ```LeapMotion```
-
-### v1.1.3
-
-- Added support for [SDK v.1.0.9](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#version-1-0-9)
-
-### v1.1.2
-
-- Added public methods:
-	-  ```PVector getPosition()``` → ```PVector getRawPosition()``` (to get raw data without mapping)
-	- ```boolean hasTools()```, ```Tool getTool(id)```, ```ArrayList<Tool> getTools()```, ```int countTools()```, ```Hand getFrontHand()```, ```Hand getLeftHand()```, ```Hand getRightHand()```, ```Finger getFrontFinger()```, ```Finger getLeftFinger()```, ```Finger getRightFinger()```, ```Tool getFrontTool()```, ```Tool getLeftTool()``` and ```Tool getRightTool()``` to class ```LeapMotion``` 
-	- ```Finger getFrontFinger()```, ```Finger getLeftFinger()```, ```Finger getRightFinger()```, ```Tool getFrontTool()```, ```Tool getLeftTool()```and ```Tool getRightTool()``` to class ```Hand```
-
-### v1.1.0
-
-- Added support for [SDK v.0.8.1](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#versnoS-0-8-1)
-- Added support for [SDK v.0.8.0](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes#version-0-8-0)
-
 
 ## Links
 
 Useful links for developers:
 
-- [Documentation](https://developer.leapmotion.com/documentation)
-- [SDK Release Notes](https://developer.leapmotion.com/documentation/Common/Leap_SDK_Release_Notes.html)
-- [Knowledge Base](https://developer.leapmotion.com/articles)
+- [Java SDK Documentation](https://developer.leapmotion.com/documentation/skeletal/index.html?proglang=current)
+- [Leap Motion Beta SDK Release Notes](https://developer.leapmotion.com/documentation/skeletal/java/supplements/SDK_Release_Notes.html)
 
 ## Projects
 

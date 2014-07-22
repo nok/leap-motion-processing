@@ -17,19 +17,21 @@ void draw(){
   // ...
 }
 
-// SWIPE GESTURE
+
+// ----- SWIPE GESTURE -----
+
 void leapOnSwipeGesture(SwipeGesture g, int state){
-  int       id               = g.getId();
-  Finger    finger           = g.getFinger();
-  PVector   position         = g.getPosition();
-  PVector   position_start   = g.getStartPosition();
-  PVector   direction        = g.getDirection();
-  float     speed            = g.getSpeed();
-  long      duration         = g.getDuration();
-  float     duration_seconds = g.getDurationInSeconds();
+  int     id               = g.getId();
+  Finger  finger           = g.getFinger();
+  PVector position         = g.getPosition();
+  PVector position_start   = g.getStartPosition();
+  PVector direction        = g.getDirection();
+  float   speed            = g.getSpeed();
+  long    duration         = g.getDuration();
+  float   duration_seconds = g.getDurationInSeconds();
 
   switch(state){
-    case 1: // Start
+    case 1:  // Start
       break;
     case 2: // Update
       break;
@@ -39,19 +41,21 @@ void leapOnSwipeGesture(SwipeGesture g, int state){
   }
 }
 
-// CIRCLE GESTURE
+
+// ----- CIRCLE GESTURE -----
+
 void leapOnCircleGesture(CircleGesture g, int state){
-  int       id               = g.getId();
-  Finger    finger           = g.getFinger();
-  PVector   position_center  = g.getCenter();
-  float     radius           = g.getRadius();
-  float     progress         = g.getProgress();
-  long      duration         = g.getDuration();
-  float     duration_seconds = g.getDurationInSeconds();
-  int       direction        = g.getDirection();
+  int     id               = g.getId();
+  Finger  finger           = g.getFinger();
+  PVector position_center  = g.getCenter();
+  float   radius           = g.getRadius();
+  float   progress         = g.getProgress();
+  long    duration         = g.getDuration();
+  float   duration_seconds = g.getDurationInSeconds();
+  int     direction        = g.getDirection();
 
   switch(state){
-    case 1: // Start
+    case 1:  // Start
       break;
     case 2: // Update
       break;
@@ -66,29 +70,32 @@ void leapOnCircleGesture(CircleGesture g, int state){
     case 1: // Clockwise/Right gesture
       break;
   }
-  
 }
 
-// SCREEN TAP GESTURE
+
+// ----- SCREEN TAP GESTURE -----
+
 void leapOnScreenTapGesture(ScreenTapGesture g){
-  int       id               = g.getId();
-  Finger    finger           = g.getFinger();
-  PVector   position         = g.getPosition();
-  PVector   direction        = g.getDirection();
-  long      duration         = g.getDuration();
-  float     duration_seconds = g.getDurationInSeconds();
+  int     id               = g.getId();
+  Finger  finger           = g.getFinger();
+  PVector position         = g.getPosition();
+  PVector direction        = g.getDirection();
+  long    duration         = g.getDuration();
+  float   duration_seconds = g.getDurationInSeconds();
 
   println("ScreenTapGesture: "+id);
 }
 
-// KEY TAP GESTURE
+
+// ----- KEY TAP GESTURE -----
+
 void leapOnKeyTapGesture(KeyTapGesture g){
-  int       id               = g.getId();
-  Finger    finger           = g.getFinger();
-  PVector   position         = g.getPosition();
-  PVector   direction        = g.getDirection();
-  long      duration         = g.getDuration();
-  float     duration_seconds = g.getDurationInSeconds();
+  int     id               = g.getId();
+  Finger  finger           = g.getFinger();
+  PVector position         = g.getPosition();
+  PVector direction        = g.getDirection();
+  long    duration         = g.getDuration();
+  float   duration_seconds = g.getDurationInSeconds();
   
   println("KeyTapGesture: "+id);
 }

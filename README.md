@@ -425,6 +425,18 @@ Leap Motion Software version:
 
 ## Changelog
 
+### v2.0.4.1 BETA
+
+- Added public methods:
+	- Class ```LeapMotion```
+		- ```ArrayList<Finger> getOutstrechtedFingers()``` (default: 75%)*
+		- ```ArrayList<Finger> getOutstrechtedFingers(int similarity)```*
+	- Class ```Hand```
+		- ```ArrayList<Finger> getOutstrechtedFingers()``` (default: 75%)*
+		- ```ArrayList<Finger> getOutstrechtedFingers(int similarity)```*
+
+"*" = custom
+
 ### v2.0.4 BETA
 
 - Added support for SDK 2.0.4+17546 BETA

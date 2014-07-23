@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
@@ -17,6 +16,7 @@ public class Hand implements PConstants {
 	private com.leapmotion.leap.Hand hand;
 	private LeapMotion leap;
 	private ArrayList<Finger> fingers;
+	private ArrayList<Finger> outstretchedFingers;
 	private ArrayList<Tool> tools;
 	
 	public Hand(PApplet parent, LeapMotion leap, com.leapmotion.leap.Hand hand){
@@ -24,6 +24,7 @@ public class Hand implements PConstants {
 		this.leap = leap;
 		this.hand = hand;
 		this.fingers = new ArrayList<Finger>();
+		this.outstretchedFingers = new ArrayList<Finger>();
 		this.tools = new ArrayList<Tool>();
 	}
 
@@ -297,6 +298,48 @@ public class Hand implements PConstants {
 		    }
 		}
 		return fingers;
+	}
+	
+	/**
+	 * Get all outstrechted fingers.
+	 * @param degree Threshold in degrees.
+	 * @return
+	 */
+	public ArrayList<Finger> getOutstrechtedFingers(int similarity) {
+		this.outstretchedFingers.clear();
+		if (this.hasFingers()) {
+			for (com.leapmotion.leap.Finger finger : this.hand.fingers()) {
+				if (Finger.isValid(finger)) {
+					Finger candidate = new Finger(this.parent, this.leap, finger);
+					// calculate total distance
+					float distance = 0.0f;
+					for (int b = 0; b < 4; b++) {
+						distance += PVector.dist(
+							candidate.getBone(b).getNextJoint(),
+							candidate.getBone(b).getPrevJoint()
+						);
+					}
+					// calculate shortest distance
+					float direct = PVector.dist(
+						candidate.getBone(0).getNextJoint(),
+							candidate.getBone(((candidate.getType() != 0) ? 3 : 2)).getPrevJoint()
+					);
+					// calculate ratio
+					if ((direct / distance * 100) >= similarity) {
+						outstretchedFingers.add(candidate);
+					}
+				}
+		    }
+		}
+		return this.outstretchedFingers;
+	}
+	
+	/**
+	 * Get all outstrechted fingers with 75% likelihood.
+	 * @return
+	 */
+	public ArrayList<Finger> getOutstrechtedFingers() {
+		return this.getOutstrechtedFingers(75);
 	}
 	
 	/**

@@ -17,11 +17,11 @@ import processing.core.PVector;
 /**
  * Leap Motion Processing Library
  * @author Darius Morawiec
- * @version 2.0.4 BETA
+ * @version 2.0.4.1 BETA
  */
 public class LeapMotion {
 	
-	public static final String VERSION = "2.0.4 BETA"; 
+	public static final String VERSION = "2.0.4.1 BETA"; 
 	public static final String SDK_VERSION = "2.0.4+17546 BETA";
 	
 	private final PApplet parent;
@@ -36,6 +36,7 @@ public class LeapMotion {
 	private Frame lastFrame;
 	private ArrayList<Hand> hands;
 	private ArrayList<Finger> fingers;
+	private ArrayList<Finger> outstretchedFingers;
 	private ArrayList<Tool> tools;
 	private ArrayList<Device> devices;
 	
@@ -61,6 +62,7 @@ public class LeapMotion {
 		this.lastFrame = Frame.invalid();
 		this.hands = new ArrayList<Hand>();
 		this.fingers = new ArrayList<Finger>();
+		this.outstretchedFingers = new ArrayList<Finger>();
 		this.tools = new ArrayList<Tool>();
 		this.devices = new ArrayList<Device>();
 		
@@ -342,18 +344,60 @@ public class LeapMotion {
 	 * Get all detected fingers.
 	 * @return
 	 */
-	public ArrayList<Finger> getFingers(){
+	public ArrayList<Finger> getFingers() {
 		this.fingers.clear();
-		if(this.hasFingers()){
-			for(com.leapmotion.leap.Finger finger : this.frame.fingers()){
-				if(Finger.isValid(finger)){
+		if (this.hasFingers()) {
+			for (com.leapmotion.leap.Finger finger : this.frame.fingers()) {
+				if (Finger.isValid(finger)) {
 					fingers.add(new Finger(this.parent, this, finger));
 				}
 		    }
 		}
 		return this.fingers;
 	}
-
+	
+	/**
+	 * Get all outstrechted fingers.
+	 * @param degree Threshold in degrees.
+	 * @return
+	 */
+	public ArrayList<Finger> getOutstrechtedFingers(int similarity) {
+		this.outstretchedFingers.clear();
+		if (this.hasFingers()) {
+			for (com.leapmotion.leap.Finger finger : this.frame.fingers()) {
+				if (Finger.isValid(finger)) {
+					Finger candidate = new Finger(this.parent, this, finger);
+					// calculate total distance
+					float distance = 0.0f;
+					for (int b = 0; b < 4; b++) {
+						distance += PVector.dist(
+							candidate.getBone(b).getNextJoint(),
+							candidate.getBone(b).getPrevJoint()
+						);
+					}
+					// calculate shortest distance
+					float direct = PVector.dist(
+						candidate.getBone(0).getNextJoint(),
+							candidate.getBone(((candidate.getType() != 0) ? 3 : 2)).getPrevJoint()
+					);
+					// calculate ratio
+					if ((direct / distance * 100) >= similarity) {
+						outstretchedFingers.add(candidate);
+					}
+				}
+		    }
+		}
+		return this.outstretchedFingers;
+	}
+	
+	/**
+	 * Get all outstrechted fingers with 75% likelihood.
+	 * @return
+	 */
+	public ArrayList<Finger> getOutstrechtedFingers() {
+		return this.getOutstrechtedFingers(75);
+	}
+	
 	/**
 	 * Get the number of detected fingers.
 	 * @return

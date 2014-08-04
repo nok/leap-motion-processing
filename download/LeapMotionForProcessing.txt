@@ -46,4 +46,4 @@ version = 6  # This must be parsable as an int
 
 # The version as the user will see it. If blank, the version attribute will be 
 # used here.
-prettyVersion = 2.0.4.1 BETA  # This is treated as a String
+prettyVersion = 2.0.5 BETA  # This is treated as a String

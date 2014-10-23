@@ -12,7 +12,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.0.5 BETA](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
+- [Leap Motion for Processing v2.1.5 BETA](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
 
 
 ## Installation
@@ -415,7 +415,8 @@ Processing version:
 
 Leap Motion Software version:
 
-* **2.0.5+18024 BETA**
+* **2.1.5+22699**
+* 2.0.5+18024 BETA
 * 2.0.4+17546 BETA
 * 2.0.3+17004 BETA
 * 2.0.2+16391 BETA
@@ -425,6 +426,22 @@ Leap Motion Software version:
 
 
 ## Changelog
+
+### v2.1.5
+
+- Added support for SDK 2.1.5+22699
+	- Updated libraries
+- Added public methods:
+	- Class ```Arm```
+		- ```PVector getPosition()```
+		- ```PVector getRawPosition()```
+	- Class ```LeapMotion```
+		- ```void printPolicyFlag()```
+<!--		- ```void printPolicyFlags()``` -->
+		- ```LeapMotion allowRunInBackground()``` ← ```LeapMotion runInBackground()```
+- Added public methods:
+	- Class ```LeapMotion```
+		- Added deprecation message to ```LeapMotion runInBackground()```
 
 ### v2.0.5 BETA
 

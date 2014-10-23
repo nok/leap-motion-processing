@@ -17,12 +17,12 @@ import processing.core.PVector;
 /**
  * Leap Motion Processing Library
  * @author Darius Morawiec
- * @version 2.0.5 BETA
+ * @version 2.1.5
  */
 public class LeapMotion {
 	
-	public static final String VERSION = "2.0.5 BETA"; 
-	public static final String SDK_VERSION = "2.0.5+18024 BETA";
+	public static final String VERSION = "2.1.5"; 
+	public static final String SDK_VERSION = "2.1.5+22699";
 	
 	private final PApplet parent;
 	
@@ -30,7 +30,13 @@ public class LeapMotion {
 	private PVector origin;
 	private boolean verbose;
 	
-	private boolean recognition;
+	// GLobal flags
+	private boolean withRecognition;
+	
+	// Policy flags
+	private boolean withBackgroundFrames;
+	private boolean withCameraImages;
+	private boolean withOptimizedHdm;
 	
 	private Frame frame;
 	private Frame lastFrame;
@@ -56,7 +62,12 @@ public class LeapMotion {
 		
 		this.setWorld(200, 500, 200);
 		this.setVerbose(verbose);
-		this.recognition = false; 
+		
+		this.withRecognition = false;
+		
+		this.withBackgroundFrames = false;
+		this.withCameraImages = false;
+		this.withOptimizedHdm = false;
 		
 		this.frame = Frame.invalid();
 		this.lastFrame = Frame.invalid();
@@ -86,7 +97,7 @@ public class LeapMotion {
 			}
 		};
 		this.controller.addListener(this.listener);
-		this.runInBackground(true);
+		this.allowRunInBackground();
 		this.parent.registerDispose(this);
 	}
 	
@@ -100,16 +111,20 @@ public class LeapMotion {
 	
 	/**
 	 * Run the tracking in background, too.
-	 * @param silent
+	 * @return
+	 */	
+	public LeapMotion allowRunInBackground(){
+		this.controller.setPolicyFlags(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
+		return this;
+	}
+
+	/**
+	 * Run the tracking in background, too.
 	 * @return
 	 */
 	public LeapMotion runInBackground(boolean active){
-		if(active){
-			this.controller.setPolicyFlags(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
-		} else {
-			this.controller.setPolicyFlags(Controller.PolicyFlag.POLICY_DEFAULT);
-		}
-		return this;
+		this.parent.println("# LeapMotion: 'runInBackground("+Boolean.toString(active)+")' is deprecated. Please just use 'allowRunInBackground()'.");
+		return allowRunInBackground();
 	}
 	
 	/**
@@ -144,6 +159,27 @@ public class LeapMotion {
 		}
 		return Frame.invalid().id();
 	}
+
+	
+	/* ------------------------------------------------------------------------ */
+	/* Policy-Flags */
+	
+//	/**
+//	 * Print policy flags.
+//	 */
+//	public void printPolicyFlags(){
+//		for (com.leapmotion.leap.Controller.PolicyFlag flag : this.controller.policyFlags().values()) {
+//			this.parent.println(flag.name());
+//		}
+//	}
+	
+	/**
+	 * Print policy flag.
+	 */
+	public void printPolicyFlag(){
+		this.parent.println(this.controller.policyFlags());
+	}
+	
 	
 	/* ------------------------------------------------------------------------ */
 	/* World */
@@ -511,6 +547,43 @@ public class LeapMotion {
 	public Tool getRightTool(){		
 		return new Tool(this.parent, this, this.frame.tools().rightmost());
 	}
+
+
+	/* ------------------------------------------------------------------------ */
+	/* Camera-Images */	
+	
+//	/**
+//	 * Activate the camera images.
+//	 * @return
+//	 */
+//	public LeapMotion withCameraImages() {
+//		this.controller.setPolicyFlags(Controller.PolicyFlag.POLICY_IMAGES);
+//		this.withCameraImages = true;
+//		return this;
+//	}
+//
+//	/**
+//	 * Deactivate the gesture recognition.
+//	 * @return
+//	 */
+//	public LeapMotion withoutCameraImages() {
+//		this.withCameraImages = false;
+//		return this;
+//	}
+	
+	
+	/* ------------------------------------------------------------------------ */
+	/* Optimized HMD */	
+	
+	/**
+	 * Activate the camera images.
+	 * @return
+	 */
+	public LeapMotion withOptimizedHdm() {
+		this.controller.setPolicyFlags(Controller.PolicyFlag.POLICY_OPTIMIZE_HMD);
+		this.withOptimizedHdm = true;
+		return this;
+	}
 	
 	
 	/* ------------------------------------------------------------------------ */
@@ -524,10 +597,10 @@ public class LeapMotion {
 	public LeapMotion withGestures(String str) {
 		str = str.trim().toUpperCase();
 		List<String> gestures = Arrays.asList(str.split("\\s*,\\s*"));
-		this.recognition = false;
+		this.withRecognition = false;
 		for(String gesture : gestures){
 			gesture = "TYPE_"+gesture;
-			this.recognition = true;
+			this.withRecognition = true;
 			switch(com.leapmotion.leap.Gesture.Type.valueOf(gesture)){
 				case TYPE_SWIPE:
 					controller.enableGesture(Gesture.Type.TYPE_SWIPE);
@@ -542,11 +615,11 @@ public class LeapMotion {
 					controller.enableGesture(Gesture.Type.TYPE_KEY_TAP);
 					break;
 				default:
-					this.recognition = false;
+					this.withRecognition = false;
 					break;
 			}
 		}
-		if(this.recognition){
+		if(this.withRecognition){
 			this.parent.registerPre(this);
 		} else {
 			this.parent.unregisterPre(this);
@@ -563,7 +636,7 @@ public class LeapMotion {
 	 */
 	public LeapMotion withoutGestures() {
 		this.parent.unregisterPre(this);
-		this.recognition = false;
+		this.withRecognition = false;
 		return this;
 	}
 	
@@ -578,7 +651,7 @@ public class LeapMotion {
 	 * Run the recognizer.
 	 */	
 	private void check() {
-		if (this.isConnected() && this.recognition) {
+		if (this.isConnected() && this.withRecognition) {
 			for (com.leapmotion.leap.Gesture g : this.frame.gestures(this.lastFrame)) {
 				if (g.isValid()) {
 					int state = 2;

@@ -1,5 +1,7 @@
 package de.voidplus.leapmotion;
 
+import com.leapmotion.leap.Vector;
+
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -64,6 +66,22 @@ public class Arm {
 	 */
 	public float getWidth(){
 		return this.arm.width();
+	}
+	
+	/**
+	 * The center position.
+	 * @return
+	 */
+	public PVector getPosition(){
+		return this.leap.map(this.arm.center());
+	}
+	
+	/**
+	 * Raw data of the center position.
+	 * @return
+	 */
+	public PVector getRawPosition(){
+		return this.leap.convert(this.arm.center());
 	}
 	
 }

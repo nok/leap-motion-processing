@@ -42,8 +42,8 @@ paragraph =
 # compare different versions of the same library, and check if an update is 
 # available. You should think of it as a counter, counting the total number of 
 # releases you've had.
-version = 6  # This must be parsable as an int
+version = 7  # This must be parsable as an int
 
 # The version as the user will see it. If blank, the version attribute will be 
 # used here.
-prettyVersion = 2.0.5 BETA  # This is treated as a String
+prettyVersion = 2.1.5  # This is treated as a String

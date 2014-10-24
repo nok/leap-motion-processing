@@ -12,7 +12,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.1.5](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
+- [Leap Motion for Processing v2.1.5.1](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
 
 
 ## Installation
@@ -385,11 +385,47 @@ void leapOnKeyTapGesture(KeyTapGesture g){
 }
 ```
 
+### Camera-Images
+
+#### Code
+
+```java
+import de.voidplus.leapmotion.*;
+
+LeapMotion leap;
+
+void setup(){
+	size(640, 480, OPENGL);
+	background(255);  
+	leap = new LeapMotion(this);
+}
+
+void draw(){
+	background(255);
+
+	// ========= CAMERA IMAGES =========
+  
+	if (leap.hasImages()) {
+		for (Image camera : leap.getImages()) {
+			if (camera.isLeft()) {
+				// left camera
+				image(camera, 0, 0);
+			} else {
+				// right camera
+				image(camera, 0, camera.getHeight());
+			}
+		}
+	}
+  
+}
+```
+
 
 ## Examples
 
-* [Basic Data](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e1_basic/e1_basic.pde)
-* [Gesture Recognition](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e2_gestures/e2_gestures.pde)
+* [Basic Data](https://github.com/voidplus/leap-motion-processing/blob/beta/examples/e1_basic/e1_basic.pde)
+* [Gesture Recognition](https://github.com/voidplus/leap-motion-processing/blob/beta/examples/e2_gestures/e2_gestures.pde)
+* [Camera Images](https://github.com/voidplus/leap-motion-processing/blob/beta/examples/e3_camera_images/e3_camera_images.pde)
 
 Note: Or try the [OneDollarUnistrokeRecognizer](https://github.com/voidplus/onedollar-unistroke-recognizer) library, a two-dimensional template based gesture recognizer.
 
@@ -426,6 +462,26 @@ Leap Motion Software version:
 
 
 ## Changelog
+
+### v2.1.5.1
+
+- Added *Image API*
+- Added new class:
+	- Class ```Image```
+- Added public methods:
+	- Class ```LeapMotion```
+		- ```LeapMotion withCameraImages()```
+		- ```boolean hasImages()```
+		- ```ArrayList<Image> getImages()```
+		- ```LeapMotion withOptimizedHdm()```
+	- Class ```Image```
+		- ```boolean isValid()```
+		- ```int getId()```
+		- ```int getWidth()```
+		- ```int getHeight()```
+		- ```boolean isLeft()```
+		- ```boolean isRight()```
+- Added new example [e3_camera_images.pde](https://github.com/voidplus/leap-motion-processing/blob/beta/examples/e3_camera_images/e3_camera_images.pde), which demonstrates the use of the *Image API*
 
 ### v2.1.5
 

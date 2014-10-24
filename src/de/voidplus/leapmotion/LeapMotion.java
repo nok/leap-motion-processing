@@ -17,11 +17,11 @@ import processing.core.PVector;
 /**
  * Leap Motion Processing Library
  * @author Darius Morawiec
- * @version 2.1.5
+ * @version 2.1.5.1
  */
 public class LeapMotion {
 	
-	public static final String VERSION = "2.1.5"; 
+	public static final String VERSION = "2.1.5.1"; 
 	public static final String SDK_VERSION = "2.1.5+22699";
 	
 	private final PApplet parent;
@@ -45,6 +45,7 @@ public class LeapMotion {
 	private ArrayList<Finger> outstretchedFingers;
 	private ArrayList<Tool> tools;
 	private ArrayList<Device> devices;
+	private ArrayList<Image> images;
 	
 	private final Controller controller;
 	private final Listener listener;
@@ -76,6 +77,7 @@ public class LeapMotion {
 		this.outstretchedFingers = new ArrayList<Finger>();
 		this.tools = new ArrayList<Tool>();
 		this.devices = new ArrayList<Device>();
+		this.images = new ArrayList<Image>();
 		
 		this.controller = new Controller();
 		this.listener = new Listener(){
@@ -107,24 +109,6 @@ public class LeapMotion {
 	 */
 	public LeapMotion(PApplet parent){
 		this(parent, false);
-	}
-	
-	/**
-	 * Run the tracking in background, too.
-	 * @return
-	 */	
-	public LeapMotion allowRunInBackground(){
-		this.controller.setPolicyFlags(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
-		return this;
-	}
-
-	/**
-	 * Run the tracking in background, too.
-	 * @return
-	 */
-	public LeapMotion runInBackground(boolean active){
-		this.parent.println("# LeapMotion: 'runInBackground("+Boolean.toString(active)+")' is deprecated. Please just use 'allowRunInBackground()'.");
-		return allowRunInBackground();
 	}
 	
 	/**
@@ -178,6 +162,25 @@ public class LeapMotion {
 	 */
 	public void printPolicyFlag(){
 		this.parent.println(this.controller.policyFlags());
+	}
+	
+	/**
+	 * Run the tracking in background, too.
+	 * @return
+	 */	
+	public LeapMotion allowRunInBackground(){
+		this.controller.setPolicyFlags(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
+		this.withBackgroundFrames = true;
+		return this;
+	}
+
+	/**
+	 * Run the tracking in background, too.
+	 * @return
+	 */
+	public LeapMotion runInBackground(boolean active){
+		this.parent.println("# LeapMotion: 'runInBackground("+Boolean.toString(active)+")' is deprecated. Please just use 'allowRunInBackground()'.");
+		return allowRunInBackground();
 	}
 	
 	
@@ -552,31 +555,62 @@ public class LeapMotion {
 	/* ------------------------------------------------------------------------ */
 	/* Camera-Images */	
 	
-//	/**
-//	 * Activate the camera images.
-//	 * @return
-//	 */
-//	public LeapMotion withCameraImages() {
-//		this.controller.setPolicyFlags(Controller.PolicyFlag.POLICY_IMAGES);
-//		this.withCameraImages = true;
-//		return this;
-//	}
-//
-//	/**
-//	 * Deactivate the gesture recognition.
-//	 * @return
-//	 */
-//	public LeapMotion withoutCameraImages() {
-//		this.withCameraImages = false;
-//		return this;
-//	}
+	/**
+	 * Activate the camera images.
+	 * @return
+	 */
+	public LeapMotion withCameraImages() {
+		this.controller.setPolicyFlags(Controller.PolicyFlag.POLICY_IMAGES);
+		this.withCameraImages = true;
+		return this;
+	}
+
+	/**
+	 * Deactivate the gesture recognition.
+	 * @return
+	 */
+	public LeapMotion withoutCameraImages() {
+		this.withCameraImages = false;
+		return this;
+	}
+	
+	/**
+	 * Any raw images available?
+	 * @return
+	 */
+	public boolean hasImages(){
+		if(this.withCameraImages){
+			if(this.controller.frame().images().count()>0){
+				return true;
+			}	
+		} else {
+			this.withCameraImages();
+		}
+		return false;
+	}
+	
+	/**
+	 * Get all raw camera images.
+	 * @return
+	 */
+	public ArrayList<Image> getImages(){
+		this.images.clear();
+		if(this.hasImages()){
+			for(com.leapmotion.leap.Image image : this.controller.frame().images()){
+				if(Image.isValid(image)){
+					images.add(new Image(this.parent, this, image));
+				}
+		    }
+		}
+		return this.images;
+	}
 	
 	
 	/* ------------------------------------------------------------------------ */
 	/* Optimized HMD */	
 	
 	/**
-	 * Activate the camera images.
+	 * Activate optimized tracking for head mounted displays.
 	 * @return
 	 */
 	public LeapMotion withOptimizedHdm() {

@@ -3,9 +3,18 @@
 Simple library to use the complete [Leap Motion](https://leapmotion.com/) [API](https://developer.leapmotion.com/documentation/api/annotated) in [Processing](http://processing.org/).
 
 
-## BETA
+## Table of Contents
 
-IF YOU ARE INTERESTED IN THE NEWEST **LEAP MOTION BETA** IMPLEMENTATION, SO HAVE A LOOK AT THE [BETA BRANCH](https://github.com/voidplus/leap-motion-processing/tree/beta).
+- [About](#about)
+- [Download](#download)
+- [Installation](#installation)
+- [Dependencies](#dependencies)
+- [Tested](#tested)
+- [Examples](#examples)
+- [Usage](#usage)
+- [Changelog](#changelog)
+- [Questions?](#questions)
+- [License](#license)
 
 
 ## About
@@ -17,7 +26,9 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.1.5.1](https://raw.github.com/voidplus/leap-motion-processing/beta/download/LeapMotionForProcessing.zip)
+- [Leap Motion for Processing v2.1.5.1](https://raw.github.com/voidplus/leap-motion-processing/master/download/LeapMotionForProcessing.zip)
+
+*Note: If you are interested in the newest **beta** implementation, so have a look at the [beta branch](https://github.com/voidplus/leap-motion-processing/tree/beta).*
 
 
 ## Installation
@@ -30,20 +41,49 @@ Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries 
 - [Leap Motion Software](https://developer.leapmotion.com/) **2.1.5+22699**
 
 
-## Usage
+## Tested
 
+System:
+
+- **OSX** (*Mac OS 10.7 and higher*)
+- **Linux** (*not tested yet, but it should work*) (*Ubuntu Linux 12.04 LTS and Ubuntu 13.04 Raring Ringtail*)
+- **Windows** (*not tested yet, but x86 and x64 should work*) (*Windows 7 and 8*)
+
+Processing version:
+
+- **2.2.1**
+- 2.1.2
+- 2.1.1
+- 2.1.0
+- 2.0.1
+- 2.0b9
+- 2.0b8
+- 2.0b7
+
+Leap Motion Software version:
+
+* **2.1.5+22699**
+* 2.0.5+18024 BETA
+* 2.0.4+17546 BETA
+* 2.0.3+17004 BETA
+* 2.0.2+16391 BETA
+* 2.0.1+15831 BETA
+* 2.0.0+13819 BETA
+* ...
+
+
+## Examples
+
+* [Basic Data-Access](#basic-data-access) → [e1_basic.pde](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e1_basic/e1_basic.pde)
+* [Gesture-Recognition](#gesture-recognition) → [e2_gestures.pde](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e2_gestures/e2_gestures.pde)
+* [Camera-Images](#camera-images) → [e3_camera_images.pde](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e3_camera_images/e3_camera_images.pde)
+
+
+## Usage
 
 ### Basic Data-Access
 
-#### Schemas
-
-![leap Motion Joints](https://raw.github.com/voidplus/leap-motion-processing/beta/reference/leap_hand.jpg)
-
-![Leap Motion Bones](https://raw.github.com/voidplus/leap-motion-processing/beta/reference/leap_bones.jpg)
-
-> Source: [Leap Motion](https://developer.leapmotion.com/documentation/skeletal/java/devguide/Leap_Overview.html)
-
-#### Code
+Before you start to code I recommend you to read the [official basic introduction](https://developer.leapmotion.com/documentation/skeletal/java/devguide/Leap_Overview.html).
 
 ```java
 import de.voidplus.leapmotion.*;
@@ -278,13 +318,9 @@ void leapOnExit(){
 
 ### Gesture-Recognition
 
-#### Schemas
-
 ![Snapshot](https://raw.github.com/voidplus/leap-motion-processing/master/reference/leap_gestures.jpg)
 
 > Source: [Leap Motion](https://developer.leapmotion.com/documentation/skeletal/java/devguide/Leap_Overview.html#gestures)
-
-#### Code
 
 ```java
 import de.voidplus.leapmotion.*;
@@ -426,46 +462,6 @@ void draw(){
 ```
 
 
-## Examples
-
-* [Basic Data](https://github.com/voidplus/leap-motion-processing/blob/beta/examples/e1_basic/e1_basic.pde)
-* [Gesture Recognition](https://github.com/voidplus/leap-motion-processing/blob/beta/examples/e2_gestures/e2_gestures.pde)
-* [Camera Images](https://github.com/voidplus/leap-motion-processing/blob/beta/examples/e3_camera_images/e3_camera_images.pde)
-
-Note: Or try the [OneDollarUnistrokeRecognizer](https://github.com/voidplus/onedollar-unistroke-recognizer) library, a two-dimensional template based gesture recognizer.
-
-
-## Tested
-
-System:
-
-- **OSX** (*Mac OS 10.7 and higher*)
-- **Linux** (*not tested yet, but it should work*) (*Ubuntu Linux 12.04 LTS and Ubuntu 13.04 Raring Ringtail*)
-- **Windows** (*not tested yet, but x86 and x64 should work*) (*Windows 7 and 8*)
-
-Processing version:
-
-- **2.2.1**
-- 2.1.2
-- 2.1.1
-- 2.1.0
-- 2.0.1
-- 2.0b9
-- 2.0b8
-- 2.0b7
-
-Leap Motion Software version:
-
-* **2.1.5+22699**
-* 2.0.5+18024 BETA
-* 2.0.4+17546 BETA
-* 2.0.3+17004 BETA
-* 2.0.2+16391 BETA
-* 2.0.1+15831 BETA
-* 2.0.0+13819 BETA
-* ...
-
-
 ## Changelog
 
 ### v2.1.5.1
@@ -486,7 +482,7 @@ Leap Motion Software version:
 		- ```int getHeight()```
 		- ```boolean isLeft()```
 		- ```boolean isRight()```
-- Added new example [e3_camera_images.pde](https://github.com/voidplus/leap-motion-processing/blob/beta/examples/e3_camera_images/e3_camera_images.pde), which demonstrates the use of the *Image API*
+- Added new example [e3_camera_images.pde](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e3_camera_images/e3_camera_images.pde), which demonstrates the use of the *Image API*
 
 ### v2.1.5
 
@@ -678,18 +674,6 @@ Leap Motion Software version:
 	- Class ```Finger```
 		- ```void drawDirection()```
 
-
-## Links
-
-Useful links for developers:
-
-- [Java SDK Documentation](https://developer.leapmotion.com/documentation/skeletal/index.html?proglang=current)
-- [Leap Motion Beta SDK Release Notes](https://developer.leapmotion.com/documentation/skeletal/java/supplements/SDK_Release_Notes.html)
-
-## Projects
-
-- [Leap Motion: Ball Maze](http://www.youtube.com/watch?v=I_-UpOYULxw) by David Thomasson
-- [Leap Motion: Tagging and capturing physical objects](https://vimeo.com/85337378) by Anouk Hoffmeister and Tom Brewe
 
 ## Questions?
 

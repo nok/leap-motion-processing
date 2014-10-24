@@ -491,8 +491,6 @@ void draw(){
 		- ```PVector getPosition()```
 		- ```PVector getRawPosition()```
 	- Class ```LeapMotion```
-		- ```void printPolicyFlag()```
-<!--		- ```void printPolicyFlags()``` -->
 		- ```LeapMotion allowRunInBackground()``` ← ```LeapMotion runInBackground()```
 - Added public methods:
 	- Class ```LeapMotion```

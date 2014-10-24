@@ -28,7 +28,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 - [Leap Motion for Processing v2.1.5.1](https://raw.github.com/voidplus/leap-motion-processing/master/download/LeapMotionForProcessing.zip)
 
-*Note: If you are interested in the newest **beta** implementation, so have a look at the [beta branch](https://github.com/voidplus/leap-motion-processing/tree/beta).*
+Note: If you are interested in the newest **beta** implementation, so have a look at the [beta branch](https://github.com/voidplus/leap-motion-processing/tree/beta).
 
 
 ## Installation
@@ -427,8 +427,6 @@ void leapOnKeyTapGesture(KeyTapGesture g){
 ```
 
 ### Camera-Images
-
-#### Code
 
 ```java
 import de.voidplus.leapmotion.*;

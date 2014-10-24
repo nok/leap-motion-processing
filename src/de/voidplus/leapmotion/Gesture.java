@@ -2,6 +2,7 @@ package de.voidplus.leapmotion;
 
 
 import java.util.ArrayList;
+
 import processing.core.PApplet;
 
 
@@ -19,6 +20,16 @@ public abstract class Gesture {
 		this.gesture = gesture;
 	}
 
+	/**
+	 * Reports whether this is a valid Gesture object. 
+	 * @return
+	 */
+	public boolean isValid(){
+		return this.gesture.isValid();
+	}
+	public static boolean isValid(com.leapmotion.leap.Gesture gesture){
+		return gesture.isValid();
+	}
 	
 	/**
 	 * Get the unique ID.
@@ -28,6 +39,27 @@ public abstract class Gesture {
 		return this.gesture.id();
 	}
 
+	/**
+	 * Get the type index of a gesture.
+	 * @return 
+	 */
+	public int getType(){
+		if(this.isValid()){
+			switch (this.gesture.type()) {
+			case TYPE_CIRCLE:
+				return 0;
+			case TYPE_KEY_TAP:
+				return 1;
+			case TYPE_SCREEN_TAP:
+				return 2;
+			case TYPE_SWIPE:
+				return 3;
+			default:
+				return -1;
+			}
+		}
+		return -1;
+	}
 	
 	/* ------------------------------------------------------------------------ */
 	/* DURATION */

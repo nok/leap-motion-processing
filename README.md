@@ -26,7 +26,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.1.5.1](https://raw.github.com/voidplus/leap-motion-processing/master/download/LeapMotionForProcessing.zip)
+- [Leap Motion for Processing v2.1.5.1](download/LeapMotionForProcessing.zip)
 
 Note: If you are interested in the newest **beta** implementation, so have a look at the [beta branch](https://github.com/voidplus/leap-motion-processing/tree/beta).
 
@@ -74,9 +74,9 @@ Leap Motion Software version:
 
 ## Examples
 
-* [Basic Data-Access](#basic-data-access) → [e1_basic.pde](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e1_basic/e1_basic.pde)
-* [Gesture-Recognition](#gesture-recognition) → [e2_gestures.pde](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e2_gestures/e2_gestures.pde)
-* [Camera-Images](#camera-images) → [e3_camera_images.pde](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e3_camera_images/e3_camera_images.pde)
+* [Basic Data-Access](#basic-data-access) → [e1_basic.pde](examples/e1_basic/e1_basic.pde)
+* [Gesture-Recognition](#gesture-recognition) → [e2_gestures.pde](examples/e2_gestures/e2_gestures.pde)
+* [Camera-Images](#camera-images) → [e3_camera_images.pde](examples/e3_camera_images/e3_camera_images.pde)
 
 
 ## Usage
@@ -318,7 +318,7 @@ void leapOnExit(){
 
 ### Gesture-Recognition
 
-![Snapshot](https://raw.github.com/voidplus/leap-motion-processing/master/reference/leap_gestures.jpg)
+![Snapshot](reference/leap_gestures.jpg)
 
 > Source: [Leap Motion](https://developer.leapmotion.com/documentation/skeletal/java/devguide/Leap_Overview.html#gestures)
 
@@ -480,7 +480,7 @@ void draw(){
 		- ```int getHeight()```
 		- ```boolean isLeft()```
 		- ```boolean isRight()```
-- Added new example [e3_camera_images.pde](https://github.com/voidplus/leap-motion-processing/blob/master/examples/e3_camera_images/e3_camera_images.pde), which demonstrates the use of the *Image API*
+- Added new example [e3_camera_images.pde](examples/e3_camera_images/e3_camera_images.pde), which demonstrates the use of the *Image API*
 
 ### v2.1.5
 
@@ -680,4 +680,4 @@ Don't be shy and feel free to contact me via [Twitter](http://twitter.voidplus.d
 
 ## License
 
-The library is Open Source Software released under the [License](https://raw.github.com/voidplus/leap-motion-processing/master/LICENSE.txt). It's developed by [Darius Morawiec](http://voidplus.de).
+The library is Open Source Software released under the [License](LICENSE.txt). It's developed by [Darius Morawiec](http://voidplus.de).

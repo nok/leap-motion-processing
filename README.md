@@ -28,7 +28,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 - [Leap Motion for Processing v2.1.5.1](download/LeapMotionForProcessing.zip?raw=true)
 
-Note: If you are interested in the newest **beta** implementation, so have a look at the [beta branch](https://github.com/voidplus/leap-motion-processing/tree/beta).
+Note: If you are interested in the newest **beta** implementation, so have a look at the [development branch](https://github.com/voidplus/leap-motion-processing/tree/dev).
 
 
 ## Installation
@@ -105,12 +105,12 @@ void draw(){
 
 
     // ========= HANDS =========
-    
+
     for(Hand hand : leap.getHands()){
 
 
         // ----- BASICS -----
-        
+
         int     hand_id          = hand.getId();
         PVector hand_position    = hand.getPosition();
         PVector hand_stabilized  = hand.getStabilizedPosition();
@@ -129,7 +129,7 @@ void draw(){
 
 
         // ----- SPECIFIC FINGER -----
-        
+
         Finger  finger_thumb     = hand.getThumb();
         // or                      hand.getFinger("thumb");
         // or                      hand.getFinger(0);
@@ -148,17 +148,17 @@ void draw(){
 
         Finger  finger_pink      = hand.getPinkyFinger();
         // or                      hand.getFinger("pinky");
-        // or                      hand.getFinger(4);        
+        // or                      hand.getFinger(4);
 
 
         // ----- DRAWING -----
-        
+
         hand.draw();
         // hand.drawSphere();
 
 
         // ========= ARM =========
-        
+
         if(hand.hasArm()){
             Arm     arm               = hand.getArm();
             float   arm_width         = arm.getWidth();
@@ -168,12 +168,12 @@ void draw(){
 
 
         // ========= FINGERS =========
-        
+
         for(Finger finger : hand.getFingers()){
-      
-      
+
+
             // ----- BASICS -----
-            
+
             int     finger_id         = finger.getId();
             PVector finger_position   = finger.getPosition();
             PVector finger_stabilized = finger.getStabilizedPosition();
@@ -183,7 +183,7 @@ void draw(){
 
 
             // ----- SPECIFIC FINGER -----
-            
+
             switch(finger.getType()){
                 case 0:
                     // System.out.println("thumb");
@@ -204,15 +204,15 @@ void draw(){
 
 
             // ----- SPECIFIC BONE -----
-            
+
             Bone    bone_distal       = finger.getDistalBone();
             // or                       finger.get("distal");
             // or                       finger.getBone(0);
-            
+
             Bone    bone_intermediate = finger.getIntermediateBone();
             // or                       finger.get("intermediate");
             // or                       finger.getBone(1);
-            
+
             Bone    bone_proximal     = finger.getProximalBone();
             // or                       finger.get("proximal");
             // or                       finger.getBone(2);
@@ -220,20 +220,20 @@ void draw(){
             Bone    bone_metacarpal   = finger.getMetacarpalBone();
             // or                       finger.get("metacarpal");
             // or                       finger.getBone(3);
-            
-            
+
+
             // ----- DRAWING -----
-            
+
             // finger.draw(); // = drawLines()+drawJoints()
             // finger.drawLines();
             // finger.drawJoints();
 
 
             // ----- TOUCH EMULATION -----
-            
+
             int     touch_zone        = finger.getTouchZone();
             float   touch_distance    = finger.getTouchDistance();
-      
+
             switch(touch_zone){
                 case -1: // None
                     break;
@@ -245,33 +245,33 @@ void draw(){
                     break;
             }
         }
-    
-    
+
+
         // ========= TOOLS =========
-        
+
         for(Tool tool : hand.getTools()){
-      
-      
+
+
             // ----- BASICS -----
-            
+
             int     tool_id           = tool.getId();
             PVector tool_position     = tool.getPosition();
             PVector tool_stabilized   = tool.getStabilizedPosition();
             PVector tool_velocity     = tool.getVelocity();
             PVector tool_direction    = tool.getDirection();
             float   tool_time         = tool.getTimeVisible();
-      
-      
+
+
             // ----- DRAWING -----
-            
+
             // tool.draw();
-      
-      
+
+
             // ----- TOUCH EMULATION -----
-            
+
             int     touch_zone        = tool.getTouchZone();
             float   touch_distance    = tool.getTouchDistance();
-      
+
             switch(touch_zone){
                 case -1: // None
                     break;
@@ -284,16 +284,16 @@ void draw(){
             }
         }
     }
-  
-  
+
+
     // ========= DEVICES =========
-    
+
     for(Device device : leap.getDevices()){
         float device_horizontal_view_angle = device.getHorizontalViewAngle();
         float device_verical_view_angle = device.getVerticalViewAngle();
         float device_range = device.getRange();
     }
-    
+
 }
 
 // ========= CALLBACKS =========
@@ -331,7 +331,7 @@ void setup(){
     size(800, 500, OPENGL);
     background(255);
     // ...
-    
+
     leap = new LeapMotion(this).withGestures();
     // leap = new LeapMotion(this).withGestures("circle, swipe, screen_tap, key_tap");
     // leap = new LeapMotion(this).withGestures("swipe"); // Leap detects only swipe gestures.
@@ -388,7 +388,7 @@ void leapOnCircleGesture(CircleGesture g, int state){
 			println("CircleGesture: "+id);
 			break;
 	}
-	
+
     switch(direction){
         case 0: // Anticlockwise/Left gesture
             break;
@@ -421,7 +421,7 @@ void leapOnKeyTapGesture(KeyTapGesture g){
 	PVector direction			= g.getDirection();
 	long 	duration 			= g.getDuration();
 	float 	duration_seconds 	= g.getDurationInSeconds();
-	
+
 	println("KeyTapGesture: "+id);
 }
 ```
@@ -443,7 +443,7 @@ void draw(){
 	background(255);
 
 	// ========= CAMERA IMAGES =========
-  
+
 	if (leap.hasImages()) {
 		for (Image camera : leap.getImages()) {
 			if (camera.isLeft()) {
@@ -455,7 +455,7 @@ void draw(){
 			}
 		}
 	}
-  
+
 }
 ```
 
@@ -561,12 +561,12 @@ void draw(){
 - Changed public methods:
 	- Class ```LeapMotion```
 		- ```Hand getHand(Integer id)```
-		- ```ArrayList<Hand> getHands()```	
+		- ```ArrayList<Hand> getHands()```
 		- ```Hand getFrontHand()```
 		- ```Hand getLeftHand()```
 		- ```Hand getRightHand()```
 		- ```Finger getFinger(Integer id)```
-		- ```ArrayList<Finger> getFingers()```	
+		- ```ArrayList<Finger> getFingers()```
 		- ```Tool getTool(Integer id)```
 		- ```ArrayList<Tool> getTools()```
 
@@ -628,7 +628,7 @@ void draw(){
 		- ```void drawFingers(boolean pre)```
 		- ```void drawFingers(int radius, boolean pre)```
 - Fixed [Gestures in Processing](https://community.leapmotion.com/t/gestures-in-processing/873/11)
-			
+
 ### v2.0.0 BETA
 
 - Added support for SDK v2.0.0+13819 BETA

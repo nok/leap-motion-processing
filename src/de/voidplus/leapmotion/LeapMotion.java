@@ -93,10 +93,7 @@ public class LeapMotion {
 			}
 		};
 		this.controller.addListener(this.listener);
-		
-		// TODO Fix java.lang.UnsatisfiedLinkError: com.leapmotion.leap.LeapJNI.Controller_isPolicySet(JLcom/leapmotion/leap/Controller;I)Z
 		this.withBackgroundFrames();
-		
 		this.parent.registerDispose(this);
 	}
 	
@@ -151,7 +148,7 @@ public class LeapMotion {
 	public void printPolicyFlags(){
 		for (PolicyFlag flag : PolicyFlag.values()) {
 			if(this.controller.isPolicySet(flag)){
-				this.log(flag.toString()+"' is set.");
+				this.log("'"+flag.toString()+"' is set.");
 			}
 		}
 	}
@@ -161,7 +158,6 @@ public class LeapMotion {
 	 * @return
 	 */	
 	public LeapMotion withBackgroundFrames(){
-		// TODO Fix java.lang.UnsatisfiedLinkError: com.leapmotion.leap.LeapJNI.Controller_isPolicySet(JLcom/leapmotion/leap/Controller;I)Z
 		if(!this.controller.isPolicySet(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES)){
 			this.controller.setPolicy(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
 		}
@@ -173,7 +169,6 @@ public class LeapMotion {
 	 * @return
 	 */	
 	public LeapMotion withoutBackgroundFrames(){
-		// TODO Fix java.lang.UnsatisfiedLinkError: com.leapmotion.leap.LeapJNI.Controller_isPolicySet(JLcom/leapmotion/leap/Controller;I)Z
 		if(this.controller.isPolicySet(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES)){
 			this.controller.clearPolicy(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
 		}		
@@ -1115,10 +1110,10 @@ public class LeapMotion {
 	 * @param skip
 	 */
 	private void log(String message, boolean skip){
-		if(skip){
-			PApplet.print("# " + LeapMotion.NAME + ": " + message);
+		if(!skip){
+			PApplet.println("# " + LeapMotion.NAME + ": " + message);
 		} else {
-			PApplet.print(message);
+			PApplet.println(message);
 		}
 	}
 	private void log(String message){

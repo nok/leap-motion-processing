@@ -26,7 +26,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.1.5.1](download/LeapMotionForProcessing.zip?raw=true)
+- [Leap Motion for Processing v2.1.6](download/LeapMotionForProcessing.zip?raw=true)
 
 Note: If you are interested in the newest **beta** implementation, so have a look at the [development branch](https://github.com/voidplus/leap-motion-processing/tree/dev).
 
@@ -38,7 +38,7 @@ Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries 
 
 ## Dependencies
 
-- [Leap Motion Software](https://developer.leapmotion.com/) **2.1.5+22699**
+- [Leap Motion Software](https://developer.leapmotion.com/) **2.1.6+23110**
 
 
 ## Tested
@@ -62,7 +62,8 @@ Processing version:
 
 Leap Motion Software version:
 
-* **2.1.5+22699**
+* **2.1.6+23110**
+* 2.1.5+22699
 * 2.0.5+18024 BETA
 * 2.0.4+17546 BETA
 * 2.0.3+17004 BETA
@@ -461,6 +462,26 @@ void draw(){
 
 
 ## Changelog
+
+
+### v2.1.6
+
+- Added support for SDK 2.1.6+23110
+	- Updated libraries
+	- Improved [policy handling](https://community.leapmotion.com/t/policyflags-in-java/1941)
+- Added public methods:
+	- Class ```LeapMotion```
+		- ```LeapMotion withBackgroundFrames()```
+		- ```LeapMotion withoutBackgroundFrames()```
+		- ```LeapMotion withCameraImages()```
+		- ```LeapMotion withoutCameraImages()```
+		- ```LeapMotion withOptimizedHdm()```
+		- ```LeapMotion withoutOptimizedHdm()```
+		- ```void printPolicyFlags()```
+- Added public methods:
+	- Class ```LeapMotion```
+		- ```LeapMotion allowRunInBackground()```
+- Cleaned up.
 
 ### v2.1.5.1
 

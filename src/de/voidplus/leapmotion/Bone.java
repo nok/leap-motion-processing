@@ -1,7 +1,5 @@
 package de.voidplus.leapmotion;
 
-import com.leapmotion.leap.Vector;
-
 import processing.core.PApplet;
 import processing.core.PVector;
 

@@ -1,18 +1,14 @@
 package de.voidplus.leapmotion;
 
-
 import java.util.ArrayList;
 
 import processing.core.PApplet;
 
-
 public abstract class Gesture {
-
 	
 	protected PApplet parent;
 	protected LeapMotion leap;
 	private com.leapmotion.leap.Gesture gesture;
-	
 	
 	public Gesture(PApplet parent, LeapMotion leap, com.leapmotion.leap.Gesture gesture){
 		this.parent = parent;

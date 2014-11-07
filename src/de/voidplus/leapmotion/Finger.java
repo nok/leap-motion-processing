@@ -6,13 +6,10 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
 
-
 public class Finger extends Pointable {
-
 	
 	private com.leapmotion.leap.Finger finger;
-	private Joint Joint;
-	
+	private Joint Joint;	
 	
 	public Finger(PApplet parent, LeapMotion leap, com.leapmotion.leap.Finger finger) {
 		super(parent, leap, (com.leapmotion.leap.Pointable) finger);
@@ -219,7 +216,7 @@ public class Finger extends Pointable {
 			this.parent.vertex(dip.x, dip.y, dip.z);
 			this.parent.vertex(tip.x, tip.y, tip.z);
 		}
-		this.parent.endShape(this.parent.OPEN);
+		this.parent.endShape(PConstants.OPEN);
 	}
 	public void drawLines(){
 		this.drawLines(true);

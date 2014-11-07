@@ -1,6 +1,7 @@
 package de.voidplus.leapmotion;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PImage;
 
 public class Image extends PImage {
@@ -12,7 +13,7 @@ public class Image extends PImage {
 	protected PImage pimage;
 
 	public Image(PApplet parent, LeapMotion leap, com.leapmotion.leap.Image image){
-		super(image.width(), image.height(), parent.RGB);
+		super(image.width(), image.height(), PConstants.RGB);
 		
 		this.parent = parent;
 		this.leap = leap;

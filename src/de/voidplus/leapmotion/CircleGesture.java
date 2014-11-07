@@ -1,21 +1,16 @@
 package de.voidplus.leapmotion;
 
-
 import processing.core.PApplet;
 import processing.core.PVector;
 
-
 public class CircleGesture extends Gesture {
 
-	
-	private com.leapmotion.leap.CircleGesture circle;
-	
+	private com.leapmotion.leap.CircleGesture circle;	
 	
 	public CircleGesture(PApplet parent, LeapMotion leap, com.leapmotion.leap.Gesture gesture){
 		super(parent, leap, gesture);
 		this.circle = new com.leapmotion.leap.CircleGesture(gesture);
 	}
-	
 	
 	/**
 	 * The center point of the circle within the Leap frame of reference. 

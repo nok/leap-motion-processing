@@ -4,18 +4,15 @@ import processing.core.PApplet;
 
 public class Device {
 
-	
 	private PApplet parent;
 	private LeapMotion leap;
-	private com.leapmotion.leap.Device device;
-	
+	private com.leapmotion.leap.Device device;	
 	
 	public Device(PApplet parent, LeapMotion leap, com.leapmotion.leap.Device device) {
 		this.parent = parent;
 		this.leap = leap;
 		this.device = device;
 	}
-	
 	
 	/**
 	 * The angle of view along the x axis of this device.

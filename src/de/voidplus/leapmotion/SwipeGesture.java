@@ -1,21 +1,16 @@
 package de.voidplus.leapmotion;
 
-
 import processing.core.PApplet;
 import processing.core.PVector;
 
-
 public class SwipeGesture extends Gesture {
-
 	
 	private com.leapmotion.leap.SwipeGesture swipe;
-	
-	
+		
 	public SwipeGesture(PApplet parent, LeapMotion leap, com.leapmotion.leap.Gesture gesture){
 		super(parent, leap, gesture);
 		this.swipe = new com.leapmotion.leap.SwipeGesture(gesture);
 	}
-	
 	
 	/**
 	 * The current position of the swipe.

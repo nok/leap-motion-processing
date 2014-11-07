@@ -1,16 +1,12 @@
 package de.voidplus.leapmotion;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
 
-
-public class Hand implements PConstants {
-	
+public class Hand implements PConstants {	
 
 	private PApplet parent;
 	private com.leapmotion.leap.Hand hand;
@@ -235,7 +231,7 @@ public class Hand implements PConstants {
 	 * @return
 	 */
 	public float getRoll(){
-		return this.parent.degrees(this.hand.direction().pitch());
+		return PApplet.degrees(this.hand.direction().pitch());
 	}
 	
 	/**
@@ -243,7 +239,7 @@ public class Hand implements PConstants {
 	 * @return
 	 */
 	public float getPitch(){
-		return -this.parent.degrees(this.hand.palmNormal().roll());
+		return -PApplet.degrees(this.hand.palmNormal().roll());
 	}
 	
 	/**
@@ -251,7 +247,7 @@ public class Hand implements PConstants {
 	 * @return
 	 */
 	public float getYaw(){
-		return this.parent.degrees(this.hand.direction().yaw());
+		return PApplet.degrees(this.hand.direction().yaw());
 	}
 	
 	

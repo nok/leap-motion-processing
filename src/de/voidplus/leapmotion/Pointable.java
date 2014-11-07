@@ -1,24 +1,19 @@
 package de.voidplus.leapmotion;
 
 import processing.core.PApplet;
-import processing.core.PConstants;
 import processing.core.PVector;
-
 
 public class Pointable {
 
-
 	protected PApplet parent;
 	protected com.leapmotion.leap.Pointable pointable;
-	protected LeapMotion leap;	
-	
+	protected LeapMotion leap;		
 	
 	public Pointable(PApplet parent, LeapMotion leap, com.leapmotion.leap.Pointable pointable){
 		this.parent = parent;
 		this.leap = leap;
 		this.pointable = pointable;
 	}
-	
 
 	/**
 	 * Get the unique ID.
@@ -108,9 +103,9 @@ public class Pointable {
 	 * 
 	 * The possible states are present in the Zone enum of this class:
 	 * 
-	 * -1 = Zone.NONE Ð The Pointable is outside the hovering zone.
-	 *  0 = Zone.HOVERING Ð The Pointable is close to, but not touching the touch plane.
-	 *  1 = Zone.TOUCHING Ð The Pointable has penetrated the touch plane.
+	 * -1 = Zone.NONE ï¿½ The Pointable is outside the hovering zone.
+	 *  0 = Zone.HOVERING ï¿½ The Pointable is close to, but not touching the touch plane.
+	 *  1 = Zone.TOUCHING ï¿½ The Pointable has penetrated the touch plane.
 	 *  
 	 *  The touchDistance value provides a normalized indication of the distance to the touch plane when the Pointable is in the hovering or touching zones.
 	 * 

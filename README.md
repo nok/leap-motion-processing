@@ -26,14 +26,14 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.1.6](download/LeapMotionForProcessing.zip?raw=true)
+- [Leap Motion for Processing v2.2.0](download/LeapMotionForProcessing.zip?raw=true)
 
 Note: If you are interested in the newest **beta** implementation, so have a look at the [development branch](https://github.com/voidplus/leap-motion-processing/tree/dev).
 
 
 ## Installation
 
-Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries folder of your Processing sketches. Reference and examples are included in the *LeapMotionForProcessing* folder.
+Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries folder of your Processing sketches. Reference and examples are included in the *LeapMotionForProcessing* folder. For further help read the [tutorial](http://www.learningprocessing.com/tutorials/libraries/) by [Daniel Shiffman](https://github.com/shiffman).
 
 
 ## Dependencies
@@ -51,6 +51,7 @@ System:
 
 Processing version:
 
+- **3.0a5**
 - **2.2.1**
 - 2.1.2
 - 2.1.1
@@ -62,7 +63,8 @@ Processing version:
 
 Leap Motion Software version:
 
-* **2.1.6+23110**
+* **2.2.0+23475**
+* 2.1.6+23110
 * 2.1.5+22699
 * 2.0.5+18024 BETA
 * 2.0.4+17546 BETA
@@ -463,6 +465,10 @@ void draw(){
 
 ## Changelog
 
+### v2.2.0
+
+- Added support for SDK 2.2.0+23475
+	- Updated libraries
 
 ### v2.1.6
 

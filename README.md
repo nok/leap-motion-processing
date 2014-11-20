@@ -38,7 +38,7 @@ Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries 
 
 ## Dependencies
 
-- [Leap Motion Software](https://developer.leapmotion.com/) **2.1.6+23110**
+- [Leap Motion Software](https://developer.leapmotion.com/) **2.2.0+23475**
 
 
 ## Tested

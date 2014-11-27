@@ -18,13 +18,13 @@ import processing.core.PVector;
 /**
  * Leap-Motion for Processing
  * @author Darius Morawiec
- * @version 2.2.0
+ * @version 2.2.1
  */
 public class LeapMotion {
 	
 	public static final String NAME = "Leap-Motion";
 	public static final String REPO = "https://github.com/voidplus/leap-motion-processing";
-	public static final String VERSION = "2.2.0"; 
+	public static final String VERSION = "2.2.1"; 
 	public static final String SDK_VERSION = "2.2.0+23475";
 	
 	private final PApplet parent;

@@ -65,7 +65,10 @@ public class CircleGesture extends Gesture {
 	 * @return
 	 */
 	public Finger getFinger() {
-		return new Finger(this.parent, this.leap, this.circle.pointable());
+		if(this.circle.pointable().isFinger()){
+			return new Finger(this.parent, this.leap, new com.leapmotion.leap.Finger(this.circle.pointable()));
+		}
+		return null;
 	}
 	
 	/**

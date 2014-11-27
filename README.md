@@ -26,7 +26,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.2.0](download/LeapMotionForProcessing.zip?raw=true)
+- [Leap Motion for Processing v2.2.1](download/LeapMotionForProcessing.zip?raw=true)
 
 Note: If you are interested in the newest **beta** implementation, so have a look at the [development branch](https://github.com/voidplus/leap-motion-processing/tree/dev).
 
@@ -464,6 +464,10 @@ void draw(){
 
 
 ## Changelog
+
+### v2.2.1
+
+- Fixed [getType() bug](https://twitter.com/Atlas_Slouched/status/537676868129140736) of fingers in gestures.
 
 ### v2.2.0
 

@@ -49,7 +49,10 @@ public class KeyTapGesture extends Gesture {
 	 * @return
 	 */
 	public Finger getFinger() {
-		return new Finger(this.parent, this.leap, this.keyTap.pointable());
+		if(this.keyTap.pointable().isFinger()){
+			return new Finger(this.parent, this.leap, new com.leapmotion.leap.Finger(this.keyTap.pointable()));
+		}
+		return null;
 	}
 	
 }

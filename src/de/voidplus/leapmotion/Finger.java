@@ -15,9 +15,9 @@ public class Finger extends Pointable {
 		super(parent, leap, (com.leapmotion.leap.Pointable) finger);
 		this.finger = finger;
 	}
-	public Finger(PApplet parent, LeapMotion leap, com.leapmotion.leap.Pointable pointable) {
-		super(parent, leap, pointable);
-	}
+//	public Finger(PApplet parent, LeapMotion leap, com.leapmotion.leap.Pointable pointable) {
+//		super(parent, leap, pointable);
+//	}
 	
 	/**
 	 * Reports whether this is a valid Finger object. 

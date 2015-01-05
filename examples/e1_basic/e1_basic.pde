@@ -81,7 +81,7 @@ void draw() {
 
     // ========= FINGERS =========
 
-    for (Finger finger : hand.getFingers ()) {
+    for (Finger finger : hand.getFingers()) {
       // Alternatives:
       // hand.getOutstrechtedFingers();
       // hand.getOutstrechtedFingersByAngle();

@@ -41,6 +41,7 @@ public class LeapMotion {
 	private ArrayList<Hand> hands;
 	private ArrayList<Finger> fingers;
 	private ArrayList<Finger> outstretchedFingers;
+	private ArrayList<Finger> outstretchedFingersByAngel;
 	private ArrayList<Tool> tools;
 	private ArrayList<Device> devices;
 	private ArrayList<Image> images;
@@ -69,6 +70,7 @@ public class LeapMotion {
 		this.hands = new ArrayList<Hand>();
 		this.fingers = new ArrayList<Finger>();
 		this.outstretchedFingers = new ArrayList<Finger>();
+		this.outstretchedFingersByAngel = new ArrayList<Finger>();
 		this.tools = new ArrayList<Tool>();
 		this.devices = new ArrayList<Device>();
 		this.images = new ArrayList<Image>();
@@ -408,11 +410,33 @@ public class LeapMotion {
 	
 	/**
 	 * Get all outstrechted fingers.
+	 * @return
+	 */
+	public ArrayList<Finger> getOutstrechtedFingers() {
+		this.outstretchedFingers.clear();
+		if(!this.frame.fingers().extended().isEmpty()){
+			for(com.leapmotion.leap.Finger finger : this.frame.fingers().extended()){
+				this.outstretchedFingers.add(new Finger(this.parent, this, finger));
+			}
+		}
+		return this.outstretchedFingers;
+	}
+
+	/**
+	 * Get all outstrechted fingers.
+	 * @return
+	 */
+	public ArrayList<Finger> getOutstrechtedFingers(int ignoreForBackwardsCompatibility) {
+		return this.getOutstrechtedFingers();
+	}
+	
+	/**
+	 * Get all outstrechted fingers by angel.
 	 * @param degree Threshold in degrees.
 	 * @return
 	 */
-	public ArrayList<Finger> getOutstrechtedFingers(int similarity) {
-		this.outstretchedFingers.clear();
+	public ArrayList<Finger> getOutstrechtedFingersByAngel(int similarity) {
+		this.outstretchedFingersByAngel.clear();
 		if (this.hasFingers()) {
 			for (com.leapmotion.leap.Finger finger : this.frame.fingers()) {
 				if (Finger.isValid(finger)) {
@@ -432,20 +456,20 @@ public class LeapMotion {
 					);
 					// calculate ratio
 					if ((direct / distance * 100) >= similarity) {
-						outstretchedFingers.add(candidate);
+						outstretchedFingersByAngel.add(candidate);
 					}
 				}
 		    }
 		}
-		return this.outstretchedFingers;
+		return this.outstretchedFingersByAngel;
 	}
 	
 	/**
 	 * Get all outstrechted fingers with 75% likelihood.
 	 * @return
 	 */
-	public ArrayList<Finger> getOutstrechtedFingers() {
-		return this.getOutstrechtedFingers(75);
+	public ArrayList<Finger> getOutstrechtedFingersByAngel() {
+		return this.getOutstrechtedFingersByAngel(75);
 	}
 	
 	/**

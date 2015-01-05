@@ -26,7 +26,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.2.1](download/LeapMotionForProcessing.zip?raw=true)
+- [Leap Motion for Processing v2.2.1.1](download/LeapMotionForProcessing.zip?raw=true)
 
 Note: If you are interested in the newest **beta** implementation, so have a look at the [development branch](https://github.com/voidplus/leap-motion-processing/tree/dev).
 
@@ -38,7 +38,7 @@ Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries 
 
 ## Dependencies
 
-- [Leap Motion Software](https://developer.leapmotion.com/) **2.2.0+23475**
+- [Leap Motion Software](https://developer.leapmotion.com/) **2.2.1+24116**
 
 
 ## Tested
@@ -63,7 +63,8 @@ Processing version:
 
 Leap Motion Software version:
 
-* **2.2.0+23475**
+* **2.2.1+24116**
+* 2.2.0+23475
 * 2.1.6+23110
 * 2.1.5+22699
 * 2.0.5+18024 BETA
@@ -465,6 +466,25 @@ void draw(){
 
 ## Changelog
 
+### v2.2.1.1
+
+- Added support for SDK 2.2.1+24116
+	- Updated libraries
+- Changed public methods:
+	- Class ```LeapMotion```
+		- ```ArrayList<Finger> getOutstretchedFingers()```
+	- Class ```Hand```
+		- ```ArrayList<Finger> getOutstretchedFingers()```
+- Added public methods:
+	- Class ```LeapMotion```
+		- ```ArrayList<Finger> getOutstretchedFingersByAngle()```
+		- ```ArrayList<Finger> getOutstretchedFingersByAngle(int similarity)``` [0-100]
+	- Class ```Hand```
+		- ```ArrayList<Finger> getOutstretchedFingersByAngle()```
+		- ```ArrayList<Finger> getOutstretchedFingersByAngle(int similarity)``` [0-100]
+
+Fixed [getOutstretchedFingers() bug](https://twitter.com/harveymoon0/status/546479022687809537) 
+
 ### v2.2.1
 
 - Fixed [getType() bug](https://twitter.com/Atlas_Slouched/status/537676868129140736) of fingers in gestures.
@@ -536,10 +556,10 @@ void draw(){
 
 - Added public methods:
 	- Class ```LeapMotion```
-		- ```ArrayList<Finger> getOutstrechtedFingers()``` (default: 75%)*
+		- ```ArrayList<Finger> getOutstrechtedFingers()``` (Default: 75%)*
 		- ```ArrayList<Finger> getOutstrechtedFingers(int similarity)```*
 	- Class ```Hand```
-		- ```ArrayList<Finger> getOutstrechtedFingers()``` (default: 75%)*
+		- ```ArrayList<Finger> getOutstrechtedFingers()``` (Default: 75%)*
 		- ```ArrayList<Finger> getOutstrechtedFingers(int similarity)```*
 
 "*" = custom
@@ -619,13 +639,13 @@ void draw(){
 		- ```float getWidth()```
 		- ```PVector getNextJoint()``` and ```PVector getRawNextJoint()```
 		- ```PVector getPrevJoint()``` and ```PVector getRawPrevJoint()```
-		- ```int getType()``` (0-3, 0=distal, 1=intermediate, 2=proximal, 3=metacarpal)
+		- ```int getType()``` ([0-3], 0=distal, 1=intermediate, 2=proximal, 3=metacarpal)
 		- ```PVector getDirection()``` and ```PVector getRawDirection()```
 		- ```void draw()``` and ```void draw(boolean pre)```
 	- Class ```Hand```
 		- ```float getWidth()```
 	- Class ```Finger```
-		- ```Bone getBone(int index)``` (0-3, 0=distal, 1=intermediate, 2=proximal, 3=metacarpal)
+		- ```Bone getBone(int index)``` ([0-3], 0=distal, 1=intermediate, 2=proximal, 3=metacarpal)
 		- ```Bone getBone(int name)``` ("distal", "intermediate", "proximal", "metacarpal")
 		- ```Bone getDistalBone()```
 		- ```Bone getIntermediateBone()```
@@ -665,7 +685,7 @@ void draw(){
 - Added support for SDK v2.0.0+13819 BETA
 - Added public methods:
 	- Class ```Hand```
-		- ```Finger getFinger(int index)``` (0-4, 0=thumb, 1=index, 2=middle, 3=ring, 4=pinky)
+		- ```Finger getFinger(int index)``` ([0-4], 0=thumb, 1=index, 2=middle, 3=ring, 4=pinky)
 		- ```Finger getFinger(String name)``` ("thumb", "index", "middle", "ring", "pinky")
 		- ```Finger getThumb()```
 		- ```Finger getIndexFinger()```
@@ -684,7 +704,7 @@ void draw(){
 		- ```PVector getPositionOfJointMcp()``` and ```PVector getRawPositionOfJointMcp()```
 		- ```PVector getPositionOfJointPip()``` and ```PVector getRawPositionOfJointPip()```
 		- ```PVector getPositionOfJointDip()``` and ```PVector getRawPositionOfJointDip()```
-		- ```int getType()``` (0-4, 0=thumb, 1=index, 2=middle, 3=ring, 4=pinky)
+		- ```int getType()``` ([0-4], 0=thumb, 1=index, 2=middle, 3=ring, 4=pinky)
 		- ```void drawLines()```
 		- ```void drawJoints()```
 	- Class ```Tool```

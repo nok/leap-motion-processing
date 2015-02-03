@@ -1,6 +1,6 @@
 # Leap Motion for Processing
 
-Simple library to use the complete [Leap Motion](https://leapmotion.com/) [API](https://developer.leapmotion.com/documentation/api/annotated) in [Processing](http://processing.org/).
+Simple library to use the complete [Leap Motion](https://leapmotion.com/) [SDK](https://developer.leapmotion.com/documentation/java/index.html) in [Processing](http://processing.org/).
 
 
 ## Table of Contents
@@ -26,9 +26,9 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.2.1.1](download/LeapMotionForProcessing.zip?raw=true)
+- [Leap Motion for Processing v2.2.2.1](download/LeapMotionForProcessing.zip?raw=true)
 
-Note: If you are interested in the newest **beta** implementation, so have a look at the [development branch](https://github.com/voidplus/leap-motion-processing/tree/dev).
+Note: If you are interested in the newest **beta** implementation, so have a look at the **dev branch**.
 
 
 ## Installation
@@ -38,7 +38,7 @@ Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries 
 
 ## Dependencies
 
-- [Leap Motion Software](https://developer.leapmotion.com/) **2.2.1+24116**
+- [Leap Motion Software](https://developer.leapmotion.com/) **2.2.2+24469**
 
 
 ## Tested
@@ -87,7 +87,7 @@ Leap Motion Software version:
 
 ### Basic Data-Access
 
-Before you start to code I recommend you to read the [official basic introduction](https://developer.leapmotion.com/documentation/skeletal/java/devguide/Leap_Overview.html).
+Before you start to code I recommend you to read the [official basic introduction](https://developer.leapmotion.com/documentation/java/devguide/Leap_Overview.html).
 
 ```java
 import de.voidplus.leapmotion.*;
@@ -466,6 +466,11 @@ void draw(){
 
 ## Changelog
 
+### v2.2.2.1
+
+- Added support for SDK 2.2.2+24469
+	- Updated libraries
+
 ### v2.2.1.1
 
 - Added support for SDK 2.2.1+24116
@@ -724,9 +729,9 @@ Fixed [getOutstretchedFingers() bug](https://twitter.com/harveymoon0/status/5464
 
 ## Questions?
 
-Don't be shy and feel free to contact me via [Twitter](http://twitter.voidplus.de).
+Don't be shy and feel free to contact me on Twitter: [@darius_morawiec](https://twitter.com/darius_morawiec)
 
 
 ## License
 
-The library is Open Source Software released under the [License](LICENSE.txt). It's developed by [Darius Morawiec](http://voidplus.de).
+The library is Open Source Software released under the [License](LICENSE.txt).

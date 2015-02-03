@@ -5,10 +5,10 @@
 name = Leap Motion for Processing
 
 # List of authors. Links can be provided using the syntax [author name](url).
-authorList = [Darius Morawiec](http://voidplus.de)
+authorList = [Darius Morawiec](http://nok.onl)
 
 # A web page for your library, NOT a direct link to where to download it.
-url = https://github.com/voidplus/leap-motion-processing
+url = https://github.com/nok/leap-motion-processing
 
 # The category of your library, must be one (or many) of the following:
 #   "3D"            "Animation"     "Compilations"      "Data"          
@@ -25,7 +25,7 @@ category = Hardware
 # repeating the name of your library here. Also, avoid saying anything redundant 
 # like mentioning that it's a library. This should start with a capitalized 
 # letter, and end with a period.
-sentence = Simple library to use the complete [Leap Motion](https://leapmotion.com/) [API](https://developer.leapmotion.com/documentation/api/annotated) in [Processing](http://processing.org/).
+sentence = Simple library to use the complete [Leap Motion](https://leapmotion.com/) [SDK](https://developer.leapmotion.com/documentation/java/index.html) in [Processing](http://processing.org/).
 
 # Additional information suitable for the Processing website. The value of
 # 'sentence' always will be prepended, so you should start by writing the
@@ -42,8 +42,8 @@ paragraph =
 # compare different versions of the same library, and check if an update is 
 # available. You should think of it as a counter, counting the total number of 
 # releases you've had.
-version = 12  # This must be parsable as an int
+version = 13  # This must be parsable as an int
 
 # The version as the user will see it. If blank, the version attribute will be 
 # used here.
-prettyVersion = 2.2.1.1  # This is treated as a String
+prettyVersion = 2.2.2.1  # This is treated as a String

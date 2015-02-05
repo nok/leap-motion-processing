@@ -18,13 +18,13 @@ import processing.core.PVector;
 /**
  * Leap-Motion for Processing
  * @author Darius Morawiec
- * @version 2.2.1.1
+ * @version 2.2.2.2
  */
 public class LeapMotion {
 	
 	public static final String NAME = "Leap-Motion";
 	public static final String REPO = "https://github.com/nok/leap-motion-processing";
-	public static final String VERSION = "2.2.2.1"; 
+	public static final String VERSION = "2.2.2.2"; 
 	public static final String SDK_VERSION = "2.2.2+24469";
 	
 	private final PApplet parent;
@@ -96,7 +96,9 @@ public class LeapMotion {
 		};
 		this.controller.addListener(this.listener);
 		this.withBackgroundFrames();
-		this.parent.registerDispose(this);
+		
+//		this.parent.registerDispose(this);
+		this.parent.registerMethod("dispose", this); // support since version 2.0b7 (REV 0215)
 	}
 	
 	/**
@@ -704,9 +706,11 @@ public class LeapMotion {
 			}
 		}
 		if(this.withRecognition){
-			this.parent.registerPre(this);
+//			this.parent.registerPre(this);
+			this.parent.registerMethod("pre", this);
 		} else {
-			this.parent.unregisterPre(this);
+//			this.parent.unregisterPre(this);
+			this.parent.unregisterMethod("pre", this);
 		}
 		return this;
 	}
@@ -719,7 +723,8 @@ public class LeapMotion {
 	 * @return
 	 */
 	public LeapMotion withoutGestures() {
-		this.parent.unregisterPre(this);
+//		this.parent.unregisterPre(this);
+		this.parent.unregisterMethod("pre", this);
 		this.withRecognition = false;
 		return this;
 	}

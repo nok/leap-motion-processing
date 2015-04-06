@@ -16,28 +16,27 @@ import processing.core.PVector;
 
 
 /**
- * Leap-Motion for Processing
+ * Leap Motion for Processing
  * @author Darius Morawiec
- * @version 2.2.3.1
+ * @version 2.2.4.1
  */
 public class LeapMotion {
 	
-	public static final String NAME = "Leap-Motion";
+	public static final String NAME = "Leap Motion";
 	public static final String REPO = "https://github.com/nok/leap-motion-processing";
-	public static final String VERSION = "2.2.3.1"; 
-	public static final String SDK_VERSION = "2.2.3+25971";
+	public static final String VERSION = "2.2.4.1"; 
+	public static final String SDK_VERSION = "2.2.4+26750";
 	
+	// Processing 
 	private final PApplet parent;
 	
+	// Global flags
+	private boolean verbose;
+	private boolean recognition;
+	
+	// Data
 	private PVector world;
 	private PVector origin;
-	private boolean verbose;
-	
-	// Global flags
-	private boolean withRecognition;
-	
-	private Frame frame;
-	private Frame lastFrame;
 	private ArrayList<Hand> hands;
 	private ArrayList<Finger> fingers;
 	private ArrayList<Finger> outstretchedFingers;
@@ -46,6 +45,9 @@ public class LeapMotion {
 	private ArrayList<Device> devices;
 	private ArrayList<Image> images;
 	
+	// Internal handler
+	private Frame frame;
+	private Frame lastFrame;
 	private final Controller controller;
 	private final Listener listener;
 	
@@ -57,16 +59,13 @@ public class LeapMotion {
 	 */
 	public LeapMotion(PApplet parent, boolean verbose){
 		this.parent = parent;
-				
-		this.log("# " + LeapMotion.NAME + "-Library v" + LeapMotion.VERSION + " - LeapMotion-SDK v" + LeapMotion.SDK_VERSION + " - " + LeapMotion.REPO, true);
-		
-		this.setWorld(200, 500, 200);
 		this.setVerbose(verbose);
+		this.recognition = false;
 		
-		this.withRecognition = false;
+		this.log("# " + LeapMotion.NAME + " Library v" + LeapMotion.VERSION + " - Leap Motion SDK v" + LeapMotion.SDK_VERSION + " - " + LeapMotion.REPO, true);
 		
-		this.frame = Frame.invalid();
-		this.lastFrame = Frame.invalid();
+		// Data
+		this.setWorld(200, 500, 200);
 		this.hands = new ArrayList<Hand>();
 		this.fingers = new ArrayList<Finger>();
 		this.outstretchedFingers = new ArrayList<Finger>();
@@ -75,6 +74,9 @@ public class LeapMotion {
 		this.devices = new ArrayList<Device>();
 		this.images = new ArrayList<Image>();
 		
+		// Internal handler
+		this.frame = Frame.invalid();
+		this.lastFrame = Frame.invalid();
 		this.controller = new Controller();
 		this.listener = new Listener(){
 		    public void onInit(Controller controller) {
@@ -225,9 +227,9 @@ public class LeapMotion {
 	
 	/**
 	 * Move the world origin.
-	 * @param width
-	 * @param height
-	 * @param depth
+	 * @param x
+	 * @param y
+	 * @param z
 	 * @return
 	 */
 	public LeapMotion moveWorld(int x, int y, int z){
@@ -434,7 +436,7 @@ public class LeapMotion {
 	
 	/**
 	 * Get all outstrechted fingers by angel.
-	 * @param degree Threshold in degrees.
+	 * @param similarity Minimum value of similarity.
 	 * @return
 	 */
 	public ArrayList<Finger> getOutstrechtedFingersByAngel(int similarity) {
@@ -683,10 +685,10 @@ public class LeapMotion {
 	public LeapMotion withGestures(String str) {
 		str = str.trim().toUpperCase();
 		List<String> gestures = Arrays.asList(str.split("\\s*,\\s*"));
-		this.withRecognition = false;
+		this.recognition = false;
 		for(String gesture : gestures){
 			gesture = "TYPE_"+gesture;
-			this.withRecognition = true;
+			this.recognition = true;
 			switch(com.leapmotion.leap.Gesture.Type.valueOf(gesture)){
 				case TYPE_SWIPE:
 					controller.enableGesture(Gesture.Type.TYPE_SWIPE);
@@ -701,11 +703,11 @@ public class LeapMotion {
 					controller.enableGesture(Gesture.Type.TYPE_KEY_TAP);
 					break;
 				default:
-					this.withRecognition = false;
+					this.recognition = false;
 					break;
 			}
 		}
-		if(this.withRecognition){
+		if(this.recognition){
 //			this.parent.registerPre(this);
 			this.parent.registerMethod("pre", this);
 		} else {
@@ -725,7 +727,7 @@ public class LeapMotion {
 	public LeapMotion withoutGestures() {
 //		this.parent.unregisterPre(this);
 		this.parent.unregisterMethod("pre", this);
-		this.withRecognition = false;
+		this.recognition = false;
 		return this;
 	}
 	
@@ -740,7 +742,7 @@ public class LeapMotion {
 	 * Check available gestures.
 	 */	
 	private void check() {
-		if (this.isConnected() && this.withRecognition) {
+		if (this.isConnected() && this.recognition) {
 			for (com.leapmotion.leap.Gesture g : this.frame.gestures(this.lastFrame)) {
 				if (g.isValid()) {
 					int state = 2;

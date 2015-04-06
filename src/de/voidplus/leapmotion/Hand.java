@@ -323,7 +323,7 @@ public class Hand implements PConstants {
 	
 	/**
 	 * Get all outstrechted fingers by angle.
-	 * @param degree Threshold in degrees.
+	 * @param similarity Minimum value of similarity.
 	 * @return
 	 */
 	public ArrayList<Finger> getOutstrechtedFingersByAngel(int similarity) {
@@ -411,7 +411,7 @@ public class Hand implements PConstants {
 
 	/**
 	 * Get a specific finger by name.
-	 * @param type	"thumb", "index", "middle", "ring", "pinky"
+	 * @param name	"thumb", "index", "middle", "ring", "pinky"
 	 * @return
 	 */
 	public Finger getFinger(String name){
@@ -611,7 +611,7 @@ public class Hand implements PConstants {
 	
 	/**
 	 * Draw the sphere of the hand.
-	 * @param radius	The radius of the ellipse (2D) or sphere (3D).
+	 * @param pre
 	 */
 	public void drawSphere(boolean pre){
 		if(pre){

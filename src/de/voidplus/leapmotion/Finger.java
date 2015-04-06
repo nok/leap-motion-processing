@@ -190,8 +190,7 @@ public class Finger extends Pointable {
 	
 	/**
 	 * Draw the lines between the joints.  
-	 * @param pre 
-	 * @return
+	 * @param pre
 	 */
 	public void drawLines(boolean pre){
 		if(pre){
@@ -240,7 +239,6 @@ public class Finger extends Pointable {
 	
 	/**
 	 * Draw all joints of finger.  
-	 * @return
 	 */
 	public void drawJoints(float radius, boolean pre){
 		if(pre){
@@ -292,7 +290,6 @@ public class Finger extends Pointable {
 	
 	/**
 	 * Draw the joints and bones of the finger.  
-	 * @return
 	 */
 	public void draw(float radius, boolean pre){
 		this.drawBones(pre);

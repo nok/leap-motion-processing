@@ -26,7 +26,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.2.4.1](download/LeapMotionForProcessing.zip?raw=true)
+- [Leap Motion for Processing v2.2.5.1](download/LeapMotionForProcessing.zip?raw=true)
 
 Note: If you are interested in the newest **development** implementation, so have a look at the [dev branch](https://github.com/nok/leap-motion-processing/tree/dev).
 
@@ -38,7 +38,7 @@ Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries 
 
 ## Dependencies
 
-- [Leap Motion Software](https://developer.leapmotion.com/) **2.2.4+26750**
+- [Leap Motion Software](https://developer.leapmotion.com/) **2.2.5+26752**
 
 
 ## Tested
@@ -63,7 +63,8 @@ Processing version:
 
 Leap Motion Software version:
 
-* **2.2.4+26750**
+* **2.2.5+26752**
+* 2.2.4+26750
 * 2.2.3+25971
 * 2.2.1+24116
 * 2.2.0+23475

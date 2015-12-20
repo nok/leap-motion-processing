@@ -4,55 +4,60 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 public class ScreenTapGesture extends Gesture {
-	
-	private com.leapmotion.leap.ScreenTapGesture screenTap;
-		
-	public ScreenTapGesture(PApplet parent, LeapMotion leap, com.leapmotion.leap.Gesture gesture){
-		super(parent, leap, gesture);
-		this.screenTap = new com.leapmotion.leap.ScreenTapGesture(gesture);
-	}
-	
-	/**
-	 * The position where the screen tap is registered. 
-	 * @return
-	 */
-	public PVector getPosition() {
-		return this.leap.map(this.screenTap.position());
-	}
 
-	/**
-	 * Raw data of the position where the screen tap is registered.
-	 * @return
-	 */
-	public PVector getRawPosition() {
-		return this.leap.convert(this.screenTap.position());
-	}
-	
-	/**
-	 * The direction of finger tip motion.
-	 * @return
-	 */
-	public PVector getDirection() {
-		return this.leap.map(this.screenTap.direction());
-	}
-	
-	/**
-	 * Raw data of the direction of finger tip motion.
-	 * @return
-	 */
-	public PVector getRawDirection() {
-		return this.leap.convert(this.screenTap.direction());
-	}
-	
-	/**
-	 * The finger performing the screen tap gesture.
-	 * @return
-	 */
-	public Finger getFinger() {
-		if(this.screenTap.pointable().isFinger()){
-			return new Finger(this.parent, this.leap, new com.leapmotion.leap.Finger(this.screenTap.pointable()));
-		}
-		return null;
-	}
-	
+    private com.leapmotion.leap.ScreenTapGesture _screenTap;
+
+    public ScreenTapGesture(PApplet parent, LeapMotion leap, com.leapmotion.leap.Gesture _gesture) {
+        super(parent, leap, _gesture);
+        this._screenTap = new com.leapmotion.leap.ScreenTapGesture(_gesture);
+    }
+
+    /**
+     * The position where the screen tap is registered.
+     *
+     * @return
+     */
+    public PVector getPosition() {
+        return this.leap.map(this._screenTap.position());
+    }
+
+    /**
+     * Raw data of the position where the screen tap is registered.
+     *
+     * @return
+     */
+    public PVector getRawPosition() {
+        return this.leap.convert(this._screenTap.position());
+    }
+
+    /**
+     * The direction of finger tip motion.
+     *
+     * @return
+     */
+    public PVector getDirection() {
+        return this.leap.map(this._screenTap.direction());
+    }
+
+    /**
+     * Raw data of the direction of finger tip motion.
+     *
+     * @return
+     */
+    public PVector getRawDirection() {
+        return this.leap.convert(this._screenTap.direction());
+    }
+
+    /**
+     * The finger performing the screen tap gesture.
+     *
+     * @return
+     */
+    public Finger getFinger() {
+        if (this._screenTap.pointable().isFinger()) {
+            return new Finger(this.parent, this.leap, new com.leapmotion.leap.Finger(this._screenTap.pointable()));
+        }
+        return null;
+    }
+
 }

@@ -2,7 +2,8 @@ package de.voidplus.leapmotion;
 
 import processing.core.PApplet;
 
-public class Device {
+
+public class Device implements RawAccess<com.leapmotion.leap.Device> {
 
     protected PApplet parent;
     protected LeapMotion leap;
@@ -12,6 +13,26 @@ public class Device {
         this.parent = parent;
         this.leap = leap;
         this._device = _device;
+    }
+
+    /**
+     * Reports whether it's a valid Bone object.
+     *
+     * @return
+     */
+    @Override
+    public boolean isValid() {
+        return this._device.isValid();
+    }
+
+    /**
+     * Get the raw instance of com.leapmotion.leap.Device.
+     *
+     * @return
+     */
+    @Override
+    public com.leapmotion.leap.Device getRaw() {
+        return this._device;
     }
 
     /**

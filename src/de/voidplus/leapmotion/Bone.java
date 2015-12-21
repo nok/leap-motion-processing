@@ -3,7 +3,8 @@ package de.voidplus.leapmotion;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-public class Bone {
+
+public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
 
     protected PApplet parent;
     protected LeapMotion leap;
@@ -16,17 +17,37 @@ public class Bone {
     }
 
     /**
-     * Reports whether it'a valid Bone object.
+     * Reports whether it's a valid Bone object.
      *
      * @return
      */
+    @Override
     public boolean isValid() {
         return this._bone.isValid();
     }
 
-    protected static boolean isValid(com.leapmotion.leap.Bone bone) {
-        return bone.isValid();
+    /**
+     * Get the raw instance of com.leapmotion.leap.Bone.
+     *
+     * @return
+     */
+    @Override
+    public com.leapmotion.leap.Bone getRaw() {
+        return this._bone;
     }
+
+//    /**
+//     * Reports whether it'a valid Bone object.
+//     *
+//     * @return
+//     */
+//    public boolean isValid() {
+//        return this._bone.isValid();
+//    }
+//
+//    protected static boolean isValid(com.leapmotion.leap.Bone bone) {
+//        return bone.isValid();
+//    }
 
     /**
      * Get the index of _bone (0-3, 0=distal, 1=intermediate, 2=proximal, 3=metacarpal).
@@ -148,5 +169,4 @@ public class Bone {
     public void draw() {
         this.draw(true);
     }
-
 }

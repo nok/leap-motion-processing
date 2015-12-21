@@ -3,7 +3,8 @@ package de.voidplus.leapmotion;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-public class Arm {
+
+public class Arm implements RawAccess<com.leapmotion.leap.Arm> {
 
     protected PApplet parent;
     protected LeapMotion leap;
@@ -16,16 +17,23 @@ public class Arm {
     }
 
     /**
-     * Reports whether this is a valid Arm object.
+     * Reports whether it's a valid Arm object.
      *
      * @return
      */
+    @Override
     public boolean isValid() {
         return this._arm.isValid();
     }
 
-    protected static boolean isValid(com.leapmotion.leap.Arm arm) {
-        return arm.isValid();
+    /**
+     * Get the raw instance of com.leapmotion.leap.Arm.
+     *
+     * @return
+     */
+    @Override
+    public com.leapmotion.leap.Arm getRaw() {
+        return this._arm;
     }
 
     /**

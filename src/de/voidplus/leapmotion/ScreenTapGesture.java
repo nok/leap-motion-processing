@@ -3,13 +3,24 @@ package de.voidplus.leapmotion;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-public class ScreenTapGesture extends Gesture {
+
+public class ScreenTapGesture extends Gesture implements RawAccess<com.leapmotion.leap.ScreenTapGesture> {
 
     private com.leapmotion.leap.ScreenTapGesture _screenTap;
 
     public ScreenTapGesture(PApplet parent, LeapMotion leap, com.leapmotion.leap.Gesture _gesture) {
         super(parent, leap, _gesture);
         this._screenTap = new com.leapmotion.leap.ScreenTapGesture(_gesture);
+    }
+
+    /**
+     * Get the raw instance of com.leapmotion.leap.ScreenTapGesture.
+     *
+     * @return
+     */
+    @Override
+    public com.leapmotion.leap.ScreenTapGesture getRaw() {
+        return this._screenTap;
     }
 
     /**

@@ -5,7 +5,8 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
 
-public class Hand implements PConstants {
+
+public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
 
     protected PApplet parent;
     protected LeapMotion leap;
@@ -27,17 +28,37 @@ public class Hand implements PConstants {
     }
 
     /**
-     * Reports whether this is a valid Hand object.
+     * Reports whether it's a valid Hand object.
      *
      * @return
      */
+    @Override
     public boolean isValid() {
         return this._hand.isValid();
     }
 
-    protected static boolean isValid(com.leapmotion.leap.Hand _hand) {
-        return _hand.isValid();
+    /**
+     * Get the raw instance of com.leapmotion.leap.Hand.
+     *
+     * @return
+     */
+    @Override
+    public com.leapmotion.leap.Hand getRaw() {
+        return this._hand;
     }
+
+//    /**
+//     * Reports whether this is a valid Hand object.
+//     *
+//     * @return
+//     */
+//    public boolean isValid() {
+//        return this._hand.isValid();
+//    }
+//
+//    protected static boolean isValid(com.leapmotion.leap.Hand _hand) {
+//        return _hand.isValid();
+//    }
 
 	/* ------------------------------------------------------------------------ */
     /* HAND */
@@ -364,7 +385,7 @@ public class Hand implements PConstants {
         this.outstretchedFingersByAngel.clear();
         if (this.hasFingers()) {
             for (com.leapmotion.leap.Finger finger : this._hand.fingers()) {
-                if (Finger.isValid(finger)) {
+                if (finger.isValid()) {
                     Finger candidate = new Finger(this.parent, this.leap, finger);
                     // calculate total distance
                     float distance = 0.0f;

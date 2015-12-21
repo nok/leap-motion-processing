@@ -3,13 +3,24 @@ package de.voidplus.leapmotion;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-public class SwipeGesture extends Gesture {
+
+public class SwipeGesture extends Gesture implements RawAccess<com.leapmotion.leap.SwipeGesture> {
 
     private com.leapmotion.leap.SwipeGesture _swipe;
 
     public SwipeGesture(PApplet parent, LeapMotion leap, com.leapmotion.leap.Gesture _gesture) {
         super(parent, leap, _gesture);
         this._swipe = new com.leapmotion.leap.SwipeGesture(_gesture);
+    }
+
+    /**
+     * Get the raw instance of com.leapmotion.leap.SwipeGesture.
+     *
+     * @return
+     */
+    @Override
+    public com.leapmotion.leap.SwipeGesture getRaw() {
+        return this._swipe;
     }
 
     /**

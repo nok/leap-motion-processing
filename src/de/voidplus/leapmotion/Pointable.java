@@ -3,6 +3,7 @@ package de.voidplus.leapmotion;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+
 public class Pointable {
 
     protected PApplet parent;
@@ -147,15 +148,6 @@ public class Pointable {
      */
     public float getTimeVisible() {
         return this._pointable.timeVisible();
-    }
-
-    /**
-     * Reports whether this is a valid Pointable object.
-     *
-     * @return
-     */
-    public boolean isValid() {
-        return this._pointable.isValid();
     }
 
     protected boolean isFinger() {

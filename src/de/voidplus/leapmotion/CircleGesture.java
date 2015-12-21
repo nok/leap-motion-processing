@@ -3,13 +3,24 @@ package de.voidplus.leapmotion;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-public class CircleGesture extends Gesture {
+
+public class CircleGesture extends Gesture implements RawAccess<com.leapmotion.leap.CircleGesture> {
 
     private com.leapmotion.leap.CircleGesture _circle;
 
     public CircleGesture(PApplet parent, LeapMotion leap, com.leapmotion.leap.Gesture _gesture) {
         super(parent, leap, _gesture);
         this._circle = new com.leapmotion.leap.CircleGesture(_gesture);
+    }
+
+    /**
+     * Get the raw instance of com.leapmotion.leap.CircleGesture.
+     *
+     * @return
+     */
+    @Override
+    public com.leapmotion.leap.CircleGesture getRaw() {
+        return this._circle;
     }
 
     /**

@@ -5,7 +5,8 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
 
-public class Finger extends Pointable {
+
+public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.Finger> {
 
     protected Joint Joint;
     private com.leapmotion.leap.Finger _finger;
@@ -14,21 +15,25 @@ public class Finger extends Pointable {
         super(parent, leap, (com.leapmotion.leap.Pointable) _finger);
         this._finger = _finger;
     }
-//	public Finger(PApplet parent, LeapMotion leap, com.leapmotion.leap.Pointable _pointable) {
-//		super(parent, leap, _pointable);
-//	}
 
     /**
-     * Reports whether this is a valid Finger object.
+     * Reports whether it's a valid Finger object.
      *
      * @return
      */
+    @Override
     public boolean isValid() {
         return this._finger.isValid();
     }
 
-    protected static boolean isValid(com.leapmotion.leap.Finger _finger) {
-        return _finger.isValid();
+    /**
+     * Get the raw instance of com.leapmotion.leap.Finger.
+     *
+     * @return
+     */
+    @Override
+    public com.leapmotion.leap.Finger getRaw() {
+        return this._finger;
     }
 
     /**

@@ -1,4 +1,6 @@
-# Leap Motion for Processing
+![Leap Motion for Processing](reference/github_cover.png)
+
+===
 
 Simple library to use the complete [Leap Motion](https://leapmotion.com/) [SDK](https://developer.leapmotion.com/documentation/java/index.html) in [Processing](http://processing.org/).
 
@@ -26,7 +28,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.2.5.1](download/LeapMotionForProcessing.zip?raw=true)
+- [Leap Motion for Processing v2.3.1.1](download/LeapMotionForProcessing.zip?raw=true)
 
 Note: If you are interested in the newest **development** implementation, so have a look at the [dev branch](https://github.com/nok/leap-motion-processing/tree/dev).
 
@@ -38,7 +40,7 @@ Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries 
 
 ## Dependencies
 
-- [Leap Motion Software](https://developer.leapmotion.com/) **2.2.5+26752**
+- [Leap Motion Software](https://developer.leapmotion.com/) **2.3.1+31549**
 
 
 ## Tested
@@ -51,8 +53,9 @@ System:
 
 Processing version:
 
-- **3.0a5**
-- **2.2.1**
+- **3.0.1**
+- 3.0a5
+- 2.2.1
 - 2.1.2
 - 2.1.1
 - 2.1.0
@@ -63,20 +66,20 @@ Processing version:
 
 Leap Motion Software version:
 
-* **2.2.5+26752**
+* **2.3.1+31549**
+* 2.2.5+26752
 * 2.2.4+26750
 * 2.2.3+25971
 * 2.2.1+24116
 * 2.2.0+23475
 * 2.1.6+23110
 * 2.1.5+22699
-* 2.0.5+18024 BETA
-* 2.0.4+17546 BETA
-* 2.0.3+17004 BETA
-* 2.0.2+16391 BETA
-* 2.0.1+15831 BETA
-* 2.0.0+13819 BETA
-* ...
+* 2.0.5+18024 beta
+* 2.0.4+17546 beta
+* 2.0.3+17004 beta
+* 2.0.2+16391 beta
+* 2.0.1+15831 beta
+* 2.0.0+13819 beta
 
 
 ## Examples

@@ -1,7 +1,8 @@
 package de.voidplus.leapmotion;
 
-import processing.core.PApplet;
 import java.util.ArrayList;
+import processing.core.PApplet;
+
 
 public abstract class Gesture {
 
@@ -22,10 +23,6 @@ public abstract class Gesture {
      */
     public boolean isValid() {
         return this._gesture.isValid();
-    }
-
-    public static boolean isValid(com.leapmotion.leap.Gesture _gesture) {
-        return _gesture.isValid();
     }
 
     /**

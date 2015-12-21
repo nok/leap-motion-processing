@@ -4,7 +4,8 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 
-public class Image extends PImage {
+
+public class Image extends PImage implements RawAccess<com.leapmotion.leap.Image> {
 
     protected PApplet parent;
     protected LeapMotion leap;
@@ -31,6 +32,26 @@ public class Image extends PImage {
             this.pixels[i] = r | g | b;
         }
         this.updatePixels();
+    }
+
+    /**
+     * Reports whether it's a valid Image object.
+     *
+     * @return
+     */
+    @Override
+    public boolean isValid() {
+        return this._image.isValid();
+    }
+
+    /**
+     * Get the raw instance of com.leapmotion.leap.Image.
+     *
+     * @return
+     */
+    @Override
+    public com.leapmotion.leap.Image getRaw() {
+        return this._image;
     }
 
     /**

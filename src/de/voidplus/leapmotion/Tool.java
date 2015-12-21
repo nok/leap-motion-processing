@@ -3,7 +3,8 @@ package de.voidplus.leapmotion;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-public class Tool extends Pointable {
+
+public class Tool extends Pointable implements RawAccess<com.leapmotion.leap.Tool> {
 
     private com.leapmotion.leap.Tool _tool;
 
@@ -17,16 +18,23 @@ public class Tool extends Pointable {
     }
 
     /**
-     * Reports whether this is a valid Tool object.
+     * Reports whether it's a valid Tool object.
      *
      * @return
      */
+    @Override
     public boolean isValid() {
         return this._tool.isValid();
     }
 
-    protected static boolean isValid(com.leapmotion.leap.Tool tool) {
-        return tool.isValid();
+    /**
+     * Get the raw instance of com.leapmotion.leap.Finger.
+     *
+     * @return
+     */
+    @Override
+    public com.leapmotion.leap.Tool getRaw() {
+        return this._tool;
     }
 
     /**

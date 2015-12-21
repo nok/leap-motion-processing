@@ -3,13 +3,24 @@ package de.voidplus.leapmotion;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-public class KeyTapGesture extends Gesture {
+
+public class KeyTapGesture extends Gesture implements RawAccess<com.leapmotion.leap.KeyTapGesture> {
 
     private com.leapmotion.leap.KeyTapGesture _keyTap;
 
     public KeyTapGesture(PApplet parent, LeapMotion leap, com.leapmotion.leap.Gesture _gesture) {
         super(parent, leap, _gesture);
         this._keyTap = new com.leapmotion.leap.KeyTapGesture(_gesture);
+    }
+
+    /**
+     * Get the raw instance of com.leapmotion.leap.KeyTapGesture.
+     *
+     * @return
+     */
+    @Override
+    public com.leapmotion.leap.KeyTapGesture getRaw() {
+        return this._keyTap;
     }
 
     /**

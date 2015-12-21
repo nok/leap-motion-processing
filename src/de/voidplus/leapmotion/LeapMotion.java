@@ -3,7 +3,6 @@ package de.voidplus.leapmotion;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import com.leapmotion.leap.Controller.PolicyFlag;
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Listener;
@@ -22,10 +21,10 @@ import processing.core.PVector;
  */
 public class LeapMotion {
 
-    public static final String NAME = "Leap Motion";
-    public static final String REPO = "https://github.com/nok/leap-motion-processing";
-    public static final String VERSION = "2.3.1.1";
-    public static final String SDK_VERSION = "2.3.1+31549";
+    private static final String NAME = "Leap Motion";
+    private static final String REPO = "https://github.com/nok/leap-motion-processing";
+    private static final String VERSION = "2.3.1.1";
+    private static final String SDK_VERSION = "2.3.1+31549";
 
     // Processing
     private final PApplet parent;
@@ -63,7 +62,12 @@ public class LeapMotion {
         this.setVerbose(verbose);
         this.recognition = false;
 
-        this.log("# " + LeapMotion.NAME + " Library v" + LeapMotion.VERSION + " - Leap Motion SDK v" + LeapMotion.SDK_VERSION + " - " + LeapMotion.REPO, true);
+        this.log("# " + LeapMotion.NAME
+                        + " Library v" + LeapMotion.VERSION
+                        + " - Leap Motion SDK v"
+                        + LeapMotion.SDK_VERSION
+                        + " - " + LeapMotion.REPO
+                , true);
 
         // Data
         this.setWorld(200, 500, 200);
@@ -215,7 +219,7 @@ public class LeapMotion {
 
 	
 	/* ------------------------------------------------------------------------ */
-	/* World */
+    /* World */
 
     /**
      * Set the world coordinates.
@@ -262,9 +266,9 @@ public class LeapMotion {
         this.origin = origin;
         return this;
     }
-	
+
 	/* ------------------------------------------------------------------------ */
-	/* Device */
+    /* Device */
 
     /**
      * Check if the Leap Motion is connected.
@@ -315,7 +319,7 @@ public class LeapMotion {
      */
     public Hand getHand(Integer id) {
         com.leapmotion.leap.Hand hand = this.frame.hand(id);
-        if (!LeapMotion.isNull(hand) && Hand.isValid(hand)) {
+        if (!LeapMotion.isNull(hand) && hand.isValid()) {
             return new Hand(this.parent, this, hand);
         }
         return null;
@@ -330,7 +334,7 @@ public class LeapMotion {
         this.hands.clear();
         if (this.hasHands()) {
             for (com.leapmotion.leap.Hand hand : this.frame.hands()) {
-                if (Hand.isValid(hand)) {
+                if (hand.isValid()) {
                     hands.add(new Hand(this.parent, this, hand));
                 }
             }
@@ -358,7 +362,7 @@ public class LeapMotion {
     public Hand getFrontHand() {
         if (!this.frame.hands().isEmpty()) {
             com.leapmotion.leap.Hand hand = this.frame.hands().frontmost();
-            if (!LeapMotion.isNull(hand) && Hand.isValid(hand)) {
+            if (!LeapMotion.isNull(hand) && hand.isValid()) {
                 return new Hand(this.parent, this, hand);
             }
         }
@@ -373,7 +377,7 @@ public class LeapMotion {
     public Hand getLeftHand() {
         if (!this.frame.hands().isEmpty()) {
             com.leapmotion.leap.Hand hand = this.frame.hands().leftmost();
-            if (!LeapMotion.isNull(hand) && Hand.isValid(hand)) {
+            if (!LeapMotion.isNull(hand) && hand.isValid()) {
                 return new Hand(this.parent, this, hand);
             }
         }
@@ -388,7 +392,7 @@ public class LeapMotion {
     public Hand getRightHand() {
         if (!this.frame.hands().isEmpty()) {
             com.leapmotion.leap.Hand hand = this.frame.hands().rightmost();
-            if (!LeapMotion.isNull(hand) && Hand.isValid(hand)) {
+            if (!LeapMotion.isNull(hand) && hand.isValid()) {
                 return new Hand(this.parent, this, hand);
             }
         }
@@ -419,7 +423,7 @@ public class LeapMotion {
      */
     public Finger getFinger(Integer id) {
         com.leapmotion.leap.Finger finger = this.frame.finger(id);
-        if (!LeapMotion.isNull(finger) && Finger.isValid(finger)) {
+        if (!LeapMotion.isNull(finger) && finger.isValid()) {
             return new Finger(this.parent, this, finger);
         }
         return null;
@@ -434,7 +438,7 @@ public class LeapMotion {
         this.fingers.clear();
         if (this.hasFingers()) {
             for (com.leapmotion.leap.Finger finger : this.frame.fingers()) {
-                if (Finger.isValid(finger)) {
+                if (finger.isValid()) {
                     fingers.add(new Finger(this.parent, this, finger));
                 }
             }
@@ -443,11 +447,11 @@ public class LeapMotion {
     }
 
     /**
-     * Get all outstrechted fingers.
+     * Get all outstretched fingers.
      *
      * @return
      */
-    public ArrayList<Finger> getOutstrechtedFingers() {
+    public ArrayList<Finger> getOutstretchedFingers() {
         this.outstretchedFingers.clear();
         if (!this.frame.fingers().extended().isEmpty()) {
             for (com.leapmotion.leap.Finger finger : this.frame.fingers().extended()) {
@@ -458,25 +462,16 @@ public class LeapMotion {
     }
 
     /**
-     * Get all outstrechted fingers.
-     *
-     * @return
-     */
-    public ArrayList<Finger> getOutstrechtedFingers(int ignoreForBackwardsCompatibility) {
-        return this.getOutstrechtedFingers();
-    }
-
-    /**
-     * Get all outstrechted fingers by angel.
+     * Get all outstretched fingers by angel.
      *
      * @param similarity Minimum value of similarity.
      * @return
      */
-    public ArrayList<Finger> getOutstrechtedFingersByAngel(int similarity) {
+    public ArrayList<Finger> getOutstretchedFingersByAngel(int similarity) {
         this.outstretchedFingersByAngel.clear();
         if (this.hasFingers()) {
             for (com.leapmotion.leap.Finger finger : this.frame.fingers()) {
-                if (Finger.isValid(finger)) {
+                if (finger.isValid()) {
                     Finger candidate = new Finger(this.parent, this, finger);
                     // calculate total distance
                     float distance = 0.0f;
@@ -507,7 +502,7 @@ public class LeapMotion {
      * @return
      */
     public ArrayList<Finger> getOutstrechtedFingersByAngel() {
-        return this.getOutstrechtedFingersByAngel(75);
+        return this.getOutstretchedFingersByAngel(75);
     }
 
     /**
@@ -573,7 +568,7 @@ public class LeapMotion {
      */
     public Tool getTool(Integer id) {
         com.leapmotion.leap.Tool tool = this.frame.tool(id);
-        if (!LeapMotion.isNull(tool) && Tool.isValid(tool)) {
+        if (!LeapMotion.isNull(tool) && tool.isValid()) {
             return new Tool(this.parent, this, tool);
         }
         return null;
@@ -588,7 +583,7 @@ public class LeapMotion {
         this.tools.clear();
         if (this.hasTools()) {
             for (com.leapmotion.leap.Tool tool : this.frame.tools()) {
-                if (Tool.isValid(tool)) {
+                if (tool.isValid()) {
                     tools.add(new Tool(this.parent, this, tool));
                 }
             }

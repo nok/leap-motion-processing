@@ -1,7 +1,7 @@
 name = Leap Motion for Processing
 authorList = [Darius Morawiec](http://nok.onl)
 url = https://github.com/nok/leap-motion-processing
-category = ##library.category##
+categories = Hardware
 sentence = Library to use the [Leap Motion](https://leapmotion.com/) in [Processing](http://processing.org/).
 paragraph = 
 version = 18

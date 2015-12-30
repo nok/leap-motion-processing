@@ -3,12 +3,14 @@ package de.voidplus.leapmotion;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import com.leapmotion.leap.Controller.PolicyFlag;
 import com.leapmotion.leap.Frame;
 import com.leapmotion.leap.Listener;
 import com.leapmotion.leap.Vector;
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.Gesture;
+import com.leapmotion.leap.Gesture.State;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -54,20 +56,21 @@ public class LeapMotion {
     /**
      * LeapMotion constructor to initialize the controller and listener.
      *
-     * @param parent  Reference (this) of sketch.
-     * @param verbose Print debug information to the console.
+     * @param parent  Instance (this) of the used sketch
+     * @param verbose Print debug information to the console
      */
     public LeapMotion(PApplet parent, boolean verbose) {
         this.parent = parent;
         this.setVerbose(verbose);
         this.recognition = false;
-
-        this.log("# " + LeapMotion.NAME
-                        + " Library v" + LeapMotion.VERSION
-                        + " - Leap Motion SDK v"
-                        + LeapMotion.SDK_VERSION
-                        + " - " + LeapMotion.REPO
-                , true);
+        this.println(
+                String.format("# %s Library v%s - Leap Motion SDK v%s - %s",
+                        LeapMotion.NAME,
+                        this.getVersion(),
+                        this.getVersionSDK(),
+                        LeapMotion.REPO
+                ), false
+        );
 
         // Data
         this.setWorld(200, 500, 200);
@@ -106,7 +109,7 @@ public class LeapMotion {
             }
         };
         this.controller.addListener(this.listener);
-        this.withBackgroundFrames();
+        this.allowBackgroundApps();
 
 //		this.parent.registerDispose(this);
         this.parent.registerMethod("dispose", this); // support since version 2.0b7 (REV 0215)
@@ -124,7 +127,7 @@ public class LeapMotion {
     /**
      * The instantaneous framerate.
      *
-     * @return
+     * @return Instantaneous framerwate
      */
     public int getFrameRate() {
         if (this.isConnected()) {
@@ -136,7 +139,7 @@ public class LeapMotion {
     /**
      * Get the current timestamp.
      *
-     * @return
+     * @return Current timestamp
      */
     public long getTimestamp() {
         if (this.isConnected()) {
@@ -146,9 +149,9 @@ public class LeapMotion {
     }
 
     /**
-     * Get the current ID.
+     * Get the current frame ID.
      *
-     * @return
+     * @return Frame ID
      */
     public long getId() {
         if (this.isConnected()) {
@@ -162,22 +165,22 @@ public class LeapMotion {
     /* Policy-Flags */
 
     /**
-     * Print policy flags.
+     * Print all policy flags.
      */
     public void printPolicyFlags() {
-        for (PolicyFlag flag : PolicyFlag.values()) {
-            if (this.controller.isPolicySet(flag)) {
-                this.log("'" + flag.toString() + "' is set.");
+        for (PolicyFlag _flag : PolicyFlag.values()) {
+            if (this.controller.isPolicySet(_flag)) {
+                this.log(String.format("'%s' is set.", _flag.toString()));
             }
         }
     }
 
     /**
-     * Enable the tracking in background.
+     * Allow background applications.
      *
-     * @return
+     * @return LeapMotion
      */
-    public LeapMotion withBackgroundFrames() {
+    public LeapMotion allowBackgroundApps() {
         if (!this.controller.isPolicySet(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES)) {
             this.controller.setPolicy(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
         }
@@ -185,36 +188,59 @@ public class LeapMotion {
     }
 
     /**
-     * Disable the tracking in background.
+     * Allow background applications.
      *
-     * @return
+     * @return LeapMotion
+     * @deprecated
+     */
+    public LeapMotion withBackgroundFrames() {
+        this.log("'withBackgroundFrames()' is deprecated. Please use 'allowBackgroundApps()'.");
+        return this.allowBackgroundApps();
+    }
+
+    /**
+     * Allow background applications.
+     *
+     * @return LeapMotion
+     * @deprecated
+     */
+    public LeapMotion runInBackground(boolean active) {
+        this.log("'runInBackground()' is deprecated. Please use 'allowBackgroundApps()'.");
+        return this.allowBackgroundApps();
+    }
+
+    /**
+     * Allow background applications.
+     *
+     * @return LeapMotion
+     * @deprecated
+     */
+    public LeapMotion allowRunInBackground() {
+        this.log("'allowRunInBackground()' is deprecated. Please use 'allowBackgroundApps()'.");
+        return this.allowBackgroundApps();
+    }
+
+    /**
+     * Disallow background applications.
+     *
+     * @return LeapMotion
+     * @deprecated
      */
     public LeapMotion withoutBackgroundFrames() {
+        this.log("'withoutBackgroundFrames()' is deprecated. Please use 'disallowBackgroundApps()'.");
+        return this.disallowBackgroundApps();
+    }
+
+    /**
+     * Disallow background applications.
+     *
+     * @return LeapMotion
+     */
+    public LeapMotion disallowBackgroundApps() {
         if (this.controller.isPolicySet(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES)) {
             this.controller.clearPolicy(Controller.PolicyFlag.POLICY_BACKGROUND_FRAMES);
         }
         return this;
-    }
-
-    /**
-     * Run tracking in background too.
-     *
-     * @return
-     * @deprecated
-     */
-    public LeapMotion runInBackground(boolean active) {
-        this.log("'runInBackground(" + Boolean.toString(active) + ")' is deprecated. Please use 'withBackgroundFrames()'.");
-        return this.withBackgroundFrames();
-    }
-
-    /**
-     * Run tracking in background too.
-     *
-     * @return
-     */
-    public LeapMotion allowRunInBackground() {
-        this.log("'allowRunInBackground()' is deprecated. Please use 'withBackgroundFrames()'.");
-        return this.withBackgroundFrames();
     }
 
 	
@@ -227,7 +253,7 @@ public class LeapMotion {
      * @param width  World width dimension in millimeters (default: 200).
      * @param height World height dimension in millimeters (default: 500).
      * @param depth  World depth dimension in millimeters (default: 200).
-     * @return
+     * @return LeapMotion
      */
     public LeapMotion setWorld(int width, int height, int depth) {
         return this.setWorld(new PVector(width, height, depth));
@@ -237,7 +263,7 @@ public class LeapMotion {
      * Set the world coordinates.
      *
      * @param world World dimensions in millimeters.
-     * @return
+     * @return LeapMotion
      */
     public LeapMotion setWorld(PVector world) {
         this.world = world;
@@ -247,10 +273,10 @@ public class LeapMotion {
     /**
      * Move the world origin.
      *
-     * @param x
-     * @param y
-     * @param z
-     * @return
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @param z Z coordinate
+     * @return LeapMotion
      */
     public LeapMotion moveWorld(int x, int y, int z) {
         return this.moveWorld(new PVector(x, y, z));
@@ -259,68 +285,97 @@ public class LeapMotion {
     /**
      * Move the world origin.
      *
-     * @param origin
-     * @return
+     * @param origin PVector of the origin
+     * @return LeapMotion
      */
     public LeapMotion moveWorld(PVector origin) {
         this.origin = origin;
         return this;
     }
 
+
 	/* ------------------------------------------------------------------------ */
     /* Device */
 
     /**
-     * Check if the Leap Motion is connected.
+     * Is the device connected successfully?
      *
-     * @return
+     * @return Is the device connected successfully?
      */
     public boolean isConnected() {
         return this.controller.isConnected();
     }
 
+    /**
+     * Get the raw instance of com.leapmotion.leap.Controller
+     *
+     * @return used com.leapmotion.leap.Controller instance
+     */
     public Controller getController() {
         return this.controller;
     }
 
+    /**
+     * Get all devices (for future updates)
+     *
+     * @return List of devices
+     */
     public ArrayList<Device> getDevices() {
         devices.clear();
         if (this.isConnected()) {
             if (!this.getController().devices().isEmpty()) {
-                for (com.leapmotion.leap.Device device : this.getController().devices()) {
-                    devices.add(new Device(this.parent, this, device));
+                for (com.leapmotion.leap.Device _device : this.getController().devices()) {
+                    devices.add(new Device(this.parent, this, _device));
                 }
             }
         }
         return this.devices;
     }
-	
+
 	
 	/* ------------------------------------------------------------------------ */
-	/* Hands */
+    /* Hands */
 
     /**
-     * Check if there is any hand.
+     * Is it a valid hand?
      *
-     * @return
+     * @param _hand Instance of com.leapmotion.leap.Hand
+     * @return Is it a valid hand?
+     */
+    private static boolean isValid(com.leapmotion.leap.Hand _hand) {
+        return _hand != null && _hand.isValid();
+    }
+
+    /**
+     * Are there any hands?
+     *
+     * @return Are there any hands?
      */
     public boolean hasHands() {
-        if (this.isConnected()) {
-            return !this.frame.hands().isEmpty();
-        }
-        return false;
+        return this.isConnected() && !this.frame.hands().isEmpty();
+    }
+
+    /**
+     * Get the number of detected hands.
+     *
+     * @return Number of detected hands
+     */
+    public int countHands() {
+        return this.isConnected() ? this.frame.hands().count() : 0;
     }
 
     /**
      * Get a specific hand.
      *
-     * @param id
-     * @return
+     * @param id ID of a specific hand
+     * @return Single hand or null
      */
     public Hand getHand(Integer id) {
-        com.leapmotion.leap.Hand hand = this.frame.hand(id);
-        if (!LeapMotion.isNull(hand) && hand.isValid()) {
-            return new Hand(this.parent, this, hand);
+        if (!this.hasHands()) {
+            com.leapmotion.leap.Hand _hand = this.frame.hand(id);
+            if (LeapMotion.isValid(_hand)) {
+                return new Hand(this.parent, this, _hand);
+            }
         }
         return null;
     }
@@ -328,14 +383,14 @@ public class LeapMotion {
     /**
      * Get all detected hands.
      *
-     * @return
+     * @return List of all detected hands
      */
     public ArrayList<Hand> getHands() {
         this.hands.clear();
         if (this.hasHands()) {
-            for (com.leapmotion.leap.Hand hand : this.frame.hands()) {
-                if (hand.isValid()) {
-                    hands.add(new Hand(this.parent, this, hand));
+            for (com.leapmotion.leap.Hand _hand : this.frame.hands()) {
+                if (LeapMotion.isValid(_hand)) {
+                    hands.add(new Hand(this.parent, this, _hand));
                 }
             }
         }
@@ -343,27 +398,15 @@ public class LeapMotion {
     }
 
     /**
-     * Get the number of detected hands.
-     *
-     * @return
-     */
-    public int countHands() {
-        if (this.isConnected()) {
-            return this.frame.hands().count();
-        }
-        return 0;
-    }
-
-    /**
      * The member of the list that is farthest to the front within the standard Leap Motion frame of reference (i.e has the smallest Z coordinate).
      *
-     * @return
+     * @return Single hand or null
      */
     public Hand getFrontHand() {
-        if (!this.frame.hands().isEmpty()) {
-            com.leapmotion.leap.Hand hand = this.frame.hands().frontmost();
-            if (!LeapMotion.isNull(hand) && hand.isValid()) {
-                return new Hand(this.parent, this, hand);
+        if (!this.hasHands()) {
+            com.leapmotion.leap.Hand _hand = this.frame.hands().frontmost();
+            if (LeapMotion.isValid(_hand)) {
+                return new Hand(this.parent, this, _hand);
             }
         }
         return null;
@@ -372,13 +415,13 @@ public class LeapMotion {
     /**
      * The member of the list that is farthest to the left within the standard Leap Motion frame of reference (i.e has the smallest X coordinate).
      *
-     * @return
+     * @return Single hand or null
      */
     public Hand getLeftHand() {
-        if (!this.frame.hands().isEmpty()) {
-            com.leapmotion.leap.Hand hand = this.frame.hands().leftmost();
-            if (!LeapMotion.isNull(hand) && hand.isValid()) {
-                return new Hand(this.parent, this, hand);
+        if (!this.hasHands()) {
+            com.leapmotion.leap.Hand _hand = this.frame.hands().leftmost();
+            if (!LeapMotion.isValid(_hand)) {
+                return new Hand(this.parent, this, _hand);
             }
         }
         return null;
@@ -387,44 +430,53 @@ public class LeapMotion {
     /**
      * The member of the list that is farthest to the right within the standard Leap Motion frame of reference (i.e has the largest X coordinate).
      *
-     * @return
+     * @return Right hand or null
      */
     public Hand getRightHand() {
-        if (!this.frame.hands().isEmpty()) {
-            com.leapmotion.leap.Hand hand = this.frame.hands().rightmost();
-            if (!LeapMotion.isNull(hand) && hand.isValid()) {
-                return new Hand(this.parent, this, hand);
+        if (!this.hasHands()) {
+            com.leapmotion.leap.Hand _hand = this.frame.hands().rightmost();
+            if (!LeapMotion.isValid(_hand)) {
+                return new Hand(this.parent, this, _hand);
             }
         }
         return null;
     }
-	
+
 
 	/* ------------------------------------------------------------------------ */
-	/* Fingers */
+    /* Fingers */
 
     /**
-     * Check if there is any finger.
+     * Is it a valid finger?
      *
-     * @return
+     * @param _finger Instance of com.leapmotion.leap.Finger
+     * @return Is it a valid finger?
+     */
+    private static boolean isValid(com.leapmotion.leap.Finger _finger) {
+        return _finger != null && _finger.isValid();
+    }
+
+    /**
+     * Are there any fingers?
+     *
+     * @return Are there any fingers?
      */
     public boolean hasFingers() {
-        if (this.isConnected()) {
-            return !this.frame.fingers().isEmpty();
-        }
-        return false;
+        return this.isConnected() && !this.frame.fingers().isEmpty();
     }
 
     /**
      * Get a specific finger.
      *
-     * @param id
-     * @return
+     * @param id ID of a specific finger
+     * @return Single finger or null
      */
     public Finger getFinger(Integer id) {
-        com.leapmotion.leap.Finger finger = this.frame.finger(id);
-        if (!LeapMotion.isNull(finger) && finger.isValid()) {
-            return new Finger(this.parent, this, finger);
+        if (this.hasFingers()) {
+            com.leapmotion.leap.Finger _finger = this.frame.finger(id);
+            if (!LeapMotion.isValid(_finger)) {
+                return new Finger(this.parent, this, _finger);
+            }
         }
         return null;
     }
@@ -432,14 +484,14 @@ public class LeapMotion {
     /**
      * Get all detected fingers.
      *
-     * @return
+     * @return List of fingers
      */
     public ArrayList<Finger> getFingers() {
         this.fingers.clear();
         if (this.hasFingers()) {
-            for (com.leapmotion.leap.Finger finger : this.frame.fingers()) {
-                if (finger.isValid()) {
-                    fingers.add(new Finger(this.parent, this, finger));
+            for (com.leapmotion.leap.Finger _finger : this.frame.fingers()) {
+                if (_finger.isValid()) {
+                    fingers.add(new Finger(this.parent, this, _finger));
                 }
             }
         }
@@ -449,13 +501,13 @@ public class LeapMotion {
     /**
      * Get all outstretched fingers.
      *
-     * @return
+     * @return List of fingers
      */
     public ArrayList<Finger> getOutstretchedFingers() {
         this.outstretchedFingers.clear();
         if (!this.frame.fingers().extended().isEmpty()) {
-            for (com.leapmotion.leap.Finger finger : this.frame.fingers().extended()) {
-                this.outstretchedFingers.add(new Finger(this.parent, this, finger));
+            for (com.leapmotion.leap.Finger _finger : this.frame.fingers().extended()) {
+                this.outstretchedFingers.add(new Finger(this.parent, this, _finger));
             }
         }
         return this.outstretchedFingers;
@@ -464,15 +516,15 @@ public class LeapMotion {
     /**
      * Get all outstretched fingers by angel.
      *
-     * @param similarity Minimum value of similarity.
-     * @return
+     * @param similarity Minimum value of similarity
+     * @return List of fingers
      */
     public ArrayList<Finger> getOutstretchedFingersByAngel(int similarity) {
         this.outstretchedFingersByAngel.clear();
         if (this.hasFingers()) {
-            for (com.leapmotion.leap.Finger finger : this.frame.fingers()) {
-                if (finger.isValid()) {
-                    Finger candidate = new Finger(this.parent, this, finger);
+            for (com.leapmotion.leap.Finger _finger : this.frame.fingers()) {
+                if (_finger.isValid()) {
+                    Finger candidate = new Finger(this.parent, this, _finger);
                     // calculate total distance
                     float distance = 0.0f;
                     for (int b = 0; b < 4; b++) {
@@ -499,16 +551,16 @@ public class LeapMotion {
     /**
      * Get all outstrechted fingers with 75% likelihood.
      *
-     * @return
+     * @return List of fingers
      */
     public ArrayList<Finger> getOutstrechtedFingersByAngel() {
         return this.getOutstretchedFingersByAngel(75);
     }
 
     /**
-     * Get the number of detected fingers.
+     * Get the number of overall detected fingers.
      *
-     * @return
+     * @return Number of fingers
      */
     public int countFingers() {
         if (this.isConnected()) {
@@ -520,56 +572,74 @@ public class LeapMotion {
     /**
      * The member of the list that is farthest to the front within the standard Leap Motion frame of reference (i.e has the smallest Z coordinate).
      *
-     * @return
+     * @return Single finger or null
      */
     public Finger getFrontFinger() {
-        return new Finger(this.parent, this, this.frame.fingers().frontmost());
+        if (this.hasFingers()) {
+            return new Finger(this.parent, this, this.frame.fingers().frontmost());
+        }
+        return null;
     }
 
     /**
      * The member of the list that is farthest to the left within the standard Leap Motion frame of reference (i.e has the smallest X coordinate).
      *
-     * @return
+     * @return Single finger or null
      */
     public Finger getLeftFinger() {
-        return new Finger(this.parent, this, this.frame.fingers().leftmost());
+        if (this.hasFingers()) {
+            return new Finger(this.parent, this, this.frame.fingers().leftmost());
+        }
+        return null;
     }
 
     /**
      * The member of the list that is farthest to the right within the standard Leap Motion frame of reference (i.e has the largest X coordinate).
      *
-     * @return
+     * @return Single finger or null
      */
     public Finger getRightFinger() {
-        return new Finger(this.parent, this, this.frame.fingers().rightmost());
+        if (this.hasFingers()) {
+            return new Finger(this.parent, this, this.frame.fingers().rightmost());
+        }
+        return null;
     }
-	
+
 
 	/* ------------------------------------------------------------------------ */
-	/* Tools */
+    /* Tools */
 
     /**
-     * Check if there is any tool.
+     * Is it a valid tool?
      *
-     * @return
+     * @param _tool Instance of com.leapmotion.leap.Tool
+     * @return Is it a valid tool?
+     */
+    private static boolean isValid(com.leapmotion.leap.Tool _tool) {
+        return _tool != null && _tool.isValid();
+    }
+
+    /**
+     * Are there any tools?
+     *
+     * @return Are there any tools?
      */
     public boolean hasTools() {
-        if (this.isConnected()) {
-            return !this.frame.tools().isEmpty();
-        }
-        return false;
+        return this.isConnected() && !this.frame.tools().isEmpty();
     }
 
     /**
      * Get a specific tool.
      *
-     * @param id
-     * @return
+     * @param id ID of a specific tool
+     * @return Single tool or null
      */
     public Tool getTool(Integer id) {
-        com.leapmotion.leap.Tool tool = this.frame.tool(id);
-        if (!LeapMotion.isNull(tool) && tool.isValid()) {
-            return new Tool(this.parent, this, tool);
+        if (this.hasTools()) {
+            com.leapmotion.leap.Tool _tool = this.frame.tool(id);
+            if (!LeapMotion.isValid(_tool)) {
+                return new Tool(this.parent, this, _tool);
+            }
         }
         return null;
     }
@@ -577,14 +647,14 @@ public class LeapMotion {
     /**
      * Get all detected tools.
      *
-     * @return
+     * @return List of tools
      */
     public ArrayList<Tool> getTools() {
         this.tools.clear();
         if (this.hasTools()) {
-            for (com.leapmotion.leap.Tool tool : this.frame.tools()) {
-                if (tool.isValid()) {
-                    tools.add(new Tool(this.parent, this, tool));
+            for (com.leapmotion.leap.Tool _tool : this.frame.tools()) {
+                if (LeapMotion.isValid(_tool)) {
+                    tools.add(new Tool(this.parent, this, _tool));
                 }
             }
         }
@@ -594,7 +664,7 @@ public class LeapMotion {
     /**
      * Get the number of detected tools.
      *
-     * @return
+     * @return List of tools
      */
     public int countTools() {
         if (this.isConnected()) {
@@ -606,40 +676,49 @@ public class LeapMotion {
     /**
      * The member of the list that is farthest to the front within the standard Leap Motion frame of reference (i.e has the smallest Z coordinate).
      *
-     * @return
+     * @return Single tool or null
      */
     public Tool getFrontTool() {
-        return new Tool(this.parent, this, this.frame.tools().frontmost());
+        if (this.hasTools()) {
+            return new Tool(this.parent, this, this.frame.tools().frontmost());
+        }
+        return null;
     }
 
     /**
      * The member of the list that is farthest to the left within the standard Leap Motion frame of reference (i.e has the smallest X coordinate).
      *
-     * @return
+     * @return Single tool or null
      */
     public Tool getLeftTool() {
-        return new Tool(this.parent, this, this.frame.tools().leftmost());
+        if (this.hasTools()) {
+            return new Tool(this.parent, this, this.frame.tools().leftmost());
+        }
+        return null;
     }
 
     /**
      * The member of the list that is farthest to the right within the standard Leap Motion frame of reference (i.e has the largest X coordinate).
      *
-     * @return
+     * @return Single tool or null
      */
     public Tool getRightTool() {
-        return new Tool(this.parent, this, this.frame.tools().rightmost());
+        if (this.hasTools()) {
+            return new Tool(this.parent, this, this.frame.tools().rightmost());
+        }
+        return null;
     }
 
 
 	/* ------------------------------------------------------------------------ */
-	/* Camera-Images */
+    /* Camera-Images */
 
     /**
-     * Enable camera images.
+     * Allow camera images.
      *
-     * @return
+     * @return LeapMotion
      */
-    public LeapMotion withCameraImages() {
+    public LeapMotion allowImages() {
         if (!this.controller.isPolicySet(Controller.PolicyFlag.POLICY_IMAGES)) {
             this.controller.setPolicy(Controller.PolicyFlag.POLICY_IMAGES);
         }
@@ -647,11 +726,22 @@ public class LeapMotion {
     }
 
     /**
-     * Disable camera images.
+     * Allow camera images.
      *
-     * @return
+     * @return LeapMotion
+     * @deprecated
      */
-    public LeapMotion withoutCameraImages() {
+    public LeapMotion withCameraImages() {
+        this.log("'withCameraImages()' is deprecated. Please use 'allowImages()'.");
+        return this.allowImages();
+    }
+
+    /**
+     * Disallow camera images.
+     *
+     * @return LeapMotion
+     */
+    public LeapMotion disallowImages() {
         if (this.controller.isPolicySet(Controller.PolicyFlag.POLICY_IMAGES)) {
             this.controller.clearPolicy(Controller.PolicyFlag.POLICY_IMAGES);
         }
@@ -659,17 +749,28 @@ public class LeapMotion {
     }
 
     /**
-     * Any raw images available?
+     * Disallow camera images.
      *
-     * @return
+     * @return LeapMotion
+     * @deprecated
+     */
+    public LeapMotion withoutCameraImages() {
+        this.log("'withoutCameraImages()' is deprecated. Please use 'disallowImages()'.");
+        return this.disallowImages();
+    }
+
+    /**
+     * Are there any raw images available?
+     *
+     * @return Are there any raw images available?
      */
     public boolean hasImages() {
         if (this.controller.isPolicySet(Controller.PolicyFlag.POLICY_IMAGES)) {
-            if (this.controller.frame().images().count() > 0) {
+            if (!this.controller.frame().images().isEmpty()) {
                 return true;
             }
         } else {
-            this.withCameraImages();
+            this.allowImages();
         }
         return false;
     }
@@ -677,30 +778,30 @@ public class LeapMotion {
     /**
      * Get all raw camera images.
      *
-     * @return
+     * @return List of images
      */
     public ArrayList<Image> getImages() {
         this.images.clear();
         if (this.hasImages()) {
-            for (com.leapmotion.leap.Image image : this.controller.frame().images()) {
-                if (Image.isValid(image)) {
-                    images.add(new Image(this.parent, this, image));
+            for (com.leapmotion.leap.Image _image : this.controller.frame().images()) {
+                if (_image.isValid()) {
+                    images.add(new Image(this.parent, this, _image));
                 }
             }
         }
         return this.images;
     }
-	
+
 	
 	/* ------------------------------------------------------------------------ */
-	/* Optimized HMD */
+    /* Optimized HMD */
 
     /**
-     * Enable optimized tracking for head mounted displays.
+     * Allow optimized tracking for head mounted displays.
      *
-     * @return
+     * @return LeapMotion
      */
-    public LeapMotion withOptimizedHdm() {
+    public LeapMotion allowHdm() {
         if (!this.controller.isPolicySet(Controller.PolicyFlag.POLICY_OPTIMIZE_HMD)) {
             this.controller.setPolicy(Controller.PolicyFlag.POLICY_OPTIMIZE_HMD);
         }
@@ -708,30 +809,52 @@ public class LeapMotion {
     }
 
     /**
-     * Disable optimized tracking for head mounted displays.
+     * Allow optimized tracking for head mounted displays.
      *
-     * @return
+     * @return LeapMotion
+     * @deprecated
      */
-    public LeapMotion withoutOptimizedHdm() {
+    public LeapMotion withOptimizedHdm() {
+        this.log("'withOptimizedHdm()' is deprecated. Please use 'allowHdm()'.");
+        return this.allowHdm();
+    }
+
+    /**
+     * Disallow optimized tracking for head mounted displays.
+     *
+     * @return LeapMotion
+     */
+    public LeapMotion disallowHdm() {
         if (this.controller.isPolicySet(Controller.PolicyFlag.POLICY_OPTIMIZE_HMD)) {
             this.controller.clearPolicy(Controller.PolicyFlag.POLICY_OPTIMIZE_HMD);
         }
         return this;
     }
-	
-	
-	/* ------------------------------------------------------------------------ */
-	/* Gesture-Recognition */
 
     /**
-     * Enable gesture recognition.
+     * Disallow optimized tracking for head mounted displays.
      *
-     * @param str
-     * @return
+     * @return LeapMotion
+     * @deprecated
      */
-    public LeapMotion withGestures(String str) {
-        str = str.trim().toUpperCase();
-        List<String> gestures = Arrays.asList(str.split("\\s*,\\s*"));
+    public LeapMotion withoutOptimizedHdm() {
+        this.log("'withoutOptimizedHdm()' is deprecated. Please use 'disallowHdm()'.");
+        return this.disallowHdm();
+    }
+
+	
+	/* ------------------------------------------------------------------------ */
+    /* Gesture-Recognition */
+
+    /**
+     * Activate gesture recognition.
+     *
+     * @param names List of gestures (e.g. "swipe, circle, screen_tap, key_tap")
+     * @return LeapMotion
+     */
+    public LeapMotion withGestures(String names) {
+        names = names.trim().toUpperCase();
+        List<String> gestures = Arrays.asList(names.split("\\s*,\\s*"));
         this.recognition = false;
         for (String gesture : gestures) {
             gesture = "TYPE_" + gesture;
@@ -755,26 +878,31 @@ public class LeapMotion {
             }
         }
         if (this.recognition) {
-//			this.parent.registerPre(this);
             this.parent.registerMethod("pre", this);
         } else {
-//			this.parent.unregisterPre(this);
             this.parent.unregisterMethod("pre", this);
         }
         return this;
+    }
+
+    public LeapMotion allowGestures(String names) {
+        return this.withGestures(names);
     }
 
     public LeapMotion withGestures() {
         return this.withGestures("swipe, circle, screen_tap, key_tap");
     }
 
+    public LeapMotion allowGestures() {
+        return this.withGestures("swipe, circle, screen_tap, key_tap");
+    }
+
     /**
-     * Disable gesture recognition.
+     * Deactivate gesture recognition.
      *
-     * @return
+     * @return LeapMotion
      */
     public LeapMotion withoutGestures() {
-//		this.parent.unregisterPre(this);
         this.parent.unregisterMethod("pre", this);
         this.recognition = false;
         return this;
@@ -788,98 +916,136 @@ public class LeapMotion {
     }
 
     /**
+     * Remove listener before destroying sketch.
+     */
+    public void dispose() {
+        this.controller.removeListener(this.listener);
+    }
+
+    /**
      * Check available gestures.
      */
     private void check() {
         if (this.isConnected() && this.recognition) {
-            for (com.leapmotion.leap.Gesture g : this.frame.gestures(this.lastFrame)) {
-                if (g.isValid()) {
+            for (com.leapmotion.leap.Gesture _g : this.frame.gestures(this.lastFrame)) {
+                if (_g.isValid()) {
                     int state = 2;
-                    switch (g.type()) {
+                    switch (_g.type()) {
                         case TYPE_CIRCLE:
-                            if (g.state() == com.leapmotion.leap.Gesture.State.STATE_START) {
+                            if (_g.state() == State.STATE_START) {
                                 state = 1;
-                            } else if (g.state() == com.leapmotion.leap.Gesture.State.STATE_STOP) {
+                            } else if (_g.state() == State.STATE_STOP) {
                                 state = 3;
                             }
-                            try {
-                                this.parent.getClass().getMethod(
-                                        "leapOnCircleGesture",
-                                        de.voidplus.leapmotion.CircleGesture.class,
-                                        int.class
-                                ).invoke(
-                                        this.parent,
-                                        new de.voidplus.leapmotion.CircleGesture(
-                                                this.parent,
-                                                this, g
-                                        ),
-                                        state
-                                );
-                            } catch (Exception e) {
-                                // e.printStackTrace();
-                            }
+                            dispatch("leapOnCircleGesture",
+                                    de.voidplus.leapmotion.CircleGesture.class, int.class,
+                                    new de.voidplus.leapmotion.CircleGesture(
+                                            this.parent,
+                                            this, _g
+                                    ),
+                                    state
+                            );
+
+//                            try {
+//                                this.parent.getClass().getMethod(
+//                                        "leapOnCircleGesture",
+//                                        de.voidplus.leapmotion.CircleGesture.class,
+//                                        int.class
+//                                ).invoke(
+//                                        this.parent,
+//                                        new de.voidplus.leapmotion.CircleGesture(
+//                                                this.parent,
+//                                                this, _g
+//                                        ),
+//                                        state
+//                                );
+//                            } catch (Exception e) {
+//                                // e.printStackTrace();
+//                            }
                             break;
                         case TYPE_SWIPE:
-                            if (g.state() == com.leapmotion.leap.Gesture.State.STATE_START) {
+                            if (_g.state() == State.STATE_START) {
                                 state = 1;
-                            } else if (g.state() == com.leapmotion.leap.Gesture.State.STATE_STOP) {
+                            } else if (_g.state() == State.STATE_STOP) {
                                 state = 3;
                             }
-                            try {
-                                this.parent.getClass().getMethod(
-                                        "leapOnSwipeGesture",
-                                        de.voidplus.leapmotion.SwipeGesture.class,
-                                        int.class
-                                ).invoke(
-                                        this.parent,
-                                        new de.voidplus.leapmotion.SwipeGesture(
-                                                this.parent,
-                                                this, g
-                                        ),
-                                        state
-                                );
-                            } catch (Exception e) {
-                                // e.printStackTrace();
-                            }
+                            dispatch("leapOnSwipeGesture",
+                                    de.voidplus.leapmotion.SwipeGesture.class, int.class,
+                                    new de.voidplus.leapmotion.SwipeGesture(
+                                            this.parent,
+                                            this, _g
+                                    ),
+                                    state
+                            );
+//                            try {
+//                                this.parent.getClass().getMethod(
+//                                        "leapOnSwipeGesture",
+//                                        de.voidplus.leapmotion.SwipeGesture.class,
+//                                        int.class
+//                                ).invoke(
+//                                        this.parent,
+//                                        new de.voidplus.leapmotion.SwipeGesture(
+//                                                this.parent,
+//                                                this, _g
+//                                        ),
+//                                        state
+//                                );
+//                            } catch (Exception e) {
+//                                // e.printStackTrace();
+//                            }
                             break;
                         case TYPE_SCREEN_TAP:
-                            if (g.state() == com.leapmotion.leap.Gesture.State.STATE_STOP) {
-                                try {
-                                    this.parent.getClass().getMethod(
-                                            "leapOnScreenTapGesture",
-                                            de.voidplus.leapmotion.ScreenTapGesture.class
-                                    ).invoke(
-                                            this.parent,
-                                            new de.voidplus.leapmotion.ScreenTapGesture(
-                                                    this.parent,
-                                                    this, g
-                                            )
-                                    );
-                                } catch (Exception e) {
-                                    // e.printStackTrace();
-                                }
+                            if (_g.state() == State.STATE_STOP) {
+                                dispatch("leapOnScreenTapGesture",
+                                        de.voidplus.leapmotion.ScreenTapGesture.class,
+                                        new de.voidplus.leapmotion.ScreenTapGesture(
+                                                this.parent,
+                                                this, _g
+                                        )
+                                );
+//                                try {
+//                                    this.parent.getClass().getMethod(
+//                                            "leapOnScreenTapGesture",
+//                                            de.voidplus.leapmotion.ScreenTapGesture.class
+//                                    ).invoke(
+//                                            this.parent,
+//                                            new de.voidplus.leapmotion.ScreenTapGesture(
+//                                                    this.parent,
+//                                                    this, _g
+//                                            )
+//                                    );
+//                                } catch (Exception e) {
+//                                    // e.printStackTrace();
+//                                }
                             }
                             break;
                         case TYPE_KEY_TAP:
-                            if (g.state() == com.leapmotion.leap.Gesture.State.STATE_STOP) {
-                                try {
-                                    this.parent.getClass().getMethod(
-                                            "leapOnKeyTapGesture",
-                                            de.voidplus.leapmotion.KeyTapGesture.class
-                                    ).invoke(
-                                            this.parent,
-                                            new de.voidplus.leapmotion.KeyTapGesture(
-                                                    this.parent,
-                                                    this, g
-                                            )
-                                    );
-                                } catch (Exception e) {
-                                    // e.printStackTrace();
-                                }
+                            if (_g.state() == State.STATE_STOP) {
+                                dispatch("leapOnKeyTapGesture",
+                                        de.voidplus.leapmotion.KeyTapGesture.class,
+                                        new de.voidplus.leapmotion.KeyTapGesture(
+                                                this.parent,
+                                                this, _g
+                                        )
+                                );
+//                                try {
+//                                    this.parent.getClass().getMethod(
+//                                            "leapOnKeyTapGesture",
+//                                            de.voidplus.leapmotion.KeyTapGesture.class
+//                                    ).invoke(
+//                                            this.parent,
+//                                            new de.voidplus.leapmotion.KeyTapGesture(
+//                                                    this.parent,
+//                                                    this, _g
+//                                            )
+//                                    );
+//                                } catch (Exception e) {
+//                                    // e.printStackTrace();
+//                                }
                             }
                             break;
                         default:
-                            System.out.println("Unknown gesture type.");
+                            this.log("Unknown gesture type.");
                             break;
                     }
                 }
@@ -888,12 +1054,11 @@ public class LeapMotion {
         }
     }
 
-
     /**
      * Set Gesture.Circle.MinRadius (Default: 5.0 mm)
      *
-     * @param mm
-     * @return
+     * @param mm Millimeters
+     * @return LeapMotion
      */
     public LeapMotion setGestureCircleMinRadius(float mm) {
         return this.setConfig("Gesture.Circle.MinRadius", mm);
@@ -902,8 +1067,8 @@ public class LeapMotion {
     /**
      * Set Gesture.Circle.MinArc (Default: 270 degrees)
      *
-     * @param degrees
-     * @return
+     * @param degrees Degrees
+     * @return LeapMotion
      */
     public LeapMotion setGestureCircleMinArc(float degrees) {
         return this.setConfig("Gesture.Circle.MinArc", PApplet.radians(degrees));
@@ -912,8 +1077,8 @@ public class LeapMotion {
     /**
      * Set Gesture.Swipe.MinLength (Default: 150 mm)
      *
-     * @param mm
-     * @return
+     * @param mm Millimeters
+     * @return LeapMotion
      */
     public LeapMotion setGestureSwipeMinLength(float mm) {
         return this.setConfig("Gesture.Swipe.MinLength", mm);
@@ -922,8 +1087,8 @@ public class LeapMotion {
     /**
      * Set Gesture.Swipe.MinVelocity (Default: 1000 mm/s)
      *
-     * @param mms
-     * @return
+     * @param mms Millimeters per second
+     * @return LeapMotion
      */
     public LeapMotion setGestureSwipeMinVelocity(float mms) {
         return this.setConfig("Gesture.Swipe.MinVelocity", mms);
@@ -932,8 +1097,8 @@ public class LeapMotion {
     /**
      * Set Gesture.KeyTap.MinDownVelocity (Default: 50 mm/s)
      *
-     * @param mms
-     * @return
+     * @param mms Millimeters per second
+     * @return LeapMotion
      */
     public LeapMotion setGestureKeyTapMinDownVelocity(float mms) {
         return this.setConfig("Gesture.KeyTap.MinDownVelocity", mms);
@@ -942,8 +1107,8 @@ public class LeapMotion {
     /**
      * Set Gesture.KeyTap.HistorySeconds (Default: 0.1 s)
      *
-     * @param s
-     * @return
+     * @param s Seconds
+     * @return LeapMotion
      */
     public LeapMotion setGestureKeyTapHistorySeconds(float s) {
         return this.setConfig("Gesture.KeyTap.HistorySeconds", s);
@@ -952,8 +1117,8 @@ public class LeapMotion {
     /**
      * Set Gesture.KeyTap.MinDistance (Default: 3.0 mm)
      *
-     * @param mm
-     * @return
+     * @param mm Millimeters
+     * @return LeapMotion
      */
     public LeapMotion setGestureKeyTapMinDistance(float mm) {
         return this.setConfig("Gesture.KeyTap.MinDistance", mm);
@@ -962,8 +1127,8 @@ public class LeapMotion {
     /**
      * Set Gesture.ScreenTap.MinForwardVelocity (Default: 50 mm/s)
      *
-     * @param mms
-     * @return
+     * @param mms Millimeters per second
+     * @return LeapMotion
      */
     public LeapMotion setGestureScreenTapMinForwardVelocity(float mms) {
         return this.setConfig("Gesture.ScreenTap.MinForwardVelocity", mms);
@@ -972,8 +1137,8 @@ public class LeapMotion {
     /**
      * Set Gesture.ScreenTap.HistorySeconds (Default: 0.1 s)
      *
-     * @param s
-     * @return
+     * @param s Seconds
+     * @return LeapMotion
      */
     public LeapMotion setGestureScreenTapHistorySeconds(float s) {
         return this.setConfig("Gesture.ScreenTap.HistorySeconds", s);
@@ -982,8 +1147,8 @@ public class LeapMotion {
     /**
      * Set Gesture.ScreenTap.MinDistance (Default: 5.0 mm)
      *
-     * @param mm
-     * @return
+     * @param mm Millimeters
+     * @return LeapMotion
      */
     public LeapMotion setGestureScreenTapMinDistance(float mm) {
         return this.setConfig("Gesture.ScreenTap.MinDistance", mm);
@@ -991,14 +1156,14 @@ public class LeapMotion {
 
 	
 	/* ------------------------------------------------------------------------ */
-	/* Configuration */
+    /* Configuration */
 
     /**
      * Set configuration parameters.
      *
-     * @param keyString
-     * @param value
-     * @return
+     * @param keyString Key
+     * @param value     Value
+     * @return LeapMotion
      */
     public LeapMotion setConfig(String keyString, int value) {
         if (this.controller.isConnected()) {
@@ -1013,9 +1178,9 @@ public class LeapMotion {
     /**
      * Set configuration parameters.
      *
-     * @param keyString
-     * @param value
-     * @return
+     * @param keyString Key
+     * @param value     Value
+     * @return LeapMotion
      */
     public LeapMotion setConfig(String keyString, float value) {
         if (this.controller.isConnected()) {
@@ -1029,9 +1194,9 @@ public class LeapMotion {
     /**
      * Set configuration parameters.
      *
-     * @param keyString
-     * @param value
-     * @return
+     * @param keyString Key
+     * @param value     Value
+     * @return LeapMotion
      */
     public LeapMotion setConfig(String keyString, boolean value) {
         if (this.controller.isConnected()) {
@@ -1045,9 +1210,9 @@ public class LeapMotion {
     /**
      * Set configuration parameters.
      *
-     * @param keyString
-     * @param value
-     * @return
+     * @param keyString Key
+     * @param value     Value
+     * @return LeapMotion
      */
     public LeapMotion setConfig(String keyString, String value) {
         if (this.controller.isConnected()) {
@@ -1060,13 +1225,13 @@ public class LeapMotion {
 
 	
 	/* ------------------------------------------------------------------------ */
-	/* Geometry */
+    /* Geometry */
 
     /**
      * Convert/map the Vector data to sketch PVector data with world settings.
      *
-     * @param position
-     * @return
+     * @param position Instance of class Vector
+     * @return PVector  version of instance Vector
      */
     protected PVector map(Vector position) {
 
@@ -1114,8 +1279,8 @@ public class LeapMotion {
     /**
      * Convert Vector to PVector without modifications
      *
-     * @param position
-     * @return
+     * @param position Instance of class Vector
+     * @return PVector  version of instance Vector
      */
     protected PVector convert(Vector position) {
         return this.move(new PVector(
@@ -1126,10 +1291,10 @@ public class LeapMotion {
     }
 
     /**
-     * Replace all elements.
+     * Move all elements.
      *
-     * @param position
-     * @return
+     * @param position Shift vector
+     * @return New position
      */
     private PVector move(PVector position) {
         if (this.origin != null) {
@@ -1139,15 +1304,15 @@ public class LeapMotion {
         }
         return position;
     }
-	
+
 	
 	/* ------------------------------------------------------------------------ */
-	/* Library */
+    /* Library */
 
     /**
-     * Method to route the callbacks.
+     * Method to invoke the callbacks.
      *
-     * @param method
+     * @param method Name of the callback
      */
     private void dispatch(final String method) {
         boolean success = false;
@@ -1161,27 +1326,77 @@ public class LeapMotion {
         } catch (Exception e) {
             // e.printStackTrace();
         } finally {
-            if (success && this.verbose) {
-                this.log("Callback " + method + "();");
+            if (success) {
+                this.log(String.format("Callback %s();", method));
             }
         }
     }
 
     /**
-     * Print debug information to the console.
+     * Method to invoke callbacks with one argument.
      *
-     * @param verbose
-     * @return
+     * @param method Name of the callback
+     * @param clazz  Class of argument
+     * @param obj    Content of argument
      */
-    public LeapMotion setVerbose(boolean verbose) {
-        this.verbose = verbose;
-        return this;
+    private void dispatch(final String method, Class clazz, Object obj) {
+        boolean success = false;
+        try {
+            this.parent.getClass().getMethod(
+                    method,
+                    clazz
+            ).invoke(
+                    this.parent,
+                    obj
+            );
+            success = true;
+        } catch (Exception e) {
+            // e.printStackTrace();
+        } finally {
+            if (success) {
+                this.log(String.format("Callback %s();", method));
+            }
+        }
+    }
+
+    /**
+     * Method to invoke callbacks with two arguments.
+     *
+     * @param method  Name of the callback
+     * @param clazz_1 Class of first argument
+     * @param clazz_2 Class of second argument
+     * @param obj_1   Content of first argument
+     * @param obj_2   Content of second argument
+     */
+    private void dispatch(final String method,
+                          Class clazz_1, Class clazz_2,
+                          Object obj_1, Object obj_2
+    ) {
+        boolean success = false;
+        try {
+            this.parent.getClass().getMethod(
+                    method,
+                    clazz_1,
+                    clazz_2
+            ).invoke(
+                    this.parent,
+                    obj_1,
+                    obj_2
+            );
+            success = true;
+        } catch (Exception e) {
+            // e.printStackTrace();
+        } finally {
+            if (success) {
+                this.log(String.format("Callback %s();", method));
+            }
+        }
     }
 
     /**
      * Get the version of the library.
      *
-     * @return
+     * @return Version number of the Processing library
      */
     public String getVersion() {
         return LeapMotion.VERSION;
@@ -1190,40 +1405,59 @@ public class LeapMotion {
     /**
      * Get the used version of the SDK.
      *
-     * @return
+     * @return Version number of the dependent SDK libraries
      */
     public String getVersionSDK() {
         return LeapMotion.SDK_VERSION;
     }
 
-    public void dispose() {
-        this.controller.removeListener(this.listener);
-    }
-
 	
 	/* ------------------------------------------------------------------------ */
-	/* Helpers */
+    /* Helpers */
+
+    /**
+     * Print debug information to the console.
+     *
+     * @param verbose Activate or deactivate the mode
+     * @return LeapMotion
+     */
+    public LeapMotion setVerbose(boolean verbose) {
+        this.verbose = verbose;
+        return this;
+    }
 
     /**
      * Log message to console.
      *
-     * @param message
-     * @param skip
+     * @param msg Message
+     * @param ns  Namespace
      */
-    private void log(String message, boolean skip) {
-        if (!skip) {
-            PApplet.println("# " + LeapMotion.NAME + ": " + message);
+    private void println(String msg, boolean ns) {
+        if (ns) {
+            PApplet.println(String.format("# %s: %s", LeapMotion.NAME, msg));
         } else {
-            PApplet.println(message);
+            PApplet.println(msg);
         }
     }
 
-    private void log(String message) {
-        this.log(message, false);
+    /**
+     * Print message to console.
+     *
+     * @param msg Message
+     */
+    private void println(String msg) {
+        this.println(msg, true);
     }
 
-    private static boolean isNull(Object object) {
-        return object == null;
+    /**
+     * Log message to console.
+     *
+     * @param msg Message
+     */
+    private void log(String msg) {
+        if (this.verbose) {
+            this.println(msg);
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package de.voidplus.leapmotion;
 
 import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
@@ -28,9 +29,9 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     }
 
     /**
-     * Reports whether it's a valid Hand object.
+     * Is it a valid Hand object?
      *
-     * @return
+     * @return Is it a valid Hand object?
      */
     @Override
     public boolean isValid() {
@@ -40,25 +41,13 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Get the raw instance of com.leapmotion.leap.Hand.
      *
-     * @return
+     * @return Raw instance of com.leapmotion.leap.Hand
      */
     @Override
     public com.leapmotion.leap.Hand getRaw() {
         return this._hand;
     }
 
-//    /**
-//     * Reports whether this is a valid Hand object.
-//     *
-//     * @return
-//     */
-//    public boolean isValid() {
-//        return this._hand.isValid();
-//    }
-//
-//    protected static boolean isValid(com.leapmotion.leap.Hand _hand) {
-//        return _hand.isValid();
-//    }
 
 	/* ------------------------------------------------------------------------ */
     /* HAND */
@@ -66,7 +55,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Get the unique ID.
      *
-     * @return
+     * @return ID
      */
     public int getId() {
         return this._hand.id();
@@ -75,7 +64,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * The center position of the palm in millimeters.
      *
-     * @return
+     * @return Position
      */
     public PVector getPosition() {
         return this.leap.map(this._hand.palmPosition());
@@ -84,7 +73,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Raw data of the center position.
      *
-     * @return
+     * @return Raw position
      */
     public PVector getRawPosition() {
         return this.leap.convert(this._hand.palmPosition());
@@ -93,7 +82,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * The center position of the palm in millimeters.
      *
-     * @return
+     * @return Position
      */
     public PVector getPalmPosition() {
         return this.getPosition();
@@ -102,7 +91,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * The stabilized center position of the palm in millimeters.
      *
-     * @return
+     * @return Position
      */
     public PVector getStabilizedPosition() {
         return this.leap.map(this._hand.stabilizedPalmPosition());
@@ -111,7 +100,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * The stabilized center position of the palm in millimeters.
      *
-     * @return
+     * @return Position
      */
     public PVector getStabilizedPalmPosition() {
         return this.getStabilizedPosition();
@@ -120,7 +109,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Raw data of the stabilized center position.
      *
-     * @return
+     * @return Position
      */
     public PVector getRawStabilizedPosition() {
         return this.leap.convert(this._hand.stabilizedPalmPosition());
@@ -129,7 +118,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Raw data of the stabilized center position.
      *
-     * @return
+     * @return Raw position
      */
     public PVector getRawStabilizedParlmPosition() {
         return this.getRawStabilizedPosition();
@@ -138,7 +127,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * The direction from the palm position toward the fingers.
      *
-     * @return
+     * @return Direction
      */
     public PVector getDirection() {
         return this.leap.map(this._hand.direction());
@@ -147,41 +136,41 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Raw data of the direction from the palm position toward the fingers.
      *
-     * @return
+     * @return Raw direction
      */
     public PVector getRawDirection() {
         return this.leap.convert(this._hand.direction());
     }
 
     /**
-     * How confident we are with a given _hand pose. The confidence level ranges between 0.0 and 1.0 inclusive.
+     * How confident we are with a given hand pose. The confidence level ranges between 0.0 and 1.0 inclusive.
      *
-     * @return
+     * @return Confidence level ranges between 0.0 and 1.0
      */
     public float getConfidence() {
         return this._hand.confidence();
     }
 
     /**
-     * Identifies whether this Hand is a left _hand.
+     * Identifies whether this Hand is a left hand.
      *
-     * @return True if the _hand is identified as a left _hand.
+     * @return True if the hand is identified as a left hand.
      */
     public boolean isLeft() {
         return this._hand.isLeft();
     }
 
     /**
-     * Identifies whether this Hand is a right _hand.
+     * Identifies whether this Hand is a right hand.
      *
-     * @return True if the _hand is identified as a right _hand.
+     * @return True if the hand is identified as a right hand.
      */
     public boolean isRight() {
         return this._hand.isRight();
     }
 
     /**
-     * The strength of a grab _hand pose. The strength is zero for an open _hand, and blends to 1.0 when a grabbing _hand pose is recognized.
+     * The strength of a grab hand pose. The strength is zero for an open hand, and blends to 1.0 when a grabbing hand pose is recognized.
      *
      * @return A float value in the [0..1] range representing the holding strength of the pose.
      */
@@ -190,7 +179,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     }
 
     /**
-     * The holding strength of a pinch _hand pose. The strength is zero for an open _hand, and blends to 1.0 when a pinching _hand pose is recognized. Pinching can be done between the thumb and any other finger of the same _hand.
+     * The holding strength of a pinch hand pose. The strength is zero for an open hand, and blends to 1.0 when a pinching hand pose is recognized. Pinching can be done between the thumb and any other finger of the same hand.
      *
      * @return A float value in the [0..1] range representing the holding strength of the pinch pose.
      */
@@ -201,7 +190,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * The duration of time this Hand has been visible to the Leap Motion Controller.
      *
-     * @return
+     * @return Duration
      */
     public float getTimeVisible() {
         return this._hand.timeVisible();
@@ -210,7 +199,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * The member of the list that is farthest to the front within the standard Leap Motion frame of reference (i.e has the smallest Z coordinate).
      *
-     * @return
+     * @return Single finger
      */
     public Finger getFrontFinger() {
         return new Finger(this.parent, this.leap, this._hand.fingers().frontmost());
@@ -219,7 +208,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * The member of the list that is farthest to the left within the standard Leap Motion frame of reference (i.e has the smallest X coordinate).
      *
-     * @return
+     * @return Single finger
      */
     public Finger getLeftFinger() {
         return new Finger(this.parent, this.leap, this._hand.fingers().leftmost());
@@ -228,7 +217,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * The member of the list that is farthest to the right within the standard Leap Motion frame of reference (i.e has the largest X coordinate).
      *
-     * @return
+     * @return Single finger
      */
     public Finger getRightFinger() {
         return new Finger(this.parent, this.leap, this._hand.fingers().rightmost());
@@ -237,7 +226,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * The member of the list that is farthest to the front within the standard Leap Motion frame of reference (i.e has the smallest Z coordinate).
      *
-     * @return
+     * @return Single tool
      */
     public Tool getFrontTool() {
         return new Tool(this.parent, this.leap, this._hand.tools().frontmost());
@@ -246,7 +235,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * The member of the list that is farthest to the left within the standard Leap Motion frame of reference (i.e has the smallest X coordinate).
      *
-     * @return
+     * @return Single tool
      */
     public Tool getLeftTool() {
         return new Tool(this.parent, this.leap, this._hand.tools().leftmost());
@@ -255,7 +244,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * The member of the list that is farthest to the right within the standard Leap Motion frame of reference (i.e has the largest X coordinate).
      *
-     * @return
+     * @return Single tool
      */
     public Tool getRightTool() {
         return new Tool(this.parent, this.leap, this._hand.tools().rightmost());
@@ -263,12 +252,12 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
 
 	
 	/* ------------------------------------------------------------------------ */
-	/* FLIGHT-DYNAMICS */
+    /* FLIGHT-DYNAMICS */
 
     /**
-     * Get the angles of the _hand (x=roll, y=pich, z=yaw).
+     * Get the angles of the hand (x=roll, y=pich, z=yaw).
      *
-     * @return
+     * @return Angles
      */
     public PVector getDynamics() {
         return new PVector(this.getRoll(), this.getPitch(), this.getYaw());
@@ -277,7 +266,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Get the roll angle (x).
      *
-     * @return
+     * @return Single angle
      */
     public float getRoll() {
         return PApplet.degrees(this._hand.direction().pitch());
@@ -286,7 +275,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Get the pitch angle (y).
      *
-     * @return
+     * @return Single angle
      */
     public float getPitch() {
         return -PApplet.degrees(this._hand.palmNormal().roll());
@@ -295,7 +284,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Get the yaw angle (z).
      *
-     * @return
+     * @return Single angle
      */
     public float getYaw() {
         return PApplet.degrees(this._hand.direction().yaw());
@@ -306,9 +295,9 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
 	/* SPHERE */
 
     /**
-     * The center of a sphere fit to the curvature of this _hand.
+     * The center of a sphere fit to the curvature of this hand.
      *
-     * @return
+     * @return Position
      */
     public PVector getSpherePosition() {
         return this.leap.map(this._hand.sphereCenter());
@@ -317,7 +306,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Raw data of the center of a sphere fit to the curvature of this _hand.
      *
-     * @return
+     * @return Raw position
      */
     public PVector getRawSpherePosition() {
         return this.leap.convert(this._hand.sphereCenter());
@@ -326,7 +315,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * The radius of a sphere fit to the curvature of this _hand.
      *
-     * @return
+     * @return Radius
      */
     public float getSphereRadius() {
         return this._hand.sphereRadius();
@@ -339,7 +328,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Get all detected fingers of the _hand.
      *
-     * @return
+     * @return List of fingers
      */
     public ArrayList<Finger> getFingers() {
         fingers.clear();
@@ -352,11 +341,11 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     }
 
     /**
-     * Get all outstrechted fingers.
+     * Get all outstretched fingers.
      *
-     * @return
+     * @return List of fingers
      */
-    public ArrayList<Finger> getOutstrechtedFingers() {
+    public ArrayList<Finger> getOutstretchedFingers() {
         this.outstretchedFingers.clear();
         if (!this._hand.fingers().extended().isEmpty()) {
             for (com.leapmotion.leap.Finger finger : this._hand.fingers().extended()) {
@@ -367,21 +356,21 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     }
 
     /**
-     * Get all outstrechted fingers.
+     * Get all outstretched fingers.
      *
-     * @return
+     * @return List of fingers
      */
-    public ArrayList<Finger> getOutstrechtedFingers(int ignoreForBackwardsCompatibility) {
-        return this.getOutstrechtedFingers();
+    public ArrayList<Finger> getOutstretchedFingers(int ignoreForBackwardsCompatibility) {
+        return this.getOutstretchedFingers();
     }
 
     /**
-     * Get all outstrechted fingers by angle.
+     * Get all outstretched fingers by angle.
      *
-     * @param similarity Minimum value of similarity.
-     * @return
+     * @param similarity Minimum value of similarity
+     * @return List of fingers
      */
-    public ArrayList<Finger> getOutstrechtedFingersByAngel(int similarity) {
+    public ArrayList<Finger> getOutstretchedFingersByAngel(int similarity) {
         this.outstretchedFingersByAngel.clear();
         if (this.hasFingers()) {
             for (com.leapmotion.leap.Finger finger : this._hand.fingers()) {
@@ -413,16 +402,16 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Get all outstrechted fingers with 75% likelihood by angel.
      *
-     * @return
+     * @return List of fingers
      */
-    public ArrayList<Finger> getOutstrechtedFingersByAngel() {
-        return this.getOutstrechtedFingersByAngel(75);
+    public ArrayList<Finger> getOutstretchedFingersByAngel() {
+        return this.getOutstretchedFingersByAngel(75);
     }
 
     /**
      * Get all raw outstrechted fingers.
      *
-     * @return
+     * @return List of fingers
      */
     public ArrayList<Finger> getRawOutstrechtedFingers() {
         this.outstretchedFingers.clear();
@@ -431,21 +420,18 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     }
 
     /**
-     * Check if there is any finger.
+     * Is there any finger?
      *
-     * @return
+     * @return Is there any finger?
      */
     public boolean hasFingers() {
-        if (this.leap.isConnected()) {
-            return !this._hand.fingers().isEmpty();
-        }
-        return false;
+        return this.leap.isConnected() && !this._hand.fingers().isEmpty();
     }
 
     /**
      * Get the number of fingers.
      *
-     * @return
+     * @return Number of fingers
      */
     public int countFingers() {
         if (this.leap.isConnected()) {
@@ -458,7 +444,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
      * Get a specific finger by id.
      *
      * @param type 0:TYPE_THUMB, 1:TYPE_INDEX, 2:TYPE_MIDDLE, 3:TYPE_RING, 4:TYPE_PINKY
-     * @return
+     * @return Single finger or null
      */
     public Finger getFinger(int type) {
         for (Finger finger : this.getFingers()) {
@@ -473,7 +459,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
      * Get a specific finger by name.
      *
      * @param name "thumb", "index", "middle", "ring", "pinky"
-     * @return
+     * @return Single finger or null
      */
     public Finger getFinger(String name) {
         name = name.toLowerCase();
@@ -494,7 +480,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Get the thumb finger.
      *
-     * @return
+     * @return Single finger or null
      */
     public Finger getThumb() {
         return this.getFinger(0);
@@ -503,7 +489,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Get the index finger.
      *
-     * @return
+     * @return Single finger or null
      */
     public Finger getIndexFinger() {
         return this.getFinger(1);
@@ -512,7 +498,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Get the middle finger.
      *
-     * @return
+     * @return Single finger or null
      */
     public Finger getMiddleFinger() {
         return this.getFinger(2);
@@ -521,7 +507,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Get the ring finger.
      *
-     * @return
+     * @return Single finger or null
      */
     public Finger getRingFinger() {
         return this.getFinger(3);
@@ -530,7 +516,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Get the pinky/little finger.
      *
-     * @return
+     * @return Single finger or null
      */
     public Finger getPinkyFinger() {
         return this.getFinger(4);
@@ -541,9 +527,9 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
 	/* TOOLS */
 
     /**
-     * Get all detected tools of the _hand.
+     * Get all detected tools of the hand.
      *
-     * @return
+     * @return List of tools
      */
     public ArrayList<Tool> getTools() {
         tools.clear();
@@ -556,9 +542,9 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     }
 
     /**
-     * Check if there is any tool.
+     * Is there any tool?
      *
-     * @return
+     * @return Is there any tool?
      */
     public boolean hasTools() {
         if (this.leap.isConnected()) {
@@ -570,7 +556,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     /**
      * Get the number of tools.
      *
-     * @return
+     * @return Number of tools
      */
     public int countTools() {
         if (this.leap.isConnected()) {
@@ -584,18 +570,18 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
 	/* ARM */
 
     /**
-     * Get arm of the _hand.
+     * Get arm of the hand.
      *
-     * @return
+     * @return Single arm
      */
     public Arm getArm() {
         return new Arm(this.parent, this.leap, this._hand.arm());
     }
 
     /**
-     * Check if _hand has valid arm.
+     * Is there any arm?
      *
-     * @return
+     * @return Is there any arm?
      */
     public boolean hasArm() {
         return this._hand.arm().isValid();
@@ -606,7 +592,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
 	/* DRAWING */
 
     /**
-     * Draw the _hand with all details.
+     * Draw the hand with all details.
      *
      * @param radius The radius of the ellipse (2D) or sphere (3D).
      */
@@ -664,7 +650,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     }
 
     /**
-     * Draw all fingers of the _hand.
+     * Draw all fingers of the hand.
      *
      * @param radius The radius of the ellipse (2D) or sphere (3D).
      */
@@ -689,9 +675,9 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     }
 
     /**
-     * Draw the sphere of the _hand.
+     * Draw the sphere of the hand.
      *
-     * @param pre
+     * @param pre Activate or deactivate predefined colors
      */
     public void drawSphere(boolean pre) {
         if (pre) {
@@ -714,6 +700,9 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
         }
     }
 
+    /**
+     * Draw the sphere of the hand.
+     */
     public void drawSphere() {
         this.drawSphere(true);
     }

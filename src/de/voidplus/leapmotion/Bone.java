@@ -1,6 +1,7 @@
 package de.voidplus.leapmotion;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PVector;
 
 
@@ -17,9 +18,9 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
     }
 
     /**
-     * Reports whether it's a valid Bone object.
+     * Is it a valid Bone object?
      *
-     * @return
+     * @return Is it a valid Bone object?
      */
     @Override
     public boolean isValid() {
@@ -29,30 +30,17 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
     /**
      * Get the raw instance of com.leapmotion.leap.Bone.
      *
-     * @return
+     * @return Raw instance of Bone
      */
     @Override
     public com.leapmotion.leap.Bone getRaw() {
         return this._bone;
     }
 
-//    /**
-//     * Reports whether it'a valid Bone object.
-//     *
-//     * @return
-//     */
-//    public boolean isValid() {
-//        return this._bone.isValid();
-//    }
-//
-//    protected static boolean isValid(com.leapmotion.leap.Bone bone) {
-//        return bone.isValid();
-//    }
-
     /**
-     * Get the index of _bone (0-3, 0=distal, 1=intermediate, 2=proximal, 3=metacarpal).
+     * Get the kind of bone (0-3, 0=distal, 1=intermediate, 2=proximal, 3=metacarpal).
      *
-     * @return
+     * @return Kind of bone
      */
     public int getType() {
         com.leapmotion.leap.Bone.Type type = this._bone.type();
@@ -70,18 +58,18 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
     }
 
     /**
-     * Get the length of this _bone.
+     * Get the length of this bone.
      *
-     * @return
+     * @return Length
      */
     public float getBoneLength() {
         return this._bone.length();
     }
 
     /**
-     * Get the width of this _bone.
+     * Get the width of this bone.
      *
-     * @return
+     * @return Width
      */
     public float getBoneWidth() {
         return this._bone.width();
@@ -90,7 +78,7 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
     /**
      * Get the next joint position.
      *
-     * @return
+     * @return Position
      */
     public PVector getNextJoint() {
         return this.leap.map(this._bone.nextJoint());
@@ -99,7 +87,7 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
     /**
      * Get the raw next joint position.
      *
-     * @return
+     * @return Raw position
      */
     public PVector getRawNextJoint() {
         return this.leap.convert(this._bone.nextJoint());
@@ -108,7 +96,7 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
     /**
      * Get the previous joint position.
      *
-     * @return
+     * @return Position
      */
     public PVector getPrevJoint() {
         return this.leap.map(this._bone.prevJoint());
@@ -117,7 +105,7 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
     /**
      * Get the raw previous joint position.
      *
-     * @return
+     * @return Raw position
      */
     public PVector getRawPrevJoint() {
         return this.leap.convert(this._bone.prevJoint());
@@ -126,7 +114,7 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
     /**
      * The direction.
      *
-     * @return
+     * @return Direction
      */
     public PVector getDirection() {
         return this.leap.map(this._bone.direction());
@@ -135,7 +123,7 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
     /**
      * Raw data of the direction.
      *
-     * @return
+     * @return Raw direction
      */
     public PVector getRawDirection() {
         return this.leap.convert(this._bone.direction());
@@ -144,7 +132,7 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
     /**
      * Draw all bones.
      *
-     * @param pre
+     * @param pre Activate or deactivate the predefined colors
      */
     public void draw(boolean pre) {
         if (pre) {
@@ -155,7 +143,7 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
         PVector next = this.getNextJoint();
         PVector prev = this.getPrevJoint();
 
-        this.parent.beginShape(this.parent.LINES);
+        this.parent.beginShape(PConstants.LINES);
         if (this.parent.g.is2D()) {
             this.parent.vertex(next.x, next.y);
             this.parent.vertex(prev.x, prev.y);
@@ -163,9 +151,12 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
             this.parent.vertex(next.x, next.y, next.z);
             this.parent.vertex(prev.x, prev.y, prev.z);
         }
-        this.parent.endShape(this.parent.OPEN);
+        this.parent.endShape(PConstants.OPEN);
     }
 
+    /**
+     * Draw all bones with predefined colors.
+     */
     public void draw() {
         this.draw(true);
     }

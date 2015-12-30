@@ -19,7 +19,7 @@ public class Pointable {
     /**
      * Get the unique ID.
      *
-     * @return
+     * @return ID
      */
     public int getId() {
         return this._pointable.id();
@@ -28,7 +28,7 @@ public class Pointable {
     /**
      * The tip position in millimeters.
      *
-     * @return
+     * @return Position
      */
     public PVector getPosition() {
         return this.leap.map(this._pointable.tipPosition());
@@ -37,7 +37,7 @@ public class Pointable {
     /**
      * Raw data of the tip position.
      *
-     * @return
+     * @return Raw position
      */
     public PVector getRawPosition() {
         return this.leap.convert(this._pointable.tipPosition());
@@ -46,7 +46,7 @@ public class Pointable {
     /**
      * The stabilized tip position in millimeters.
      *
-     * @return
+     * @return Position
      */
     public PVector getStabilizedPosition() {
         return this.leap.map(this._pointable.stabilizedTipPosition());
@@ -55,7 +55,7 @@ public class Pointable {
     /**
      * Raw data of the stabilized tip position.
      *
-     * @return
+     * @return Position
      */
     public PVector getRawStabilizedPosition() {
         return this.leap.convert(this._pointable.tipPosition());
@@ -64,7 +64,7 @@ public class Pointable {
     /**
      * The rate of change of the tip position in millimeters/second.
      *
-     * @return
+     * @return Position
      */
     public PVector getVelocity() {
         return this.leap.map(this._pointable.tipVelocity());
@@ -73,7 +73,7 @@ public class Pointable {
     /**
      * Raw data of the rate of change of the tip position.
      *
-     * @return
+     * @return Velocity
      */
     public PVector getRawVelocity() {
         return this.leap.convert(this._pointable.tipVelocity());
@@ -82,7 +82,7 @@ public class Pointable {
     /**
      * The direction in which this finger is pointing.
      *
-     * @return
+     * @return Direction
      */
     public PVector getDirection() {
         return new PVector(
@@ -135,7 +135,7 @@ public class Pointable {
     /**
      * The estimated length of the finger or tool in millimeters.
      *
-     * @return
+     * @return Length
      */
     public float getLength() {
         return this._pointable.length();
@@ -144,16 +144,26 @@ public class Pointable {
     /**
      * The duration of time this Pointable has been visible to the Leap Motion Controller.
      *
-     * @return
+     * @return Duration of visibility
      */
     public float getTimeVisible() {
         return this._pointable.timeVisible();
     }
 
+    /**
+     * Is this a finger?
+     *
+     * @return Is this a finger?
+     */
     protected boolean isFinger() {
         return this._pointable.isFinger();
     }
 
+    /**
+     * Is this a tool?
+     *
+     * @return Is this a tool?
+     */
     protected boolean isTool() {
         return this._pointable.isTool();
     }

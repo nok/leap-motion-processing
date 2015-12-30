@@ -35,9 +35,9 @@ public class Image extends PImage implements RawAccess<com.leapmotion.leap.Image
     }
 
     /**
-     * Reports whether it's a valid Image object.
+     * Is it a valid Image object?
      *
-     * @return
+     * @return Is it a valid Image object?
      */
     @Override
     public boolean isValid() {
@@ -47,7 +47,7 @@ public class Image extends PImage implements RawAccess<com.leapmotion.leap.Image
     /**
      * Get the raw instance of com.leapmotion.leap.Image.
      *
-     * @return
+     * @return Raw instance of com.leapmotion.leap.Image
      */
     @Override
     public com.leapmotion.leap.Image getRaw() {
@@ -55,64 +55,48 @@ public class Image extends PImage implements RawAccess<com.leapmotion.leap.Image
     }
 
     /**
-     * Is it a valid instance of class Image?
+     * Get image width.
      *
-     * @param image
-     * @return
-     */
-    protected static boolean isValid(com.leapmotion.leap.Image image) {
-        return image.isValid();
-    }
-
-    /**
-     * Get _image width.
-     *
-     * @return
+     * @return Width
      */
     public int getWidth() {
         return this.width;
     }
 
     /**
-     * Get _image height.
+     * Get image height.
      *
-     * @return
+     * @return Height
      */
     public int getHeight() {
         return this.height;
     }
 
     /**
-     * Get the id of _image.
+     * Get the id of image.
      *
-     * @return
+     * @return ID
      */
     public int getId() {
         return this.id;
     }
 
     /**
-     * Is that the left camera?
+     * Is this the left camera?
      *
-     * @return
+     * @return Is this the left camera?
      */
     public boolean isLeft() {
-        if (this.getId() == 1) {
-            return true;
-        }
-        return false;
+        return this.getId() == 1;
     }
 
     /**
-     * Is that the right camera?
+     * Is this the right camera?
      *
-     * @return
+     * @return Is this the right camera?
      */
     public boolean isRight() {
-        if (this.getId() == 0) {
-            return true;
-        }
-        return false;
+        return this.getId() == 0;
     }
 
 }

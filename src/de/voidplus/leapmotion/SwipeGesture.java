@@ -16,7 +16,7 @@ public class SwipeGesture extends Gesture implements RawAccess<com.leapmotion.le
     /**
      * Get the raw instance of com.leapmotion.leap.SwipeGesture.
      *
-     * @return
+     * @return Raw instance of com.leapmotion.leap.SwipeGesture
      */
     @Override
     public com.leapmotion.leap.SwipeGesture getRaw() {
@@ -24,76 +24,79 @@ public class SwipeGesture extends Gesture implements RawAccess<com.leapmotion.le
     }
 
     /**
-     * The current position of the _swipe.
+     * The current position of the swipe.
      *
-     * @return
+     * @return Position
      */
     public PVector getPosition() {
         return this.leap.map(this._swipe.position());
     }
 
     /**
-     * Raw data of the current position of the _swipe.
+     * Raw data of the current position of the swipe.
      *
-     * @return
+     * @return Raw position
      */
     public PVector getRawPosition() {
         return this.leap.convert(this._swipe.position());
     }
 
     /**
-     * The position where the _swipe began.
+     * The position where the swipe began.
      *
-     * @return
+     * @return Position
      */
     public PVector getStartPosition() {
         return this.leap.map(this._swipe.startPosition());
     }
 
     /**
-     * Raw data of the position where the _swipe began.
+     * Raw data of the position where the swipe began.
      *
-     * @return
+     * @return Raw position
      */
     public PVector getRawStartPosition() {
         return this.leap.convert(this._swipe.startPosition());
     }
 
     /**
-     * The unit direction vector parallel to the _swipe motion.
+     * The unit direction vector parallel to the swipe motion.
      *
-     * @return
+     * @return Direction
      */
     public PVector getDirection() {
         return this.leap.map(this._swipe.direction());
     }
 
     /**
-     * Raw data of the unit direction vector parallel to the _swipe motion.
+     * Raw data of the unit direction vector parallel to the swipe motion.
      *
-     * @return
+     * @return Raw direction
      */
     public PVector getRawDirection() {
         return this.leap.convert(this._swipe.direction());
     }
 
     /**
-     * The _swipe speed in mm/second.
+     * The swipe speed in mm/second.
      *
-     * @return
+     * @return Speed
      */
     public float getSpeed() {
         return this._swipe.speed();
     }
 
     /**
-     * The finger performing the _swipe gesture.
+     * The finger performing the swipe gesture.
      *
-     * @return
+     * @return Single finger or null
      */
     public Finger getFinger() {
         if (this._swipe.pointable().isFinger()) {
-            return new Finger(this.parent, this.leap, new com.leapmotion.leap.Finger(this._swipe.pointable()));
+            return new Finger(
+                    this.parent, this.leap,
+                    new com.leapmotion.leap.Finger(this._swipe.pointable())
+            );
         }
         return null;
     }

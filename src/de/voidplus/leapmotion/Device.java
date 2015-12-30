@@ -16,9 +16,9 @@ public class Device implements RawAccess<com.leapmotion.leap.Device> {
     }
 
     /**
-     * Reports whether it's a valid Bone object.
+     * Is it a valid Device object?
      *
-     * @return
+     * @return Is it a valid Device object?
      */
     @Override
     public boolean isValid() {
@@ -28,7 +28,7 @@ public class Device implements RawAccess<com.leapmotion.leap.Device> {
     /**
      * Get the raw instance of com.leapmotion.leap.Device.
      *
-     * @return
+     * @return Raw instance of com.leapmotion.leap.Device
      */
     @Override
     public com.leapmotion.leap.Device getRaw() {

@@ -1,6 +1,7 @@
 package de.voidplus.leapmotion;
 
 import java.util.ArrayList;
+
 import processing.core.PApplet;
 
 
@@ -17,9 +18,9 @@ public abstract class Gesture {
     }
 
     /**
-     * Reports whether this is a valid Gesture object.
+     * Is it a valid Gesture object?
      *
-     * @return
+     * @return Is it a valid Gesture object?
      */
     public boolean isValid() {
         return this._gesture.isValid();
@@ -28,16 +29,16 @@ public abstract class Gesture {
     /**
      * Get the unique ID.
      *
-     * @return
+     * @return ID
      */
     public int getId() {
         return this._gesture.id();
     }
 
     /**
-     * Get the type index of a _gesture.
+     * Get the type index of a gesture.
      *
-     * @return
+     * @return Type of gesture
      */
     public int getType() {
         if (this.isValid()) {
@@ -57,13 +58,14 @@ public abstract class Gesture {
         return -1;
     }
 
+
 	/* ------------------------------------------------------------------------ */
     /* DURATION */
 
     /**
      * The elapsed duration of the recognized movement up to the frame containing this Gesture object, in microseconds.
      *
-     * @return
+     * @return Microseconds
      */
     public long getDuration() {
         return this._gesture.duration();
@@ -72,7 +74,7 @@ public abstract class Gesture {
     /**
      * The elapsed duration in seconds.
      *
-     * @return
+     * @return Seconds
      */
     public float getDurationInSeconds() {
         return this._gesture.durationSeconds();
@@ -80,21 +82,33 @@ public abstract class Gesture {
 
 
 	/* ------------------------------------------------------------------------ */
-	/* HAND */
+    /* HAND */
 
     /**
-     * Check if there is any hand.
+     * Is there any hand?
      *
-     * @return
+     * @return Is there any hand?
      */
     public boolean hasHands() {
         return !this._gesture.hands().isEmpty();
     }
 
     /**
+     * Get the number of detected hands.
+     *
+     * @return Number of hands
+     */
+    public int countHands() {
+        if (this.hasHands()) {
+            return this._gesture.hands().count();
+        }
+        return 0;
+    }
+
+    /**
      * Get all detected hands.
      *
-     * @return
+     * @return List of hands
      */
     public ArrayList<Hand> getHands() {
         ArrayList<Hand> hands = new ArrayList<Hand>();
@@ -104,18 +118,6 @@ public abstract class Gesture {
             }
         }
         return hands;
-    }
-
-    /**
-     * Get the number of detected hands.
-     *
-     * @return
-     */
-    public int countHands() {
-        if (this.hasHands()) {
-            return this._gesture.hands().count();
-        }
-        return 0;
     }
 
 }

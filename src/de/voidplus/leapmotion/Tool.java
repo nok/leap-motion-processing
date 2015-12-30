@@ -18,9 +18,9 @@ public class Tool extends Pointable implements RawAccess<com.leapmotion.leap.Too
     }
 
     /**
-     * Reports whether it's a valid Tool object.
+     * Is it a valid Tool object?
      *
-     * @return
+     * @return Is it a valid Tool object?
      */
     @Override
     public boolean isValid() {
@@ -30,7 +30,7 @@ public class Tool extends Pointable implements RawAccess<com.leapmotion.leap.Too
     /**
      * Get the raw instance of com.leapmotion.leap.Finger.
      *
-     * @return
+     * @return Raw instance of com.leapmotion.leap.Finger
      */
     @Override
     public com.leapmotion.leap.Tool getRaw() {
@@ -40,7 +40,7 @@ public class Tool extends Pointable implements RawAccess<com.leapmotion.leap.Too
     /**
      * Get the position of tip.
      *
-     * @return
+     * @return Position
      */
     public PVector getTipPosition() {
         return this.leap.map(this._tool.tipPosition());
@@ -49,7 +49,7 @@ public class Tool extends Pointable implements RawAccess<com.leapmotion.leap.Too
     /**
      * Raw data of tip position.
      *
-     * @return
+     * @return Raw position
      */
     public PVector getRawTipPosition() {
         return this.leap.convert(this._tool.tipPosition());
@@ -57,7 +57,7 @@ public class Tool extends Pointable implements RawAccess<com.leapmotion.leap.Too
 
 
 	/* ------------------------------------------------------------------------ */
-	/* DRAWING */
+    /* DRAWING */
 
     /**
      * Draw the finger with all details.
@@ -97,6 +97,9 @@ public class Tool extends Pointable implements RawAccess<com.leapmotion.leap.Too
         }
     }
 
+    /**
+     * Draw the finger with all details.
+     */
     public void draw() {
         this.draw(5);
     }

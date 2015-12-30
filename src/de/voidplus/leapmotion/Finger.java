@@ -1,6 +1,5 @@
 package de.voidplus.leapmotion;
 
-import com.leapmotion.leap.Finger.Joint;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
@@ -8,7 +7,6 @@ import processing.core.PVector;
 
 public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.Finger> {
 
-    protected Joint Joint;
     private com.leapmotion.leap.Finger _finger;
 
     public Finger(PApplet parent, LeapMotion leap, com.leapmotion.leap.Finger _finger) {
@@ -17,9 +15,9 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
     }
 
     /**
-     * Reports whether it's a valid Finger object.
+     * Is it a valid Finger object?
      *
-     * @return
+     * @return Is it a valid Finger object?
      */
     @Override
     public boolean isValid() {
@@ -29,7 +27,7 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
     /**
      * Get the raw instance of com.leapmotion.leap.Finger.
      *
-     * @return
+     * @return Raw instance of com.leapmotion.leap.Finger
      */
     @Override
     public com.leapmotion.leap.Finger getRaw() {
@@ -37,81 +35,97 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
     }
 
     /**
-     * The _finger tip position in millimeters.
+     * The finger tip position in millimeters.
      *
-     * @return
+     * @return Position
      */
     public PVector getPositionOfJointTip() {
-        return this.leap.map(this._finger.jointPosition(com.leapmotion.leap.Finger.Joint.JOINT_TIP));
+        return this.leap.map(this._finger.jointPosition(
+                com.leapmotion.leap.Finger.Joint.JOINT_TIP)
+        );
     }
 
     /**
      * The mcp joint position in millimeters.
      *
-     * @return
+     * @return Position
      */
     public PVector getPositionOfJointMcp() {
-        return this.leap.map(this._finger.jointPosition(Joint.JOINT_MCP));
+        return this.leap.map(this._finger.jointPosition(
+                com.leapmotion.leap.Finger.Joint.JOINT_MCP)
+        );
     }
 
     /**
      * The pip joint position in millimeters.
      *
-     * @return
+     * @return Position
      */
     public PVector getPositionOfJointPip() {
-        return this.leap.map(this._finger.jointPosition(Joint.JOINT_PIP));
+        return this.leap.map(this._finger.jointPosition(
+                com.leapmotion.leap.Finger.Joint.JOINT_PIP)
+        );
     }
 
     /**
      * The dip joint position in millimeters.
      *
-     * @return
+     * @return Position
      */
     public PVector getPositionOfJointDip() {
-        return this.leap.map(this._finger.jointPosition(Joint.JOINT_DIP));
+        return this.leap.map(this._finger.jointPosition(
+                com.leapmotion.leap.Finger.Joint.JOINT_DIP)
+        );
     }
 
     /**
-     * Raw data of the _finger tip position.
+     * Raw data of the finger tip position.
      *
-     * @return
+     * @return Raw position
      */
     public PVector getRawPositionOfJointTip() {
-        return this.leap.convert(this._finger.jointPosition(Joint.JOINT_TIP));
+        return this.leap.convert(this._finger.jointPosition(
+                com.leapmotion.leap.Finger.Joint.JOINT_TIP)
+        );
     }
 
     /**
      * Raw data of the mcp joint position.
      *
-     * @return
+     * @return Raw position
      */
     public PVector getRawPositionOfJointMcp() {
-        return this.leap.convert(this._finger.jointPosition(Joint.JOINT_MCP));
+        return this.leap.convert(this._finger.jointPosition(
+                com.leapmotion.leap.Finger.Joint.JOINT_MCP)
+        );
     }
 
     /**
      * Raw data of the pip joint position.
      *
-     * @return
+     * @return Raw position
      */
     public PVector getRawPositionOfJointPip() {
-        return this.leap.convert(this._finger.jointPosition(Joint.JOINT_PIP));
+        return this.leap.convert(this._finger.jointPosition(
+                com.leapmotion.leap.Finger.Joint.JOINT_PIP)
+        );
     }
 
     /**
      * Raw data of the dip joint position.
      *
-     * @return
+     * @return Raw position
      */
     public PVector getRawPositionOfJointDip() {
-        return this.leap.convert(this._finger.jointPosition(Joint.JOINT_DIP));
+        return this.leap.convert(this._finger.jointPosition(
+                com.leapmotion.leap.Finger.Joint.JOINT_DIP)
+        );
     }
 
     /**
      * Get the index of fingertype (0-4, 0=thumb, 1=index, 2=middle, 3=ring, 4=pinky).
      *
-     * @return
+     * @return Type of index
      */
     public int getType() {
         com.leapmotion.leap.Finger.Type type = this._finger.type();
@@ -134,18 +148,22 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
      * Get a specific bone by name.
      *
      * @param name "distal", "intermediate", "proximal", "metacarpal"
-     * @return
+     * @return Single bone or null
      */
     public Bone getBone(String name) {
         name = name.toLowerCase();
         if (name.equals("distal")) {
-            return new Bone(parent, leap, this._finger.bone(com.leapmotion.leap.Bone.Type.TYPE_DISTAL));
+            return new Bone(parent, leap, this._finger.bone(
+                    com.leapmotion.leap.Bone.Type.TYPE_DISTAL));
         } else if (name.equals("intermediate")) {
-            return new Bone(parent, leap, this._finger.bone(com.leapmotion.leap.Bone.Type.TYPE_INTERMEDIATE));
+            return new Bone(parent, leap, this._finger.bone(
+                    com.leapmotion.leap.Bone.Type.TYPE_INTERMEDIATE));
         } else if (name.equals("proximal")) {
-            return new Bone(parent, leap, this._finger.bone(com.leapmotion.leap.Bone.Type.TYPE_PROXIMAL));
+            return new Bone(parent, leap, this._finger.bone(
+                    com.leapmotion.leap.Bone.Type.TYPE_PROXIMAL));
         } else if (name.equals("metacarpal")) {
-            return new Bone(parent, leap, this._finger.bone(com.leapmotion.leap.Bone.Type.TYPE_METACARPAL));
+            return new Bone(parent, leap, this._finger.bone(
+                    com.leapmotion.leap.Bone.Type.TYPE_METACARPAL));
         }
         return null;
     }
@@ -154,65 +172,74 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
      * Get a specific bone by numeric index.
      *
      * @param type (0-3, 0=distal, 1=intermediate, 2=proximal, 3=metacarpal).
-     * @return
+     * @return Single bone or null
      */
     public Bone getBone(int type) {
         switch (type) {
             case 0:
-                return new Bone(parent, leap, this._finger.bone(com.leapmotion.leap.Bone.Type.TYPE_DISTAL));
+                return new Bone(parent, leap, this._finger.bone(
+                        com.leapmotion.leap.Bone.Type.TYPE_DISTAL));
             case 1:
-                return new Bone(parent, leap, this._finger.bone(com.leapmotion.leap.Bone.Type.TYPE_INTERMEDIATE));
+                return new Bone(parent, leap, this._finger.bone(
+                        com.leapmotion.leap.Bone.Type.TYPE_INTERMEDIATE));
             case 2:
-                return new Bone(parent, leap, this._finger.bone(com.leapmotion.leap.Bone.Type.TYPE_PROXIMAL));
+                return new Bone(parent, leap, this._finger.bone(
+                        com.leapmotion.leap.Bone.Type.TYPE_PROXIMAL));
             case 3:
-                return new Bone(parent, leap, this._finger.bone(com.leapmotion.leap.Bone.Type.TYPE_METACARPAL));
+                return new Bone(parent, leap, this._finger.bone(
+                        com.leapmotion.leap.Bone.Type.TYPE_METACARPAL));
         }
         return null;
     }
 
     /**
-     * Get the distal bone of the _finger.
+     * Get the distal bone of the finger.
      *
-     * @return
+     * @return Single bone
      */
     public Bone getDistalBone() {
-        return new Bone(parent, leap, this._finger.bone(com.leapmotion.leap.Bone.Type.TYPE_DISTAL));
+        return new Bone(parent, leap, this._finger.bone(
+                com.leapmotion.leap.Bone.Type.TYPE_DISTAL));
     }
 
     /**
-     * Get the intermediate bone of the _finger.
+     * Get the intermediate bone of the finger.
      *
-     * @return
+     * @return Single bone
      */
     public Bone getIntermediateBone() {
-        return new Bone(parent, leap, this._finger.bone(com.leapmotion.leap.Bone.Type.TYPE_INTERMEDIATE));
+        return new Bone(parent, leap, this._finger.bone(
+                com.leapmotion.leap.Bone.Type.TYPE_INTERMEDIATE));
     }
 
     /**
-     * Get the metacarpal bone of the _finger.
+     * Get the metacarpal bone of the finger.
      *
-     * @return
+     * @return Single bone
      */
     public Bone getMetacarpalBone() {
-        return new Bone(parent, leap, this._finger.bone(com.leapmotion.leap.Bone.Type.TYPE_METACARPAL));
+        return new Bone(parent, leap, this._finger.bone(
+                com.leapmotion.leap.Bone.Type.TYPE_METACARPAL));
     }
 
     /**
-     * Get the proximal bone of the _finger.
+     * Get the proximal bone of the finger.
      *
-     * @return
+     * @return Single bone
      */
     public Bone getProximalBone() {
-        return new Bone(parent, leap, this._finger.bone(com.leapmotion.leap.Bone.Type.TYPE_PROXIMAL));
+        return new Bone(parent, leap, this._finger.bone(
+                com.leapmotion.leap.Bone.Type.TYPE_PROXIMAL));
     }
+
 
 	/* ------------------------------------------------------------------------ */
     /* DRAWING */
 
     /**
-     * Draw the lines between the joints.
+     * Draw the lines between joints.
      *
-     * @param pre
+     * @param pre Activate or deactivate predefined colors
      */
     public void drawLines(boolean pre) {
         if (pre) {
@@ -240,14 +267,17 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
         this.parent.endShape(PConstants.OPEN);
     }
 
+    /**
+     * Draw the lines between joints.
+     */
     public void drawLines() {
         this.drawLines(true);
     }
 
     /**
-     * Draw all bones of _finger.
+     * Draw all bones of a finger.
      *
-     * @param pre
+     * @param pre Activate or deactivate predefined colors
      */
     public void drawBones(boolean pre) {
         this.getBone(0).draw(pre);
@@ -258,12 +288,18 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
         }
     }
 
+    /**
+     * Draw all bones of a finger.
+     */
     public void drawBones() {
         this.drawBones(true);
     }
 
     /**
-     * Draw all joints of _finger.
+     * Draw all joints and bones of a finger.
+     *
+     * @param radius Radius
+     * @param pre    Activate or deactivate predefined colors
      */
     public void drawJoints(float radius, boolean pre) {
         if (pre) {
@@ -304,20 +340,36 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
         }
     }
 
+    /**
+     * Draw all joints of finger.
+     *
+     * @param radius Radius
+     */
     public void drawJoints(int radius) {
         this.drawJoints(radius, true);
     }
 
+    /**
+     * Draw all joints of a finger.
+     *
+     * @param pre Activate or deactivate predefined colors
+     */
     public void drawJoints(boolean pre) {
         this.drawJoints(3, pre);
     }
 
+    /**
+     * Draw all joints of a finger.
+     */
     public void drawJoints() {
         this.drawJoints(3, true);
     }
 
     /**
-     * Draw the joints and bones of the _finger.
+     * Draw all joints and bones of a finger.
+     *
+     * @param radius Radius
+     * @param pre    Activate or deactivate predefined colors
      */
     public void draw(float radius, boolean pre) {
         this.drawBones(pre);
@@ -325,14 +377,27 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
         this.drawJoints(radius, pre);
     }
 
+    /**
+     * Draw all joints and bones of a finger.
+     *
+     * @param radius Radius
+     */
     public void draw(int radius) {
         this.draw(radius, true);
     }
 
+    /**
+     * Draw all joints and bones of a finger.
+     *
+     * @param pre Activate or deactivate predefined colors
+     */
     public void draw(boolean pre) {
         this.draw(3, pre);
     }
 
+    /**
+     * Draw all joints and bones of a finger.
+     */
     public void draw() {
         this.draw(3, true);
     }

@@ -16,7 +16,7 @@ public class KeyTapGesture extends Gesture implements RawAccess<com.leapmotion.l
     /**
      * Get the raw instance of com.leapmotion.leap.KeyTapGesture.
      *
-     * @return
+     * @return Raw instance of com.leapmotion.leap.KeyTapGesture
      */
     @Override
     public com.leapmotion.leap.KeyTapGesture getRaw() {
@@ -26,7 +26,7 @@ public class KeyTapGesture extends Gesture implements RawAccess<com.leapmotion.l
     /**
      * The position where the key tap is registered.
      *
-     * @return
+     * @return Position
      */
     public PVector getPosition() {
         return this.leap.map(this._keyTap.position());
@@ -35,7 +35,7 @@ public class KeyTapGesture extends Gesture implements RawAccess<com.leapmotion.l
     /**
      * Raw data of the position where the key tap is registered.
      *
-     * @return
+     * @return Raw position
      */
     public PVector getRawPosition() {
         return this.leap.convert(this._keyTap.position());
@@ -44,7 +44,7 @@ public class KeyTapGesture extends Gesture implements RawAccess<com.leapmotion.l
     /**
      * The direction of finger tip motion.
      *
-     * @return
+     * @return Direction
      */
     public PVector getDirection() {
         return this.leap.map(this._keyTap.direction());
@@ -53,7 +53,7 @@ public class KeyTapGesture extends Gesture implements RawAccess<com.leapmotion.l
     /**
      * Raw data of the position where the key tap is registered.
      *
-     * @return
+     * @return Raw direction
      */
     public PVector getRawDirection() {
         return this.leap.convert(this._keyTap.direction());
@@ -62,11 +62,14 @@ public class KeyTapGesture extends Gesture implements RawAccess<com.leapmotion.l
     /**
      * The finger performing the key tap gesture.
      *
-     * @return
+     * @return Single finger or null
      */
     public Finger getFinger() {
         if (this._keyTap.pointable().isFinger()) {
-            return new Finger(this.parent, this.leap, new com.leapmotion.leap.Finger(this._keyTap.pointable()));
+            return new Finger(
+                    this.parent, this.leap,
+                    new com.leapmotion.leap.Finger(this._keyTap.pointable())
+            );
         }
         return null;
     }

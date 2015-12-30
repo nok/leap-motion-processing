@@ -16,7 +16,7 @@ public class ScreenTapGesture extends Gesture implements RawAccess<com.leapmotio
     /**
      * Get the raw instance of com.leapmotion.leap.ScreenTapGesture.
      *
-     * @return
+     * @return Raw instance of com.leapmotion.leap.ScreenTapGesture
      */
     @Override
     public com.leapmotion.leap.ScreenTapGesture getRaw() {
@@ -26,7 +26,7 @@ public class ScreenTapGesture extends Gesture implements RawAccess<com.leapmotio
     /**
      * The position where the screen tap is registered.
      *
-     * @return
+     * @return Position
      */
     public PVector getPosition() {
         return this.leap.map(this._screenTap.position());
@@ -35,7 +35,7 @@ public class ScreenTapGesture extends Gesture implements RawAccess<com.leapmotio
     /**
      * Raw data of the position where the screen tap is registered.
      *
-     * @return
+     * @return Raw position
      */
     public PVector getRawPosition() {
         return this.leap.convert(this._screenTap.position());
@@ -44,7 +44,7 @@ public class ScreenTapGesture extends Gesture implements RawAccess<com.leapmotio
     /**
      * The direction of finger tip motion.
      *
-     * @return
+     * @return Direction
      */
     public PVector getDirection() {
         return this.leap.map(this._screenTap.direction());
@@ -53,7 +53,7 @@ public class ScreenTapGesture extends Gesture implements RawAccess<com.leapmotio
     /**
      * Raw data of the direction of finger tip motion.
      *
-     * @return
+     * @return Raw direction
      */
     public PVector getRawDirection() {
         return this.leap.convert(this._screenTap.direction());
@@ -62,7 +62,7 @@ public class ScreenTapGesture extends Gesture implements RawAccess<com.leapmotio
     /**
      * The finger performing the screen tap gesture.
      *
-     * @return
+     * @return Single finger or null
      */
     public Finger getFinger() {
         if (this._screenTap.pointable().isFinger()) {

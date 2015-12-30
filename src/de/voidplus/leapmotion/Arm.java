@@ -17,9 +17,9 @@ public class Arm implements RawAccess<com.leapmotion.leap.Arm> {
     }
 
     /**
-     * Reports whether it's a valid Arm object.
+     * Is it a valid Arm object?
      *
-     * @return
+     * @return Is it a valid Arm object?
      */
     @Override
     public boolean isValid() {
@@ -29,7 +29,7 @@ public class Arm implements RawAccess<com.leapmotion.leap.Arm> {
     /**
      * Get the raw instance of com.leapmotion.leap.Arm.
      *
-     * @return
+     * @return Raw instance of Arm
      */
     @Override
     public com.leapmotion.leap.Arm getRaw() {
@@ -39,7 +39,7 @@ public class Arm implements RawAccess<com.leapmotion.leap.Arm> {
     /**
      * The position of the elbow.
      *
-     * @return
+     * @return Position
      */
     public PVector getElbowPosition() {
         return this.leap.map(this._arm.elbowPosition());
@@ -48,7 +48,7 @@ public class Arm implements RawAccess<com.leapmotion.leap.Arm> {
     /**
      * The raw position of the elbow.
      *
-     * @return
+     * @return Position
      */
     public PVector getWristRawPosition() {
         return this.leap.convert(this._arm.wristPosition());
@@ -57,7 +57,7 @@ public class Arm implements RawAccess<com.leapmotion.leap.Arm> {
     /**
      * The position of the wrist.
      *
-     * @return
+     * @return Position
      */
     public PVector getWristPosition() {
         return this.leap.map(this._arm.wristPosition());
@@ -66,7 +66,7 @@ public class Arm implements RawAccess<com.leapmotion.leap.Arm> {
     /**
      * The raw position of the wrist.
      *
-     * @return
+     * @return Position
      */
     public PVector getElbowRawPosition() {
         return this.leap.convert(this._arm.elbowPosition());
@@ -75,7 +75,7 @@ public class Arm implements RawAccess<com.leapmotion.leap.Arm> {
     /**
      * The average width of the arm.
      *
-     * @return
+     * @return Width
      */
     public float getWidth() {
         return this._arm.width();
@@ -84,7 +84,7 @@ public class Arm implements RawAccess<com.leapmotion.leap.Arm> {
     /**
      * The center position.
      *
-     * @return
+     * @return Position
      */
     public PVector getPosition() {
         return this.leap.map(this._arm.center());
@@ -93,7 +93,7 @@ public class Arm implements RawAccess<com.leapmotion.leap.Arm> {
     /**
      * Raw data of the center position.
      *
-     * @return
+     * @return Position
      */
     public PVector getRawPosition() {
         return this.leap.convert(this._arm.center());

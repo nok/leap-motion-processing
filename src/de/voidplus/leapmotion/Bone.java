@@ -133,7 +133,7 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
      * Draw all bones.
      */
     public void draw() {
-        this.parent.stroke(0, 35);
+//        this.parent.stroke(0, 35);
         this.parent.noFill();
 
         PVector next = this.getNextJoint();

@@ -35,6 +35,15 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
     }
 
     /**
+     * Is the finger extended?
+     *
+     * @return Is the finger extended?
+     */
+    public boolean isExtended() {
+        return this._finger.isExtended();
+    }
+
+    /**
      * The finger tip position in millimeters.
      *
      * @return Position
@@ -262,6 +271,7 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
      * Draw all bones of a finger.
      */
     public void drawBones() {
+        this.parent.stroke(0, (this.isExtended()) ? 170 : 35);
         this.getBone(0).draw();
         this.getBone(1).draw();
         this.getBone(2).draw();

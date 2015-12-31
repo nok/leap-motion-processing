@@ -3,13 +3,13 @@ import de.voidplus.leapmotion.*;
 LeapMotion leap;
 
 void setup(){
-  size(800, 500, OPENGL);
+  size(800, 500);
   background(255);
   // ...
     
-  leap = new LeapMotion(this).withGestures();
-  // leap = new LeapMotion(this).withGestures("circle, swipe, screen_tap, key_tap");
-  // leap = new LeapMotion(this).withGestures("swipe"); // Leap detects only swipe gestures.
+  leap = new LeapMotion(this).allowGestures(); // All gestures
+  // leap = new LeapMotion(this).allowGestures("circle, swipe, screen_tap, key_tap");
+  // leap = new LeapMotion(this).allowGestures("swipe"); // Leap detects only swipe gestures
 }
 
 void draw(){

@@ -3,7 +3,7 @@ import de.voidplus.leapmotion.*;
 LeapMotion leap;
 
 void setup() {
-  size(800, 500, OPENGL);
+  size(800, 500);
   background(255);
   // ...
 
@@ -83,8 +83,8 @@ void draw() {
 
     for (Finger finger : hand.getFingers()) {
       // Alternatives:
-      // hand.getOutstrechtedFingers();
-      // hand.getOutstrechtedFingersByAngle();
+      // hand.getOutstretchedFingers();
+      // hand.getOutstretchedFingersByAngle();
 
       // ----- BASICS -----
 
@@ -118,6 +118,8 @@ void draw() {
 
 
       // ----- SPECIFIC BONE -----
+      // Overview:
+      // https://developer.leapmotion.com/documentation/java/devguide/Leap_Overview.html#Layer_1
 
       Bone    bone_distal       = finger.getDistalBone();
       // or                       finger.get("distal");
@@ -138,8 +140,8 @@ void draw() {
 
       // ----- DRAWING -----
 
-      // finger.draw(); // = drawLines()+drawJoints()
-      // finger.drawLines();
+      // finger.draw(); // = drawBones()+drawJoints()
+      // finger.drawBones();
       // finger.drawJoints();
 
 
@@ -163,7 +165,7 @@ void draw() {
 
     // ========= TOOLS =========
 
-    for (Tool tool : hand.getTools ()) {
+    for (Tool tool : hand.getTools()) {
 
 
       // ----- BASICS -----
@@ -202,12 +204,13 @@ void draw() {
 
   // ========= DEVICES =========
 
-  for (Device device : leap.getDevices ()) {
+  for (Device device : leap.getDevices()) {
     float device_horizontal_view_angle = device.getHorizontalViewAngle();
     float device_verical_view_angle = device.getVerticalViewAngle();
     float device_range = device.getRange();
   }
 }
+
 
 // ========= CALLBACKS =========
 

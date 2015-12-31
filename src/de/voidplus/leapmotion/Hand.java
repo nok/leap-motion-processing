@@ -289,7 +289,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     public float getYaw() {
         return PApplet.degrees(this._hand.direction().yaw());
     }
-	
+
 	
 	/* ------------------------------------------------------------------------ */
 	/* SPHERE */
@@ -320,7 +320,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
     public float getSphereRadius() {
         return this._hand.sphereRadius();
     }
-	
+
 
 	/* ------------------------------------------------------------------------ */
 	/* FINGERS */
@@ -607,30 +607,50 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
             this.parent.ellipseMode(PConstants.CENTER);
             this.parent.ellipse(position.x, position.y, radius, radius);
         } else {
-
-            // position
             this.parent.pushMatrix();
             this.parent.translate(position.x, position.y, position.z);
             this.parent.sphereDetail(20);
             this.parent.sphere(radius);
             this.parent.popMatrix();
-
-            // sphere
-//			this.parent.stroke(0, 30);
-//			
-//			this.parent.noFill();
-//			this.parent.pushMatrix();
-//				this.parent.translate(position.x, position.y, position.z);
-//				
-//				float pitch = this._hand.direction().pitch();
-//				PVector rotation = this.leap.map(new com.leapmotion.leap.Vector(pitch, 0, 0));
-//				this.parent.rotateX(rotation.x);
-//				this.parent.ellipse(0, 0, 100, 100);
-//			this.parent.popMatrix();
-
         }
-        // fingers
+
+        // Is there any arm?
+        if (this.hasArm()) {
+            this.getArm().draw(pre);
+        }
+
+        // Are there any fingers?
         if (this.hasFingers()) {
+            if (this.countFingers() == 5) {
+
+                if (pre) {
+                    this.parent.stroke(0, 35);
+                    this.parent.noFill();
+                }
+
+                PVector lastJointOfThumb = this.getThumb().getProximalBone().getPrevJoint();
+                PVector lastJointOfIndex = this.getIndexFinger().getMetacarpalBone().getPrevJoint();
+                PVector lastJointOfMiddle = this.getMiddleFinger().getMetacarpalBone().getPrevJoint();
+                PVector lastJointOfRing = this.getRingFinger().getMetacarpalBone().getPrevJoint();
+                PVector lastJointOfPinky = this.getPinkyFinger().getMetacarpalBone().getPrevJoint();
+
+                this.parent.beginShape();
+                if (this.parent.g.is2D()) {
+                    this.parent.vertex(lastJointOfThumb.x, lastJointOfThumb.y);
+                    this.parent.vertex(lastJointOfIndex.x, lastJointOfIndex.y);
+                    this.parent.vertex(lastJointOfMiddle.x, lastJointOfMiddle.y);
+                    this.parent.vertex(lastJointOfRing.x, lastJointOfRing.y);
+                    this.parent.vertex(lastJointOfPinky.x, lastJointOfPinky.y);
+                } else {
+                    this.parent.vertex(lastJointOfThumb.x, lastJointOfThumb.y, lastJointOfThumb.z);
+                    this.parent.vertex(lastJointOfIndex.x, lastJointOfIndex.y, lastJointOfIndex.z);
+                    this.parent.vertex(lastJointOfMiddle.x, lastJointOfMiddle.y, lastJointOfMiddle.z);
+                    this.parent.vertex(lastJointOfRing.x, lastJointOfRing.y, lastJointOfRing.z);
+                    this.parent.vertex(lastJointOfPinky.x, lastJointOfPinky.y, lastJointOfPinky.z);
+                }
+                this.parent.endShape(PConstants.OPEN);
+
+            }
             for (Finger finger : this.getFingers()) {
                 finger.draw(pre);
             }

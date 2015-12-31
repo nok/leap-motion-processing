@@ -283,7 +283,7 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
         this.getBone(0).draw(pre);
         this.getBone(1).draw(pre);
         this.getBone(2).draw(pre);
-        if (this.getType() != 0) { // thumb
+        if (this.getType() != 0) { // !thumb
             this.getBone(3).draw(pre);
         }
     }
@@ -315,28 +315,31 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
         if (this.parent.g.is2D()) {
             this.parent.ellipseMode(PConstants.CENTER);
             this.parent.ellipse(tip.x, tip.y, radius, radius);
-            this.parent.ellipse(mcp.x, mcp.y, radius, radius);
             this.parent.ellipse(pip.x, pip.y, radius, radius);
             this.parent.ellipse(dip.x, dip.y, radius, radius);
+            if (this.getType() != 0) {
+                this.parent.ellipse(mcp.x, mcp.y, radius, radius);
+            }
         } else {
             this.parent.sphereDetail(20);
-
             this.parent.pushMatrix();
-            this.parent.translate(tip.x, tip.y, tip.z);
-            this.parent.sphere(radius);
+                this.parent.translate(tip.x, tip.y, tip.z);
+                this.parent.sphere(radius);
             this.parent.popMatrix();
             this.parent.pushMatrix();
-            this.parent.translate(mcp.x, mcp.y, mcp.z);
-            this.parent.sphere(radius);
+                this.parent.translate(pip.x, pip.y, pip.z);
+                this.parent.sphere(radius);
             this.parent.popMatrix();
             this.parent.pushMatrix();
-            this.parent.translate(pip.x, pip.y, pip.z);
-            this.parent.sphere(radius);
+                this.parent.translate(dip.x, dip.y, dip.z);
+                this.parent.sphere(radius);
             this.parent.popMatrix();
-            this.parent.pushMatrix();
-            this.parent.translate(dip.x, dip.y, dip.z);
-            this.parent.sphere(radius);
-            this.parent.popMatrix();
+            if (this.getType() != 0) {
+                this.parent.pushMatrix();
+                    this.parent.translate(mcp.x, mcp.y, mcp.z);
+                    this.parent.sphere(radius);
+                this.parent.popMatrix();
+            }
         }
     }
 
@@ -373,7 +376,6 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
      */
     public void draw(float radius, boolean pre) {
         this.drawBones(pre);
-        // this.drawLines(pre);
         this.drawJoints(radius, pre);
     }
 

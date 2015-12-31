@@ -131,14 +131,10 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
 
     /**
      * Draw all bones.
-     *
-     * @param pre Activate or deactivate the predefined colors
      */
-    public void draw(boolean pre) {
-        if (pre) {
-            this.parent.stroke(0, 35);
-            this.parent.noFill();
-        }
+    public void draw() {
+        this.parent.stroke(0, 35);
+        this.parent.noFill();
 
         PVector next = this.getNextJoint();
         PVector prev = this.getPrevJoint();
@@ -154,10 +150,4 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
         this.parent.endShape(PConstants.OPEN);
     }
 
-    /**
-     * Draw all bones with predefined colors.
-     */
-    public void draw() {
-        this.draw(true);
-    }
 }

@@ -104,43 +104,34 @@ public class Arm implements RawAccess<com.leapmotion.leap.Arm> {
      * Draw arm.
      *
      * @param radius Radius
-     * @param pre    Activate or deactivate predefined colors
      */
-    public void draw(float radius, boolean pre) {
+    public void draw(float radius) {
         PVector wristPos = this.getWristPosition();
         PVector elbowPos = this.getElbowPosition();
 
         if (this.parent.g.is2D()) {
-            if (pre) {
-                this.parent.stroke(0, 35);
-                this.parent.noFill();
-            }
+            this.parent.stroke(0, 35);
+            this.parent.noFill();
             this.parent.beginShape(PConstants.LINES);
             this.parent.vertex(wristPos.x, wristPos.y);
             this.parent.vertex(elbowPos.x, elbowPos.y);
             this.parent.endShape(PConstants.OPEN);
 
-            if (pre) {
-                this.parent.noStroke();
-                this.parent.fill(0);
-            }
+            this.parent.noStroke();
+            this.parent.fill(0);
             this.parent.ellipseMode(PConstants.CENTER);
             this.parent.ellipse(wristPos.x, wristPos.y, radius, radius);
             this.parent.ellipse(elbowPos.x, elbowPos.y, radius, radius);
         } else {
-            if (pre) {
-                this.parent.stroke(0, 35);
-                this.parent.noFill();
-            }
+            this.parent.stroke(0, 35);
+            this.parent.noFill();
             this.parent.beginShape(PConstants.LINES);
             this.parent.vertex(wristPos.x, wristPos.y, wristPos.z);
             this.parent.vertex(elbowPos.x, elbowPos.y, elbowPos.z);
             this.parent.endShape(PConstants.OPEN);
 
-            if (pre) {
-                this.parent.noStroke();
-                this.parent.fill(0);
-            }
+            this.parent.noStroke();
+            this.parent.fill(0);
             this.parent.sphereDetail(20);
             this.parent.pushMatrix();
                 this.parent.translate(wristPos.x, wristPos.y, wristPos.z);
@@ -155,27 +146,9 @@ public class Arm implements RawAccess<com.leapmotion.leap.Arm> {
 
     /**
      * Draw arm.
-     *
-     * @param radius Radius
-     */
-    public void draw(int radius) {
-        this.draw(radius, true);
-    }
-
-    /**
-     * Draw arm.
-     *
-     * @param pre Activate or deactivate predefined colors
-     */
-    public void draw(boolean pre) {
-        this.draw(3, pre);
-    }
-
-    /**
-     * Draw arm.
      */
     public void draw() {
-        this.draw(3, true);
+        this.draw(3);
     }
 
 }

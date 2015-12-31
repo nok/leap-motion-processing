@@ -596,11 +596,9 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
      *
      * @param radius The radius of the ellipse (2D) or sphere (3D).
      */
-    public void draw(float radius, boolean pre) {
-        if (pre) {
-            this.parent.noStroke();
-            this.parent.fill(0);
-        }
+    public void draw(float radius) {
+        this.parent.noStroke();
+        this.parent.fill(0);
 
         PVector position = this.getPosition();
         if (this.parent.g.is2D()) {
@@ -616,18 +614,14 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
 
         // Is there any arm?
         if (this.hasArm()) {
-            this.getArm().draw(pre);
+            this.getArm().draw();
         }
 
         // Are there any fingers?
         if (this.hasFingers()) {
             if (this.countFingers() == 5) {
-
-                if (pre) {
-                    this.parent.stroke(0, 35);
-                    this.parent.noFill();
-                }
-
+                this.parent.stroke(0, 35);
+                this.parent.noFill();
                 PVector lastJointOfThumb = this.getThumb().getProximalBone().getPrevJoint();
                 PVector lastJointOfIndex = this.getIndexFinger().getMetacarpalBone().getPrevJoint();
                 PVector lastJointOfMiddle = this.getMiddleFinger().getMetacarpalBone().getPrevJoint();
@@ -652,21 +646,13 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
 
             }
             for (Finger finger : this.getFingers()) {
-                finger.draw(pre);
+                finger.draw();
             }
         }
     }
 
-    public void draw(int radius) {
-        this.draw(radius, true);
-    }
-
-    public void draw(boolean pre) {
-        this.draw(5, pre);
-    }
-
     public void draw() {
-        this.draw(5, true);
+        this.draw(5);
     }
 
     /**
@@ -674,36 +660,24 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
      *
      * @param radius The radius of the ellipse (2D) or sphere (3D).
      */
-    public void drawFingers(int radius, boolean pre) {
+    public void drawFingers(int radius) {
         if (this.hasFingers()) {
             for (Finger finger : this.fingers) {
-                finger.draw(radius, pre);
+                finger.draw(radius);
             }
         }
     }
 
-    public void drawFingers(int radius) {
-        this.drawFingers(radius, true);
-    }
-
-    public void drawFingers(boolean pre) {
-        this.drawFingers(3, pre);
-    }
-
     public void drawFingers() {
-        this.drawFingers(3, true);
+        this.drawFingers(3);
     }
 
     /**
      * Draw the sphere of the hand.
-     *
-     * @param pre Activate or deactivate predefined colors
      */
-    public void drawSphere(boolean pre) {
-        if (pre) {
-            this.parent.stroke(0, 10);
-            this.parent.noFill();
-        }
+    public void drawSphere() {
+        this.parent.stroke(0, 10);
+        this.parent.noFill();
 
         PVector position = this.getSpherePosition();
         float radius = this.getSphereRadius();
@@ -718,13 +692,6 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
             this.parent.sphere(radius);
             this.parent.popMatrix();
         }
-    }
-
-    /**
-     * Draw the sphere of the hand.
-     */
-    public void drawSphere() {
-        this.drawSphere(true);
     }
 
 }

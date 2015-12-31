@@ -237,76 +237,25 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
     /* DRAWING */
 
     /**
-     * Draw the lines between joints.
-     *
-     * @param pre Activate or deactivate predefined colors
-     */
-    public void drawLines(boolean pre) {
-        if (pre) {
-            this.parent.stroke(0);
-            this.parent.noFill();
-        }
-
-        PVector tip = this.getPositionOfJointTip();
-        PVector mcp = this.getPositionOfJointMcp();
-        PVector pip = this.getPositionOfJointPip();
-        PVector dip = this.getPositionOfJointDip();
-
-        this.parent.beginShape();
-        if (this.parent.g.is2D()) {
-            this.parent.vertex(mcp.x, mcp.y);
-            this.parent.vertex(pip.x, pip.y);
-            this.parent.vertex(dip.x, dip.y);
-            this.parent.vertex(tip.x, tip.y);
-        } else {
-            this.parent.vertex(mcp.x, mcp.y, mcp.z);
-            this.parent.vertex(pip.x, pip.y, pip.z);
-            this.parent.vertex(dip.x, dip.y, dip.z);
-            this.parent.vertex(tip.x, tip.y, tip.z);
-        }
-        this.parent.endShape(PConstants.OPEN);
-    }
-
-    /**
-     * Draw the lines between joints.
-     */
-    public void drawLines() {
-        this.drawLines(true);
-    }
-
-    /**
-     * Draw all bones of a finger.
-     *
-     * @param pre Activate or deactivate predefined colors
-     */
-    public void drawBones(boolean pre) {
-        this.getBone(0).draw(pre);
-        this.getBone(1).draw(pre);
-        this.getBone(2).draw(pre);
-        if (this.getType() != 0) { // !thumb
-            this.getBone(3).draw(pre);
-        }
-    }
-
-    /**
      * Draw all bones of a finger.
      */
     public void drawBones() {
-        this.drawBones(true);
+        this.getBone(0).draw();
+        this.getBone(1).draw();
+        this.getBone(2).draw();
+        if (this.getType() != 0) { // ≠thumb
+            this.getBone(3).draw();
+        }
     }
 
     /**
      * Draw all joints and bones of a finger.
      *
      * @param radius Radius
-     * @param pre    Activate or deactivate predefined colors
      */
-    public void drawJoints(float radius, boolean pre) {
-        if (pre) {
-            this.parent.noStroke();
-            this.parent.fill(0);
-        }
-
+    public void drawJoints(float radius) {
+        this.parent.noStroke();
+        this.parent.fill(0);
         PVector tip = this.getPositionOfJointTip();
         PVector mcp = this.getPositionOfJointMcp();
         PVector pip = this.getPositionOfJointPip();
@@ -317,66 +266,37 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
             this.parent.ellipse(tip.x, tip.y, radius, radius);
             this.parent.ellipse(pip.x, pip.y, radius, radius);
             this.parent.ellipse(dip.x, dip.y, radius, radius);
-            if (this.getType() != 0) {
+            if (this.getType() != 0) { // ≠thumb
                 this.parent.ellipse(mcp.x, mcp.y, radius, radius);
             }
         } else {
             this.parent.sphereDetail(20);
             this.parent.pushMatrix();
-                this.parent.translate(tip.x, tip.y, tip.z);
-                this.parent.sphere(radius);
+            this.parent.translate(tip.x, tip.y, tip.z);
+            this.parent.sphere(radius);
             this.parent.popMatrix();
             this.parent.pushMatrix();
-                this.parent.translate(pip.x, pip.y, pip.z);
-                this.parent.sphere(radius);
+            this.parent.translate(pip.x, pip.y, pip.z);
+            this.parent.sphere(radius);
             this.parent.popMatrix();
             this.parent.pushMatrix();
-                this.parent.translate(dip.x, dip.y, dip.z);
-                this.parent.sphere(radius);
+            this.parent.translate(dip.x, dip.y, dip.z);
+            this.parent.sphere(radius);
             this.parent.popMatrix();
-            if (this.getType() != 0) {
+            if (this.getType() != 0) { // ≠thumb
                 this.parent.pushMatrix();
-                    this.parent.translate(mcp.x, mcp.y, mcp.z);
-                    this.parent.sphere(radius);
+                this.parent.translate(mcp.x, mcp.y, mcp.z);
+                this.parent.sphere(radius);
                 this.parent.popMatrix();
             }
         }
     }
 
     /**
-     * Draw all joints of finger.
-     *
-     * @param radius Radius
-     */
-    public void drawJoints(int radius) {
-        this.drawJoints(radius, true);
-    }
-
-    /**
-     * Draw all joints of a finger.
-     *
-     * @param pre Activate or deactivate predefined colors
-     */
-    public void drawJoints(boolean pre) {
-        this.drawJoints(3, pre);
-    }
-
-    /**
      * Draw all joints of a finger.
      */
     public void drawJoints() {
-        this.drawJoints(3, true);
-    }
-
-    /**
-     * Draw all joints and bones of a finger.
-     *
-     * @param radius Radius
-     * @param pre    Activate or deactivate predefined colors
-     */
-    public void draw(float radius, boolean pre) {
-        this.drawBones(pre);
-        this.drawJoints(radius, pre);
+        this.drawJoints(3);
     }
 
     /**
@@ -384,24 +304,16 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
      *
      * @param radius Radius
      */
-    public void draw(int radius) {
-        this.draw(radius, true);
-    }
-
-    /**
-     * Draw all joints and bones of a finger.
-     *
-     * @param pre Activate or deactivate predefined colors
-     */
-    public void draw(boolean pre) {
-        this.draw(3, pre);
+    public void draw(float radius) {
+        this.drawBones();
+        this.drawJoints(radius);
     }
 
     /**
      * Draw all joints and bones of a finger.
      */
     public void draw() {
-        this.draw(3, true);
+        this.draw(3);
     }
 
 }

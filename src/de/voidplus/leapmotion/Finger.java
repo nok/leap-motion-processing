@@ -125,7 +125,7 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
     /**
      * Get the index of fingertype (0-4, 0=thumb, 1=index, 2=middle, 3=ring, 4=pinky).
      *
-     * @return Type of index
+     * @return Index of index
      */
     public int getType() {
         com.leapmotion.leap.Finger.Type type = this._finger.type();
@@ -142,6 +142,28 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
                 return 4;
         }
         return -1;
+    }
+
+    /**
+     * Get the name of fingertype (0-4, 0=thumb, 1=index, 2=middle, 3=ring, 4=pinky).
+     *
+     * @return Name of finger
+     */
+    public String getTypeName() {
+        com.leapmotion.leap.Finger.Type type = this._finger.type();
+        switch (type) {
+            case TYPE_THUMB:
+                return "thumb";
+            case TYPE_INDEX:
+                return "index";
+            case TYPE_MIDDLE:
+                return "middle";
+            case TYPE_RING:
+                return "ring";
+            case TYPE_PINKY:
+                return "pinky";
+        }
+        return "";
     }
 
     /**
@@ -300,6 +322,26 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
     }
 
     /**
+     * Draw the type of the finger.
+     *
+     * @param xShift Shift in x axis
+     * @param yShift Shift in y axis
+     * @param zShift Shift in z axis
+     */
+    public void drawName(int xShift, int yShift, int zShift) {
+        PVector pos = this.getPosition();
+        this.parent.fill(0);
+        this.parent.text(this.getTypeName(), pos.x + xShift, pos.y + yShift, pos.z + zShift);
+    }
+
+    /**
+     * Draw the type of the finger.
+     */
+    public void drawName() {
+        this.drawName(-15, -15, 0);
+    }
+
+    /**
      * Draw all joints and bones of a finger.
      *
      * @param radius Radius
@@ -307,6 +349,7 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
     public void draw(float radius) {
         this.drawBones();
         this.drawJoints(radius);
+        this.drawName();
     }
 
     /**

@@ -643,7 +643,6 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
                     this.parent.vertex(lastJointOfPinky.x, lastJointOfPinky.y, lastJointOfPinky.z);
                 }
                 this.parent.endShape(PConstants.OPEN);
-
             }
             for (Finger finger : this.getFingers()) {
                 finger.draw();

@@ -15,6 +15,7 @@ distribution/
 web/
 bin/
 tmp/
+*.psd
 
 # IntelliJ IDEA
 leap-motion-processing.iml

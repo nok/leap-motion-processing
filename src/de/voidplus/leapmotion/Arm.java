@@ -109,7 +109,7 @@ public class Arm implements RawAccess<com.leapmotion.leap.Arm> {
         PVector wristPos = this.getWristPosition();
         PVector elbowPos = this.getElbowPosition();
 
-        if (this.parent.g.is2D()) {
+        if (this.leap.is2D) {
             this.parent.stroke(0, 35);
             this.parent.noFill();
             this.parent.beginShape(PConstants.LINES);

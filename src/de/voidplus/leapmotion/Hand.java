@@ -601,7 +601,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
         this.parent.fill(0);
 
         PVector position = this.getPosition();
-        if (this.parent.g.is2D()) {
+        if (this.leap.is2D) {
             this.parent.ellipseMode(PConstants.CENTER);
             this.parent.ellipse(position.x, position.y, radius, radius);
         } else {
@@ -629,7 +629,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
                 PVector lastJointOfPinky = this.getPinkyFinger().getMetacarpalBone().getPrevJoint();
 
                 this.parent.beginShape();
-                if (this.parent.g.is2D()) {
+                if (this.leap.is2D) {
                     this.parent.vertex(lastJointOfThumb.x, lastJointOfThumb.y);
                     this.parent.vertex(lastJointOfIndex.x, lastJointOfIndex.y);
                     this.parent.vertex(lastJointOfMiddle.x, lastJointOfMiddle.y);
@@ -651,7 +651,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
 
         // Basic information
         this.parent.stroke(0);
-        if (this.parent.g.is2D()) {
+        if (this.leap.is2D) {
             this.parent.text(String.format(
                     "id: %d" +
                             "\nconfidence: %.2f" +
@@ -729,7 +729,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
         PVector position = this.getSpherePosition();
         float radius = this.getSphereRadius();
 
-        if (this.parent.g.is2D()) {
+        if (this.leap.is2D) {
             this.parent.ellipseMode(PConstants.CENTER);
             this.parent.ellipse(position.x, position.y, radius, radius);
         } else {

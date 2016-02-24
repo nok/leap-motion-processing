@@ -140,7 +140,7 @@ public class Bone implements RawAccess<com.leapmotion.leap.Bone> {
         PVector prev = this.getPrevJoint();
 
         this.parent.beginShape(PConstants.LINES);
-        if (this.parent.g.is2D()) {
+        if (this.leap.is2D) {
             this.parent.vertex(next.x, next.y);
             this.parent.vertex(prev.x, prev.y);
         } else {

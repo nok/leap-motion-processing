@@ -28,7 +28,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.3.1.1](download/LeapMotionForProcessing.zip?raw=true)
+- [Leap Motion for Processing v2.3.1.2](download/LeapMotionForProcessing.zip?raw=true)
 
 Note: If you are interested in the newest **development** implementation, so have a look at the [dev branch](https://github.com/nok/leap-motion-processing/tree/dev).
 
@@ -53,7 +53,8 @@ System:
 
 Processing version:
 
-- **3.0.1**
+- **3.0.2**
+- 3.0.1
 - 3.0a5
 - 2.2.1
 - 2.1.2
@@ -84,9 +85,9 @@ Leap Motion Software version:
 
 ## Examples
 
-* [Basic Data-Access](#basic-data-access) → [e1_basic.pde](examples/e1_basic/e1_basic.pde)
-* [Gesture-Recognition](#gesture-recognition) → [e2_gestures.pde](examples/e2_gestures/e2_gestures.pde)
-* [Camera-Images](#camera-images) → [e3_camera_images.pde](examples/e3_camera_images/e3_camera_images.pde)
+* [Basic Data-Access](#basic-data-access) → File: [e1_basic.pde](examples/e1_basic/e1_basic.pde), preview: [e1_basic.png](reference/e1_basic.png)
+* [Gesture-Recognition](#gesture-recognition) → File: [e2_gestures.pde](examples/e2_gestures/e2_gestures.pde)
+* [Camera-Images](#camera-images) → File: [e3_camera_images.pde](examples/e3_camera_images/e3_camera_images.pde), preview: [e3_camera_images.png](reference/e3_camera_images.png)
 
 
 ## Usage

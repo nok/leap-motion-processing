@@ -293,7 +293,7 @@ public class Finger extends Pointable implements RawAccess<com.leapmotion.leap.F
         PVector pip = this.getPositionOfJointPip();
         PVector dip = this.getPositionOfJointDip();
 
-        if (this.parent.g.is2D()) {
+        if (this.leap.is2D) {
             this.parent.ellipseMode(PConstants.CENTER);
             this.parent.ellipse(tip.x, tip.y, radius, radius);
             this.parent.ellipse(pip.x, pip.y, radius, radius);

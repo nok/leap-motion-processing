@@ -30,6 +30,7 @@ public class LeapMotion {
 
     // Processing
     private final PApplet parent;
+    protected boolean is2D;
 
     // Global flags
     private boolean verbose;
@@ -61,6 +62,7 @@ public class LeapMotion {
      */
     public LeapMotion(PApplet parent, boolean verbose) {
         this.parent = parent;
+        this.is2D = parent.g.is2D();
         this.setVerbose(verbose);
         this.recognition = false;
         this.println(

@@ -71,7 +71,7 @@ public class Tool extends Pointable implements RawAccess<com.leapmotion.leap.Too
         this.parent.noStroke();
         this.parent.fill(0);
 
-        if (this.parent.g.is2D()) {
+        if (this.leap.is2D) {
             this.parent.line(start.x, start.y, end.x, end.y);
         } else {
             this.parent.line(start.x, start.y, start.z, end.x, end.y, end.z);
@@ -80,7 +80,7 @@ public class Tool extends Pointable implements RawAccess<com.leapmotion.leap.Too
         this.parent.stroke(radius);
         this.parent.noFill();
 
-        if (this.parent.g.is2D()) {
+        if (this.leap.is2D) {
             this.parent.ellipseMode(processing.core.PConstants.CENTER);
             this.parent.ellipse(start.x, start.y, radius, radius);
             this.parent.ellipse(end.x, end.y, radius, radius);

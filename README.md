@@ -2,6 +2,8 @@
 
 ===
 
+[![Join the chat at https://gitter.im/nok/leap-motion-processing](https://badges.gitter.im/nok/leap-motion-processing.svg)](https://gitter.im/nok/leap-motion-processing?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Simple library to use the complete [Leap Motion](https://leapmotion.com/) [SDK](https://developer.leapmotion.com/documentation/java/index.html) in [Processing](http://processing.org/).
 
 

@@ -6,7 +6,7 @@
 
 ===
 
-Simple library to use the complete [Leap Motion](https://leapmotion.com/) [SDK](https://developer.leapmotion.com/documentation/java/index.html) in [Processing](http://processing.org/).
+Library to use the complete [Leap Motion](https://leapmotion.com/) [SDK](https://developer.leapmotion.com/documentation/java/index.html) in [Processing](http://processing.org/).
 
 
 ## Table of Contents
@@ -42,7 +42,7 @@ Unzip and put the extracted *LeapMotionForProcessing* folder into the libraries 
 
 ## Dependencies
 
-- [Leap Motion Software](https://developer.leapmotion.com/) **2.3.1+31549**
+- Running [Leap Motion Software](https://developer.leapmotion.com/) **2.3.1+31549**
 
 
 ## Tested
@@ -88,9 +88,9 @@ Leap Motion Software version:
 
 ## Examples
 
-* [Basics](#basics) ([Preview](reference/e1_basic.png)) → File: [LM_1_Basics.pde](examples/LM_1_Basics/LM_1_Basics.pde)
+* [Basics](#basics) ([preview](reference/e1_basic.png)) → File: [LM_1_Basics.pde](examples/LM_1_Basics/LM_1_Basics.pde)
 * [Gestures](#gestures) → File: [LM_2_Gestures.pde](examples/LM_2_Gestures/LM_2_Gestures.pde)
-* [Camera-Images](#camera-images) ([Preview](reference/e3_camera_images.png)) → File: [LM_3_Camera_Images.pde](examples/LM_3_Camera_Images/LM_3_Camera_Images.pde)
+* [Camera-Images](#camera-images) ([preview](reference/e3_camera_images.png)) → File: [LM_3_Camera_Images.pde](examples/LM_3_Camera_Images/LM_3_Camera_Images.pde)
 
 
 ## Usage

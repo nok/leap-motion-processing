@@ -89,14 +89,14 @@ Leap Motion Software version:
 
 ## Examples
 
-* [Basic Data-Access](#basic-data-access) → File: [e1_basic.pde](examples/e1_basic/e1_basic.pde), preview: [e1_basic.png](reference/e1_basic.png)
-* [Gesture-Recognition](#gesture-recognition) → File: [e2_gestures.pde](examples/e2_gestures/e2_gestures.pde)
-* [Camera-Images](#camera-images) → File: [e3_camera_images.pde](examples/e3_camera_images/e3_camera_images.pde), preview: [e3_camera_images.png](reference/e3_camera_images.png)
+* [Basics](#basics) ([Preview](reference/e1_basic.png)) → File: [LM_1_Basics.pde](examples/LM_1_Basics/LM_1_Basics.pde)
+* [Gestures](#gestures) → File: [LM_2_Gestures.pde](examples/LM_2_Gestures/LM_2_Gestures.pde)
+* [Camera-Images](#camera-images) ([Preview](reference/e3_camera_images.png)) → File: [LM_3_Camera_Images.pde](examples/LM_3_Camera_Images/LM_3_Camera_Images.pde)
 
 
 ## Usage
 
-### Basic Data-Access
+### Basics
 
 Before you start to code I recommend you to read the [official basic introduction](https://developer.leapmotion.com/documentation/java/devguide/Leap_Overview.html).
 
@@ -331,7 +331,7 @@ void leapOnExit(){
 ```
 
 
-### Gesture-Recognition
+### Gestures
 
 ![Snapshot](reference/leap_gestures.jpg)
 

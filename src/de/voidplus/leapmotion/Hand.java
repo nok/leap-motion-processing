@@ -651,51 +651,26 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
 
         // Basic information
         this.parent.stroke(0);
+        String information = String.format(
+            "id: %d" +
+            "\nconfidence: %.2f" +
+            "\nhand side: %s" +
+            "\noutstretched fingers: %d" +
+            "\ntime visible: %.2f s" +
+            "\npinch strength: %.2f" +
+            "\ngrab strength: %.2f",
+            this.getId(),
+            this.getConfidence(),
+            this.isLeft() ? "left" : "right",
+            this.getOutstretchedFingers().size(),
+            this.getTimeVisible(),
+            this.getPinchStrength(),
+            this.getGrabStrength());
         if (this.leap.is2D) {
-            this.parent.text(String.format(
-                    "id: %d" +
-                            "\nconfidence: %.2f" +
-                            "\ndirection: %s" +
-                            "\noutstretched fingers: %d" +
-                            "\ntime visible: %.2f s" +
-                            "\npinch strength: %.2f" +
-                            "\ngrab strength: %.2f",
-                    this.getId(),
-                    this.getConfidence(),
-                    this.isLeft() ? "left" : "right",
-                    this.getOutstretchedFingers().size(),
-                    this.getTimeVisible(),
-                    this.getPinchStrength(),
-                    this.getGrabStrength()
-            ), position.x - 30, position.y - 150);
+            this.parent.text(information, position.x - 30, position.y - 150);
         } else {
-            this.parent.text(String.format(
-                    "id: %d" +
-                            "\nconfidence: %.2f" +
-                            "\ndirection: %s" +
-                            "\noutstretched fingers: %d" +
-                            "\ntime visible: %.2f s" +
-                            "\npinch strength: %.2f" +
-                            "\ngrab strength: %.2f",
-                    this.getId(),
-                    this.getConfidence(),
-                    this.isLeft() ? "left" : "right",
-                    this.getOutstretchedFingers().size(),
-                    this.getTimeVisible(),
-                    this.getPinchStrength(),
-                    this.getGrabStrength()
-            ), position.x - 30, position.y - 150, position.z);
+            this.parent.text(information, position.x - 30, position.y - 150, position.z);
         }
-        
-//        this.parent.noFill();
-//        this.parent.stroke(100);
-//        this.parent.pushMatrix();
-//        this.parent.translate(position.x, position.y + 50, position.z);
-//        this.parent.rotateX(PApplet.radians(this.getRoll()));
-//        this.parent.rotateY(PApplet.radians(this.getYaw()));
-//        this.parent.rotateZ(PApplet.radians(this.getPitch()));
-//        this.parent.box(50, 30, 50);
-//        this.parent.popMatrix();
     }
 
     public void draw() {

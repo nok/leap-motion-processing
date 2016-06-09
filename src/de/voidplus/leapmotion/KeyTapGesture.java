@@ -47,7 +47,11 @@ public class KeyTapGesture extends Gesture implements RawAccess<com.leapmotion.l
      * @return Direction
      */
     public PVector getDirection() {
-        return this.leap.map(this._keyTap.direction());
+        return new PVector(
+            PApplet.degrees(this._keyTap.direction().roll()),
+            PApplet.degrees(this._keyTap.direction().pitch()),
+            PApplet.degrees(this._keyTap.direction().yaw())
+        );
     }
 
     /**

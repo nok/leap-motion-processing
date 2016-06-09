@@ -65,7 +65,11 @@ public class SwipeGesture extends Gesture implements RawAccess<com.leapmotion.le
      * @return Direction
      */
     public PVector getDirection() {
-        return this.leap.map(this._swipe.direction());
+        return new PVector(
+            PApplet.degrees(this._swipe.direction().roll()),
+            PApplet.degrees(this._swipe.direction().pitch()),
+            PApplet.degrees(this._swipe.direction().yaw())
+        );
     }
 
     /**

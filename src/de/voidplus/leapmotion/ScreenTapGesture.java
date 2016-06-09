@@ -47,7 +47,11 @@ public class ScreenTapGesture extends Gesture implements RawAccess<com.leapmotio
      * @return Direction
      */
     public PVector getDirection() {
-        return this.leap.map(this._screenTap.direction());
+        return new PVector(
+            PApplet.degrees(this._screenTap.direction().roll()),
+            PApplet.degrees(this._screenTap.direction().pitch()),
+            PApplet.degrees(this._screenTap.direction().yaw())
+        );
     }
 
     /**

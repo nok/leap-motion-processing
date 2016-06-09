@@ -130,7 +130,11 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
      * @return Direction
      */
     public PVector getDirection() {
-        return this.leap.map(this._hand.direction());
+        return new PVector(
+            PApplet.degrees(this._hand.direction().roll()),
+            PApplet.degrees(this._hand.direction().pitch()),
+            PApplet.degrees(this._hand.direction().yaw())
+        );
     }
 
     /**

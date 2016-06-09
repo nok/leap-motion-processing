@@ -113,8 +113,8 @@ public class LeapMotion {
         this.controller.addListener(this.listener);
         this.allowBackgroundApps();
 
-//		this.parent.registerDispose(this);
-        this.parent.registerMethod("dispose", this); // support since version 2.0b7 (REV 0215)
+        // support since version 2.0b7 (REV 0215)
+        this.parent.registerMethod("dispose", this);
     }
 
     /**

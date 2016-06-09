@@ -105,7 +105,7 @@ import de.voidplus.leapmotion.*;
 LeapMotion leap;
 
 void setup(){
-    size(800, 500, OPENGL);
+    size(800, 500);
     background(255);
     // ...
 
@@ -342,7 +342,7 @@ import de.voidplus.leapmotion.*;
 LeapMotion leap;
 
 void setup(){
-    size(800, 500, OPENGL);
+    size(800, 500);
     background(255);
     // ...
 
@@ -391,7 +391,7 @@ void leapOnCircleGesture(CircleGesture g, int state){
 	float 	progress 			= g.getProgress();
 	long 	duration 			= g.getDuration();
 	float 	duration_seconds 	= g.getDurationInSeconds();
-    int     direction          = g.getDirection();
+    int     direction           = g.getDirection();
 
 	switch(state){
 		case 1:	// Start
@@ -448,7 +448,7 @@ import de.voidplus.leapmotion.*;
 LeapMotion leap;
 
 void setup(){
-	size(640, 480, OPENGL);
+	size(640, 480);
 	background(255);  
 	leap = new LeapMotion(this);
 }

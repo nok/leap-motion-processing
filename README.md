@@ -1,3 +1,7 @@
+[![Join the chat at https://gitter.im/nok/leap-motion-processing](https://badges.gitter.im/nok/leap-motion-processing.svg)](https://gitter.im/nok/leap-motion-processing?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+---
+
 ![Leap Motion for Processing](reference/github_cover.png)
 
 ===
@@ -478,7 +482,7 @@ You can find the changes in the [release](https://github.com/nok/leap-motion-pro
 
 ## Questions?
 
-Don't be shy and feel free to contact me on Twitter: [@darius_morawiec](https://twitter.com/darius_morawiec)
+Don't be shy and feel free to contact me on [Twitter](https://twitter.com/darius_morawiec) or [Gitter](https://gitter.im/nok/leap-motion-processing).
 
 
 ## License

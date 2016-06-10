@@ -1,4 +1,4 @@
-[![Join the chat at https://gitter.im/nok/leap-motion-processing](https://badges.gitter.im/nok/leap-motion-processing.svg)](https://gitter.im/nok/leap-motion-processing?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/nok/leap-motion-processing](https://badges.gitter.im/nok/leap-motion-processing.svg)](https://gitter.im/nok/leap-motion-processing?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/nok/leap-motion-processing/master/LICENSE.txt)
 
 ---
 

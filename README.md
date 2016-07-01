@@ -59,6 +59,9 @@ Processing version:
 - 3.0.2
 - 3.0.1
 - 3.0a5
+
+To use an older version of Processing examine the [release](https://github.com/nok/leap-motion-processing/releases) section:
+
 - 2.2.1
 - 2.1.2
 - 2.1.1

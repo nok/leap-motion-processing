@@ -5,6 +5,6 @@ categories = Hardware
 sentence = Library to use the [Leap Motion](https://leapmotion.com/) in [Processing](http://processing.org/).
 paragraph = The Leap detects and tracks hands, fingers and finger-like tools. The device operates in an intimate proximity with high precision and tracking frame rate.
 version = 22
-prettyVersion = 2.3.1.3
+prettyVersion = 2.3.1.4
 minRevision = 0
 maxRevision = 0

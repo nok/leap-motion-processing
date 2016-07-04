@@ -273,7 +273,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
      * @return Single angle
      */
     public float getRoll() {
-        return PApplet.degrees(this._hand.direction().roll());
+        return -PApplet.degrees(this._hand.palmNormal().roll());
     }
 
     /**
@@ -282,7 +282,7 @@ public class Hand implements PConstants, RawAccess<com.leapmotion.leap.Hand> {
      * @return Single angle
      */
     public float getPitch() {
-        return -PApplet.degrees(this._hand.palmNormal().pitch());
+        return PApplet.degrees(this._hand.direction().pitch());
     }
 
     /**

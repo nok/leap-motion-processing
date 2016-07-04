@@ -32,7 +32,7 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.3.1.3](download/LeapMotionForProcessing.zip?raw=true)
+- [Leap Motion for Processing v2.3.1.4](download/LeapMotionForProcessing.zip?raw=true)
 
 
 ## Installation

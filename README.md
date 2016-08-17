@@ -15,7 +15,6 @@ Contributed library to use the [Leap Motion](https://leapmotion.com/) in [Proces
 - [Installation](#installation)
 - [Dependencies](#dependencies)
 - [Tested](#tested)
-- [Examples](#examples)
 - [Usage](#usage)
 - [Changelog](#changelog)
 - [Questions?](#questions)
@@ -31,14 +30,14 @@ The Leap software analyzes the objects observed in the device field of view. It 
 
 ## Download
 
-- [Leap Motion for Processing v2.3.1.4](download/LeapMotionForProcessing.zip?raw=true)
+- [Leap Motion for Processing v2.3.1.5](download/LeapMotionForProcessing.zip?raw=true)
 
 
 ## Installation
 
 Either you use the import manager of Processing (`Sketch > Import library ... > Add library ... > Filter: "Leap Motion"`).
 
-Or you [download](download/LeapMotionForProcessing.zip?raw=true), unzip and copy the extracted *LeapMotionForProcessing* folder into the libraries folder of your Processing sketches. The reference and examples are stored in the *LeapMotionForProcessing* directory. For further help read the [instructions](http://www.learningprocessing.com/tutorials/libraries/) by [Daniel Shiffman](https://github.com/shiffman).
+Or you [download](download/LeapMotionForProcessing.zip?raw=true), unzip and copy the extracted *LeapMotionForProcessing* folder into the libraries folder of your Processing sketches. The reference and examples are stored in the *LeapMotionForProcessing* directory. For further help you can read the [instructions](http://www.learningprocessing.com/tutorials/libraries/) by [Daniel Shiffman](https://github.com/shiffman).
 
 
 ## Dependencies
@@ -91,18 +90,16 @@ Leap Motion Software version:
 * 2.0.0+13819 beta
 
 
-## Examples
-
-* [Basics](#basics) ([preview](reference/e1_basic.png)) → File: [LM_1_Basics.pde](examples/LM_1_Basics/LM_1_Basics.pde)
-* [Gestures](#gestures) → File: [LM_2_Gestures.pde](examples/LM_2_Gestures/LM_2_Gestures.pde)
-* [Camera-Images](#camera-images) ([preview](reference/e3_camera_images.png)) → File: [LM_3_Camera_Images.pde](examples/LM_3_Camera_Images/LM_3_Camera_Images.pde)
-
-
 ## Usage
+
+* [Basics](#basics)
+* [Gestures](#gestures)
+* [Camera-Images](#camera-images)
+
 
 ### Basics
 
-The following examples shows the basic data access.
+The following example shows the basic [data access](reference/e1_basic.png):
 
 ```java
 import de.voidplus.leapmotion.*;
@@ -351,6 +348,8 @@ void draw() {
 
 > Source: [Leap Motion](https://developer.leapmotion.com/documentation/skeletal/java/devguide/Leap_Overview.html#gestures)
 
+The following example shows how to recognize predefined gestures:
+
 ```java
 import de.voidplus.leapmotion.*;
 
@@ -392,7 +391,7 @@ void leapOnSwipeGesture(SwipeGesture g, int state){
   PVector direction        = g.getDirection();
   float   speed            = g.getSpeed();
   long    duration         = g.getDuration();
-  float   duration_seconds = g.getDurationInSeconds();
+  float   durationSeconds  = g.getDurationInSeconds();
 
   switch(state){
     case 1: // Start
@@ -470,6 +469,8 @@ void leapOnKeyTapGesture(KeyTapGesture g){
 ```
 
 ### Camera-Images
+
+Furthermore you have access to the [raw camera images](reference/e3_camera_images.png):
 
 ```java
 import de.voidplus.leapmotion.*;

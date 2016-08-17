@@ -38,7 +38,7 @@ void leapOnSwipeGesture(SwipeGesture g, int state){
   PVector direction        = g.getDirection();
   float   speed            = g.getSpeed();
   long    duration         = g.getDuration();
-  float   duration_seconds = g.getDurationInSeconds();
+  float   durationSeconds  = g.getDurationInSeconds();
 
   switch(state){
     case 1: // Start

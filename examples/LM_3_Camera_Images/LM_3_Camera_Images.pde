@@ -4,7 +4,7 @@ LeapMotion leap;
 
 void setup(){
   size(640, 480);
-  background(255);  
+  background(255);
   leap = new LeapMotion(this);
 }
 
@@ -12,8 +12,6 @@ void draw(){
   background(255);
   // ...
 
-  // ========= CAMERA IMAGES =========
-  
   if (leap.hasImages()) {
     for (Image camera : leap.getImages()) {
       if (camera.isLeft()) {
@@ -25,5 +23,5 @@ void draw(){
       }
     }
   }
-  
+
 }

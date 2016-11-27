@@ -19,13 +19,13 @@ import processing.core.PVector;
  * Leap Motion for Processing
  *
  * @author Darius Morawiec
- * @version 2.3.1.5
+ * @version 2.3.1.6
  */
 public class LeapMotion {
 
     private static final String NAME = "Leap Motion";
     private static final String REPO = "https://github.com/nok/leap-motion-processing";
-    private static final String VERSION = "2.3.1.5";
+    private static final String VERSION = "2.3.1.6";
     private static final String SDK_VERSION = "2.3.1+31549";
 
     // Processing
@@ -420,9 +420,9 @@ public class LeapMotion {
      * @return Single hand or null
      */
     public Hand getLeftHand() {
-        if (!this.hasHands()) {
+        if (this.hasHands()) {
             com.leapmotion.leap.Hand _hand = this.frame.hands().leftmost();
-            if (!LeapMotion.isValid(_hand)) {
+            if (LeapMotion.isValid(_hand)) {
                 return new Hand(this.parent, this, _hand);
             }
         }
@@ -435,9 +435,9 @@ public class LeapMotion {
      * @return Right hand or null
      */
     public Hand getRightHand() {
-        if (!this.hasHands()) {
+        if (this.hasHands()) {
             com.leapmotion.leap.Hand _hand = this.frame.hands().rightmost();
-            if (!LeapMotion.isValid(_hand)) {
+            if (LeapMotion.isValid(_hand)) {
                 return new Hand(this.parent, this, _hand);
             }
         }

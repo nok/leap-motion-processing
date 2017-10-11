@@ -294,12 +294,13 @@ void draw() {
         break;
       }
     }
-
+  }
+  
 
     // ==================================================
     // 6. Tools
 
-    for (Tool tool : hand.getTools()) {
+    for (Tool tool : leap.getTools()) {
       int     toolId           = tool.getId();
       PVector toolPosition     = tool.getPosition();
       PVector toolStabilized   = tool.getStabilizedPosition();
@@ -328,7 +329,6 @@ void draw() {
         break;
       }
     }
-  }
 
 
   // ====================================================
